@@ -1,0 +1,67 @@
+<app-header></app-header>
+<h3 *ngIf="!editEstate" style="border: 1px solid rgb(214, 214, 214);margin-top: 100px;padding-left: 25px;">
+    {{'Paddhotel.addhotel' |
+    translate }}</h3>
+<h3 *ngIf="editEstate" style="border: 1px solid rgb(214, 214, 214);margin-top: 100px;padding-left: 25px;">
+    {{'Paddhotel.edithotel' |
+    translate }}</h3>
+
+<a (click)="backToMyPlaces()"
+style="border: 1px solid rgb(214, 214, 214);margin-top: 100px;padding-left: 25px;">
+    <div class="div-icons-header" fxLayout="column">
+        <p  style="margin-left:25px; cursor: pointer;">{{'Pprofile.profile' | translate }}</p>
+        <i *ngIf="!hideTextInNavigation" style="margin-left:25px; cursor: pointer;"  class="material-icons" >keyboard_backspace</i>
+    </div>
+</a>
+
+<div class="arrows_nav_admin">
+    <a (click)="moveStep('rules-hotel')"
+    style="padding-left: 25px;">
+        <div class="div-icons-header" fxLayout="column">
+            <p  style="margin-left:25px; cursor: pointer;">{{'Paddhotel.back' | translate }}</p>
+            <i *ngIf="!hideTextInNavigation" style="margin-left:25px; cursor: pointer;"  class="material-icons" >keyboard_arrow_left</i>
+        </div>
+    </a>
+
+    <a (click)="moveStep('calendar-hotel')"
+    style="padding-left: 25px; margin-right: 3%;">
+        <div class="div-icons-header" fxLayout="column">
+            <p  style="margin-left:25px; cursor: pointer;">{{'Paddhotel.next' | translate }}</p>
+            <i *ngIf="!hideTextInNavigation" style="margin-left:25px; cursor: pointer;"  class="material-icons" >keyboard_arrow_right</i>
+        </div>
+    </a>
+</div>
+
+<form class="field_margin" [formGroup]="myForm" (ngSubmit)="submit()">
+          
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input
+            formControlName="name"
+            id="name"
+            type="text"
+            class="form-control">
+        <div *ngIf="f.name.touched && f.name.invalid" class="alert alert-danger">
+            <div *ngIf="f.name.errors && f.name.errors.required">Name is required.</div>
+            <div *ngIf="f.name.errors && f.name.errors.minlength">Name should be 3 character.</div>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label for="file">File</label>
+        <input
+            formControlName="file"
+            id="file"
+            type="file"
+            class="form-control"
+            multiple=""
+            (change)="onFileChange($event)">
+        <div *ngIf="f.file.touched && f.file.invalid" class="alert alert-danger">
+            <div *ngIf="f.file.errors && f.file.errors.required">File is required.</div>
+        </div>
+    </div>
+    
+    <img *ngFor='let url of images'  [src]="url" height="150" width="200px" style="margin: 3px;"> <br/>
+        
+    <button class="btn btn-primary" type="submit">Submit</button>
+</form>

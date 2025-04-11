@@ -1,0 +1,552 @@
+<app-header (changeProductEvent)="handleHeaderAndCarouselEvent($event)" (showLoader)="onShowLoader($event)"
+  (currencyEvent)="onCurrencyDataReceived($event)"></app-header>
+<!-- <app-carousel (changeProductEvent)="handleHeaderAndCarouselEvent($event)"></app-carousel> -->
+
+<section>
+
+  <div *ngIf="showFlights"
+    style="width: 100%;height: 3790px;margin-top: -12px;margin-bottom: -200px; margin-right: 15%;">
+    <iframe [src]="'https://flights.nobitour.com/?locale=' + language| safe" class="iFrame mobile-iFrame"></iframe>
+  </div>
+
+  <div *ngIf="showInsurance"
+    style="width: 100%;height: 1790px;margin-top: -12px;margin-bottom: -200px; margin-right: 15%;">
+    <iframe src="https://insurance.nobitour.com" class="iFrame mobile-iFrame"></iframe>
+  </div>
+
+  <div *ngIf="showCars" style="width: 100%;height: 3390px;margin-bottom: -200px; margin-right: 15%;">
+    <iframe src="https://rent-a-car.nobitour.com/" class="iFrame mobile-iFrame"></iframe>
+  </div>
+
+  <div *ngIf="showPersonalTransfer"
+    style="width: 100%;height: 5790px;margin-top: -12px;margin-bottom: -200px; margin-right: 15%;">
+    <iframe src="https://personal-transfer.nobitour.com" class="iFrame mobile-iFrame"></iframe>
+  </div>
+
+  <div *ngIf="showAviaBusRUssia"
+    style="width: 100%;height: 5790px;margin-top: -12px;margin-bottom: -200px; margin-right: 15%;">
+    <iframe src="https://bus.nobitour.com" class="iFrame mobile-iFrame"></iframe>
+  </div>
+
+  <div *ngIf="showEstatesRu" style="width: 100%;height: 5790px;margin-bottom: -200px;">
+    <iframe src="https://hotels.nobitour.com" class="iFrame mobile-iFrame"></iframe>
+    <!-- <div fxFlex="20" class="recommend">
+      <mat-card class="mat-favorite" fxLayout="column" fxLayoutAlign="center start">
+        <iframe src="https://insurance.nobitour.com/new.html"
+          style="width: 100%;height: 2790px;margin-bottom: -200px;"></iframe>
+      </mat-card>
+
+    </div> -->
+  </div>
+
+  <div *ngIf="showAdventuresRu"
+    style="width: 100%;height: 9790px;margin-top: -12px;margin-bottom: -200px; margin-right: 15%;">
+    <iframe src="https://excursion.nobitour.com" class="iFrame mobile-iFrame"></iframe>
+  </div>
+</section>
+
+<div class="search-bar-wrap" *ngIf="show_search_bar">
+  <div class="search-bar">
+    <div class="input-box city-input" style="margin-right: 1%;">
+      <label for="city" class="search-bar-label">{{ 'Paddhotel.city' | translate }}</label>
+      <input class="ind_input city-input" type="text" [(ngModel)]="citySearch" id="city"
+        placeholder="{{ 'Paddhotel.city' | translate }}" [matAutocomplete]="auto" (input)="getByKeyword($event)">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option class="options-container" *ngFor="let nobiCity of nobiCities" [value]="nobiCity.city">
+          <div *ngIf="showLoaderForSearch" class="loader"></div>
+          <div *ngIf="nobiCity.city && !showLoaderForSearch">
+            <span class="main_color">{{ nobiCity.city }}</span>
+            <br>
+            <span class="main_color">{{ nobiCity.country }}</span>
+          </div>
+        </mat-option>
+      </mat-autocomplete>
+    </div>
+    <div *ngIf="isEstate" class="input-box">
+      <label for="fromDate" class="search-bar-label">{{ 'Product.checkin' | translate }}</label>
+      <input class="ind_input" style="border-right: 1px solid #ddd" type="date" [(ngModel)]="fromDateSearch"
+        id="fromDate" [min]="minDate.toISOString().split('T')[0]" (ngModelChange)="onFromDateChange()">
+    </div>
+    <div *ngIf="isAdventure" class="input-box adventure-field-wrap">
+      <label for="fromDate" class="search-bar-label">{{ 'Transfer.orderDate' | translate }}</label>
+      <input class="ind_input adventure-field" type="date" [(ngModel)]="fromDateSearch" id="fromDate"
+        [min]="minDate.toISOString().split('T')[0]" (ngModelChange)="onFromDateChange()">
+    </div>
+    <div *ngIf="isEstate" class="input-box" style="margin-right: 1%;">
+      <label for="toDate" class="search-bar-label">{{ 'Product.checkout' | translate }}</label>
+      <input class="ind_input" type="date" [(ngModel)]="toDateSearch" id="toDate" [min]="minToDate?.toISOString().split('T')[0]">
+    </div>
+    
+    <div class="input-box guest-wrap">
+      <label for="guest" class="search-bar-label">{{ 'Home.guest' | translate }}</label>
+      <input class="ind_input guest-input" readonly type="text" (click)="toggleDropdown()" id="peopleCount"
+        placeholder="{{ adultCount }} {{'Product.adult' | translate}}, {{childrenCount}} {{ 'Product.children' | translate }}">
+      <div class="dropdown-people" *ngIf="dropdownOpen">
+        <div style="padding: 5px 0px;" fxLayout="row" fxLayoutAlign="space-between center">
+          <div>{{ 'Product.adult' | translate }}</div>
+          <div fxLayout="row">
+            <button mat-icon-button (click)="onAdultCount('+')">
+              <mat-icon>remove</mat-icon>
+            </button>
+            <span mat-icon-button style="padding: 8px 4px;">
+              <div>{{adultCount}}</div>
+            </span>
+            <button mat-icon-button (click)="onAdultCount('-')">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+        </div>
+        <div style="padding: 5px 0px;" fxLayout="row" fxLayoutAlign="space-between center">
+          <div>{{ 'Product.children' | translate }}</div>
+          <div fxLayout="row">
+            <button mat-icon-button (click)="onChildCount('+')">
+              <mat-icon>remove</mat-icon>
+            </button>
+            <span mat-icon-button style="padding: 8px 4px;">
+              <div>{{childrenCount}}</div>
+            </span>
+            <button mat-icon-button (click)="onChildCount('-')">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="search_button" style="margin-top: 23px;" (click)="searchForCity()">{{ 'Home.search' | translate
+      }}</button>
+  </div>
+</div>
+
+<br>
+<section *ngIf="showEstates" class="hotels">
+  <div class="wrapper">
+
+    <h2 *ngIf="isEstateTranslated" class="hotels__title section-title hotels__title-mob">{{"Home.hotels" | translate}}
+      {{cityName | titlecase}}, {{countryName}}</h2>
+    <h2 *ngIf="isAdventureTranslated" class="hotels__title section-title hotels__title-mob">{{"Home.adventures" |
+      translate}} {{cityName |titlecase}}, {{countryName}}</h2>
+    <div class="hotels__main">
+      <aside class="sidebar">
+        <!-- <a *ngIf="isEstateTranslated" (click)="goToHome('estateRu')" class="ex__widget white_label_russia">
+          <img loading="lazy" src="../../assets/img/h-slider/icon-1.webp" alt="" width="50" height="50">
+          <span>{{'Home.iframeRussia5.2'| translate}}</span>
+        </a>
+        <a *ngIf="isAdventureTranslated" (click)="goToHome('adventureRu')" class="ex__widget white_label_russia">
+          <img loading="lazy" src="../../assets/img/h-slider/icon-2.webp" alt="" width="50" height="50">
+          <span>{{'Home.iframeRussia6'| translate}}</span>
+        </a> -->
+
+        <div class="h-search" *ngIf="productType == 'estates'">
+          <p class="h-search__title">{{'Home.search' | translate }}</p>
+          <div class="h-search__row field field-date">
+            <div class="field__row field__row-sel none-content">
+              <input (focus)="isSelectedFalse()" class="search_input" matInput type="text" aria-label="Number"
+                placeholder="{{'Home.search' | translate }}" [formControl]="myControl" [matAutocomplete]="auto"
+                (ngModelChange)="getByKeyword($event)" (keydown.enter)="handleEnterClick()">
+            </div>
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+
+              <mat-option *ngFor="let nobiCity of nobiCities" [value]="nobiCity.city"
+                (click)="setKeywordToCityAndIso(nobiCity.city, nobiCity.countryIso, nobiCity.cityId)">
+                <div *ngIf="nobiCity.city" fxLayout="column" fxLayoutAlign="space-between start">
+                  <span>
+                    {{nobiCity.city}}
+                  </span>
+                  <span>
+                    {{nobiCity.country}}
+                  </span>
+                </div>
+              </mat-option>
+
+              <mat-option *ngFor="let estateProuct of estateProucts" [value]="estateProuct.name"
+                [ngClass]="{'hideIfNoTypeProduct': !estateProuct}" (click)="onCheckForProduct('estate')">
+                <div *ngIf="estateProuct">
+                  <div fxLayout="column" fxLayoutAlign="space-between start">
+                    <span>
+                      {{estateProuct.name}}
+                    </span>
+                    <span>
+                      Estate
+                    </span>
+                  </div>
+                  <div fxLayout="row" fxLayoutAlign="space-between center">
+                    <span>
+                      {{estateProuct.address}},
+                    </span>
+                    <span>
+                      {{estate.city}}
+                    </span>
+                  </div>
+                </div>
+              </mat-option>
+            </mat-autocomplete>
+
+          </div>
+
+          <form fxLayout="column" fxLayoutAlign="space-around center" [formGroup]="filterFormGroup"
+            #resetFilterForm="ngForm" (ngSubmit)="filterProducts()">
+            <div class="div-check" fxLayout="column" fxLayoutAlign="start center">
+              <label>{{'Product.checkin' | translate }}</label>
+
+              <div class="h-search__row field field-date">
+                <div (click)="CheckIn.open(); setSearchToTrue()" class="field__row field__row-sel none-content">
+                  <input [(ngModel)]="fromDate" matInput formControlName="checkIn" [matDatepickerFilter]="myFilter"
+                    [matDatepicker]="CheckIn" [min]="checkoutMinDate" (click)="changeCheckOutMin('CheckIn')">
+                  <mat-datepicker-toggle matSuffix [for]="CheckIn" style="height:15px">
+                    <mat-icon matDatepickerToggleIcon (click)="changeCheckOutMin('CheckIn')">
+                    </mat-icon>
+                  </mat-datepicker-toggle>
+                  <mat-datepicker #CheckIn></mat-datepicker>
+                </div>
+              </div>
+              <label>{{'Product.checkout' | translate }}</label>
+
+              <div class="h-search__row field field-date">
+                <div (click)="CheckOut.open(); setSearchToTrue()" class="field__row field__row-sel none-content">
+                  <input [(ngModel)]="toDate" matInput formControlName="checkOut" [matDatepicker]="CheckOut"
+                    [min]="minDate" (click)="changeCheckOutMin('CheckOut')">
+                  <mat-datepicker-toggle matSuffix [for]="CheckOut" style="height:15px">
+                    <mat-icon matDatepickerToggleIcon (click)="changeCheckOutMin('CheckOut')">
+                    </mat-icon>
+                  </mat-datepicker-toggle>
+                  <mat-datepicker #CheckOut></mat-datepicker>
+                </div>
+              </div>
+
+              <label class="field__label">{{"Product.guests" | translate}}</label>
+              <mat-card fxLayout="row" class="guest_field" style="width: 100%;" [matMenuTriggerFor]="menu">
+                <mat-icon>people</mat-icon>
+                <div fxLayout="column">
+
+
+                  <div fxLayout="column">
+                    <p class="text_in_search_design">
+                      {{filterFormGroup.controls.numberOfAdult.value}} {{'Product.adult' | translate }}
+                    </p>
+                    <p class="text_in_search_design">
+                      {{filterFormGroup.controls.numberOfChildren.value}} {{'Product.children' | translate }}
+                    </p>
+                  </div>
+                </div>
+              </mat-card>
+
+              <mat-menu #menu="matMenu">
+                <div fxLayout="column">
+
+                  <div class="adults_filter" fxLayout="row" fxLayoutAlign="start center"
+                    (click)="$event.stopPropagation();">
+                    {{'Product.adults' | translate }}:<button mat-button (click)="handleMinusAdult()"
+                      [disabled]="!enableAdult">-</button>
+                    <input type="text" class="num" value="numberOfAdult" formControlName="numberOfAdult" />
+                    <button mat-button (click)="handlePlusAdults()">+</button>
+                  </div>
+
+
+                  <div class="children_filter" fxLayout="row" fxLayoutAlign="start center"
+                    (click)="$event.stopPropagation();">
+                    {{'Product.childrens' | translate }}:<button mat-button (click)="handleMinusChildren()"
+                      [disabled]="!enableChildren">-</button>
+                    <input type="text" class="num" value="numberOfChildren" formControlName="numberOfChildren" />
+                    <button mat-button (click)="handlePlusChildren()">+</button>
+                  </div>
+
+                  <div fxLayout="row" fxLayoutAlign="space-around center">
+                    <button mat-stroked-button style="margin-left:15%" color="warn">{{"Product.save" |
+                      translate}}</button>
+                    <button mat-stroked-button style="margin-right:15%" (click)="OnCancelGuests()">{{"Product.close" |
+                      translate}}</button>
+                  </div>
+                </div>
+              </mat-menu>
+              <!-- <button [disabled]="!isSelected" class="h-search__submit" type="submit">{{'Home.find' |
+                translate}}</button> -->
+              <button class="h-search__submit" type="submit">{{'Home.find' |
+                translate}}</button>
+              <p *ngIf="!isSelected">{{"Home.selectCityFromDropdown" | translate}}</p>
+
+            </div>
+
+            <div fxLayout="column" fxLayoutAlign="start center">
+
+            </div>
+
+          </form>
+        </div>
+
+        <form class="h-search" [formGroup]="filterFormGroup" #resetFilterForm="ngForm" (ngSubmit)="filterProducts()"
+          *ngIf="productType == 'adventures'">
+          <p class="h-search__title">{{"Home.search" | translate}}</p>
+          <div class="h-search__row field">
+            <div class="field__row field__row-sel none-content">
+              <input (focus)="isSelectedFalse()" class="search_input" matInput type="text" aria-label="Number"
+                placeholder="{{'Home.search' | translate }}" [formControl]="myControl" [matAutocomplete]="auto"
+                (ngModelChange)="getByKeyword($event)">
+            </div>
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+
+              <mat-option *ngFor="let nobiCity of nobiCities" [value]="nobiCity.city"
+                (click)="setKeywordToCityAndIso(nobiCity.city, nobiCity.countryIso, nobiCity.cityId)">
+                <div *ngIf="nobiCity.city" fxLayout="column" fxLayoutAlign="space-between start">
+                  <span>
+                    {{nobiCity.city}}
+                  </span>
+                  <span>
+                    {{nobiCity.country}}
+                  </span>
+                </div>
+              </mat-option>
+              <mat-option *ngFor="let adventureProuct of adventureProucts" [value]="adventureProuct.name"
+                [ngClass]="{'hideIfNoTypeProduct': !adventureProuct}" (click)="onCheckForProduct('adventure')">
+                <div *ngIf="adventureProuct">
+                  <div fxLayout="column" fxLayoutAlign="space-between start">
+                    <span>
+                      {{adventureProuct.name}}
+                    </span>
+                    <span>
+                      Adventure
+                    </span>
+                  </div>
+                  <div fxLayout="row" fxLayoutAlign="space-between center">
+                    <span>
+                      {{adventureProuct.address}}
+                    </span>
+                    <span>
+                      {{adventure.city}}
+                    </span>
+                  </div>
+                </div>
+              </mat-option>
+            </mat-autocomplete>
+          </div>
+
+          <label class="field__label">{{"Product.guests" | translate}}</label>
+          <mat-card fxLayout="row" class="guest_field" style="width: 100%;" [matMenuTriggerFor]="menu">
+            <mat-icon>people</mat-icon>
+            <div fxLayout="column">
+
+
+              <div fxLayout="column">
+                <p class="text_in_search_design">
+                  {{filterFormGroup.controls.numberOfAdult.value}} {{'Product.adult' | translate }}
+                </p>
+                <p class="text_in_search_design">
+                  {{filterFormGroup.controls.numberOfChildren.value}} {{'Product.children' | translate }}
+                </p>
+              </div>
+            </div>
+          </mat-card>
+
+          <mat-menu #menu="matMenu">
+            <div fxLayout="column">
+
+              <div fxLayout="row" fxLayoutAlign="start center" (click)="$event.stopPropagation();">
+                {{'Product.adults' | translate }}:<button mat-button (click)="handleMinusAdult()"
+                  [disabled]="!enableAdult">-</button>
+                <input type="text" class="num" value="numberOfAdult" formControlName="numberOfAdult" />
+                <button mat-button (click)="handlePlusAdults()">+</button>
+              </div>
+
+
+              <div fxLayout="row" fxLayoutAlign="start center" (click)="$event.stopPropagation();">
+                {{'Product.childrens' | translate }}:<button mat-button (click)="handleMinusChildren()"
+                  [disabled]="!enableChildren">-</button>
+                <input type="text" class="num" value="numberOfChildren" formControlName="numberOfChildren" />
+                <button mat-button (click)="handlePlusChildren()">+</button>
+              </div>
+
+              <div fxLayout="row" fxLayoutAlign="space-around center">
+                <button mat-stroked-button color="warn">Save</button>
+                <button mat-stroked-button (click)="OnCancelGuests()">Close</button>
+              </div>
+            </div>
+          </mat-menu>
+          <!-- <button [disabled]="!isSelected" class="h-search__submit" type="submit">{{'Home.find' |
+            translate}}</button> -->
+          <button class="h-search__submit" type="submit">{{'Home.find' |
+            translate}}</button>
+          <p *ngIf="!isSelected">{{"Home.selectCityFromDropdown" | translate}}</p>
+        </form>
+        <div *ngIf="showWeather" class="weather-widget">
+          <div class="weather-today">
+            <div class="weather-info">
+              <div class="weather-location">{{ cityName | titlecase }}</div>
+              <div class="forecast-date">{{ today?.date }}</div>
+              <div class="weather-temperature">{{ today?.temperature | roundUp }}°C</div>
+              <img loading="lazy" [src]="getWeatherIconUrl(today?.icon)" alt="Weather Icon" class="weather-icon">
+            </div>
+          </div>
+          <div class="weather-forecast">
+            <div class="forecast-day" *ngFor="let forecast of remainingForecast">
+              <div class="forecast-date">{{ forecast?.date }}</div>
+              <div class="forecast-temperature">{{ forecast?.temperature | roundUp }}°C</div>
+              <img loading="lazy" [src]="getWeatherIconUrl(forecast?.icon)" alt="Weather Icon" class="weather-icon">
+              <div class="forecast-description">{{ forecast?.description }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="sort-container" *ngIf="productType == 'estate'">
+          <div class="sort">
+            <a (click)="defaultSorting()">{{"Home.default_sorting" | translate}}</a>
+          </div>
+          <div class="sort">
+            <select (change)="sortByPrice($event.target.value, 'estate')" [(ngModel)]="selectedPriceSortOption">
+              <option value="default">
+                {{"Home.price_sorting" | translate}} &#x2195;
+              </option>
+              <option value="asc">
+                {{"Home.sort_by_price" | translate}} MIN
+              </option>
+              <option value="desc">
+                {{"Home.sort_by_price" | translate}} MAX
+              </option>
+            </select>
+          </div>
+          
+          <div class="sort">
+            <select *ngIf="isMtEstate" (change)="sortByStars($event.target.value, 'estate')" [(ngModel)]="selectedStarsSortOption">
+              <option value="default">
+                {{"Home.star_sorting" | translate}} &#x2195;
+              </option>
+              <option value="asc">
+                {{"Home.sort_by_stars" | translate}} MIN
+              </option>
+              <option value="desc">
+                {{"Home.sort_by_stars" | translate}} MAX
+              </option>
+            </select>
+          </div>
+         
+        </div>
+        <br>
+
+      </aside>
+
+      <div class="hotels__content">
+
+        <div *ngIf="productType == 'adventure'" class="mt_hotels__cards">
+          <ng-container *ngFor="let adventure of allAdventures  | slice:startIndex:startIndex + pageSize as slicedData;">
+            <div class="mt_hotels__card xs-card mt_card_size ratehawk_hotel_size" >
+
+              <div class="">
+                <a (click)="redirectToAdventure(adventure)" style="cursor: pointer;">
+                  <img loading="lazy" src="{{adventure.imageUrl}}" alt=""  style="min-width:500px !important;max-width:500px !important; height: 320px !important;">
+                </a>
+              </div>
+              <div class="mt_card_container ">
+                <a (click)="redirectToAdventure(adventure)" style="cursor: pointer;">
+                  <div class="mt_xs-card__info">
+                    <span><h2>{{ adventure.name | nameTranslator | async  }}</h2></span>
+                      <br>
+                    <h5>{{ adventure.cityName}}, {{ adventure.countryName}}</h5>
+
+                    <p class="mt_card_text_name">{{adventure.kind}}</p>
+                    <p class="mt_xs-card__cost ">
+                      <img loading="lazy" src="../../assets/img/icons/marked.webp" alt="" width="32" height="32">
+                      <span class="rounded-purple">{{stripDecimals(adventure.originalPrice) * conversion_rate | roundUp  }} {{default_curr}}</span>
+
+                    <div>
+                      <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+                        <mat-icon *ngIf="star <= adventure.starRating">stars</mat-icon>
+                      </ng-container>
+                    </div>
+
+                  </div>
+                </a>
+
+              </div>
+            </div>
+
+          </ng-container>
+        </div>
+
+        <div class="hotels__row">
+         
+          <div *ngIf="isMtEstate" class="mt_hotels__cards">
+            <ng-container *ngFor="let estate of rateHawkEstates | slice:startIndex:startIndex + pageSize as slicedData;">
+              <div class="mt_hotels__card xs-card mt_card_size ratehawk_hotel_size" >
+
+                <div class="">
+                  <a  (click)="redirect_to_zenhotels(estate.id, estate.mid, estate.city, estate.country, estate.region_id)" style="cursor: pointer;">
+                    <img loading="lazy"  [src]="(estate.imageUrl | parseJson)[0]" alt=""  style="min-width:500px !important;max-width:500px !important; height: 320px !important;">
+                  </a>
+                </div>
+                <div class="mt_card_container ">
+                  <a  (click)="redirect_to_zenhotels(estate.id, estate.mid, estate.city, estate.country, estate.region_id)" style="cursor: pointer;">
+                    <div class="mt_xs-card__info zenhotel" >
+                      <span><h5>{{ estate.title | nameTranslator | async   }}</h5></span>
+                        
+                        <span><p>{{ estate.address | nameTranslator | async  }}</p></span>
+                      <div class="times">
+                        <span>{{"Home.checkin" | translate}}: {{ estate.check_in_time  }}</span>
+                        <br>
+                        <span>{{"Home.checkout" | translate}}: {{ estate.check_out_time  }}</span>
+                      </div>
+                      <p class="mt_card_text_name">{{"Padproduct.typehost" | translate}}: {{estate.kind | nameTranslator | async}}</p>
+                      <p  class="mt_xs-card__cost ">
+                        <img loading="lazy" src="../../assets/img/icons/marked.webp" alt="" width="32" height="32">
+                        <span>{{"Paddhotel.from" | translate}}: </span><span class="rounded-purple">{{ (estate.daily_prices | sumPrices) * conversion_rate | roundUp  }} {{default_curr}}</span>
+                         <!-- for ru below -->
+                        <!-- <span>{{"Paddhotel.from" | translate}}: </span><span class="rounded-purple">{{ (estate.daily_prices | sumPrices) | roundUp  }} ₽</span> -->
+
+                        <br>
+                      <div>
+                        <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+                          <mat-icon *ngIf="star <= estate.star_rating">stars</mat-icon>
+                        </ng-container>
+                      </div>
+
+                    </div>
+                  </a>
+
+                </div>
+              </div>
+
+            </ng-container>
+          </div>
+
+
+        </div>
+        <div *ngIf="isMtEstate || productType === 'adventure'" fxLayout="row" fxLayoutAlign="center center" style="display: flex; flex-direction: row; max-width: 100%;
+        box-sizing: border-box; justify-content: center;
+        align-content: center; align-items: center;">
+          <div class="pagination">
+            <button *ngIf="currentPage > 1" (click)="previousPage(productType)" style="margin-right: 10px;">
+              <i class="fa fa-angle-left" style="font-size:30px; margin-top:3vh"></i>
+            </button>
+            <a style="margin-top:2.4vh" [ngClass]="{'selected': currentPage === 1}"
+              (click)="navToSpecificPage(1, productType)" class="pagination_number">1</a>
+            <a style="margin-top:2.4vh" [ngClass]="{'selected': currentPage === 2}"
+              (click)="navToSpecificPage(2, productType)" class="pagination_number">2</a>
+
+            <div *ngFor="let page of page_count; index as i">
+              <ng-container *ngIf="page_count[i] > 2">
+                <a [ngClass]="{'selected': page === currentPage}"
+                  (click)="navToSpecificPage(page_count[i], productType)"
+                  class="pagination_number">{{page_count[i]}}</a>
+              </ng-container>
+            </div>
+
+            <button *ngIf="currentPage < total_pages_count" (click)="nextPage(productType)" style="margin-right: 10px;">
+              <i class="fa fa-angle-right" style="font-size:30px; margin-top:3vh"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<div class="basic-container" *ngIf="showLoader">
+  <div class="spinner-position">
+    <mat-spinner [diameter]="100"></mat-spinner>
+  </div>
+</div>
+
+
+
+
+
+
+
+<app-bottom *ngIf="!showLoader && !underMaitenance" style="position: relative;bottom: -190px;"
+  class="mobile_bottom"></app-bottom>

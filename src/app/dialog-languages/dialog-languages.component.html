@@ -1,0 +1,61 @@
+<div fxLayout="row" fxLayoutAlign="space-between center">
+    <h2 mat-dialog-title>{{'Language.all' | translate }}</h2>
+    <button mat-button (click)="close()" style="width: 0px;margin-top: -30px;margin-right: -12px;">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+<span>
+    <mat-divider style="width: 80%;margin-top: -18px;"></mat-divider>
+</span>
+
+<mat-dialog-content>
+
+    <div fxLayout="column" style="margin-top: 20px;">
+        <!-- <p style="margin-top: 10px;">{{'Language.language' | translate }}</p>
+        <div fxLayout="row">
+            <button mat-button><img src="../../assets/{{currentLang.lang}}.png" width="24px"><span class="profile-menu"
+                    style="margin-left: 10px;">{{currentLang.title}}</span></button>
+        </div> -->
+
+        <div fxLayout="row wrap">
+                <button fxFlex="0 1 calc(33.3%)" fxFlex.lt-md="0 1 calc(50%)" fxFlex.lt-sm="100%" mat-button
+                class="{{enBtnClass}}" (click)="changeLanguage('en', 'English');" fxLayoutAlign="start"><img
+                    src="../../assets/en.png" width="24px"><span class="profile-menu"
+                    style="margin-left: 10px;">English</span>
+                    <a style="display: none;" href="/en">English</a>
+                </button>
+                <button fxFlex="0 1 calc(33.3%)" fxFlex.lt-md="0 1 calc(50%)" fxFlex.lt-sm="100%" mat-button
+                class="{{bgBtnClass}}" (click)="changeLanguage('bg', 'Български');" fxLayoutAlign="start"><img
+                    src="../../assets/bg.png" width="24px"><span class="profile-menu"
+                    style="margin-left: 10px;">Български</span>
+                    <a style="display: none;" href="/bg">Български</a>
+                </button>
+                <button fxFlex="0 1 calc(33.3%)" fxFlex.lt-md="0 1 calc(50%)" fxFlex.lt-sm="100%" mat-button
+                class="{{elBtnClass}}" (click)="changeLanguage('el', 'Ελληνική');" fxLayoutAlign="start"><img
+                    src="../../assets/el.png" width="24px"><span class="profile-menu"
+                    style="margin-left: 10px;">Ελληνική</span>
+                    <a style="display: none;" href="/el">Ελληνική</a>
+                </button>
+
+        </div>
+        <div fxLayout="row wrap" style="margin-bottom: 10px;">
+                <button fxFlex="0 1 calc(33.3%)" fxFlex.lt-md="0 1 calc(50%)" fxFlex.lt-sm="100%" mat-button
+                class="{{hyBtnClass}}" (click)="changeLanguage('hy', 'Հայերեն');" fxLayoutAlign="start"><img
+                    src="../../assets/hy.png" width="24px"><span class="profile-menu"
+                    style="margin-left: 10px;">Հայերեն</span>
+                    <a style="display: none;" href="/hy">Հայերեն</a>
+                </button>
+                <button fxFlex="0 1 calc(33.3%)" fxFlex.lt-md="0 1 calc(50%)" fxFlex.lt-sm="100%" mat-button
+                class="{{ruBtnClass}}" (click)="changeLanguage('ru', 'Русский');" fxLayoutAlign="start"><img
+                    src="../../assets/ru.png" width="24px"><span class="profile-menu"
+                    style="margin-left: 10px;">Русский</span>
+                    <a style="display: none;" href="/ru">Русский</a>
+                </button>
+        </div>
+    </div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+
+</mat-dialog-actions>

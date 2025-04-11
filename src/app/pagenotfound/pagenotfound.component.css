@@ -1,0 +1,24 @@
+a{
+    text-decoration: none;
+    color:rgb(96 211 236 / 87%);
+}
+
+img{
+  height: 390px;
+  width: auto;
+}
+
+.pagenotfound_spinner{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    font-size: 30px;
+    font-weight: 400;
+}
+
+.buttonStyle{
+    color: rgba(0, 0, 0, 0.507);
+    margin: 3px;
+}

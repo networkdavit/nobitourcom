@@ -1,0 +1,55 @@
+<app-header></app-header>
+<app-carousel></app-carousel>
+
+
+<section class="contact">
+  <div class="wrapper">
+    <div class="contact__content">
+      <h2 class="contact__title section-title">{{"Contact.contactus" | translate}}</h2>
+
+      <form [formGroup]="feedbackForm" (ngSubmit)="onSubmitMessage()" #resetAdminLoginForm="ngForm">
+        <div class="contact__main">
+          <div class="contact__fields">
+            <div class="contact__fields_main">
+              <div class="contact_row field">
+                <label class="field__label">{{"Contact.name" | translate}}</label>
+                <div class="field__row">
+                  <img src="../../assets/img/icons/c-user.png" alt="" width="24" height="24">
+                  <input class="contact_input" type="text" placeholder="Your Name" formControlName="name">
+                </div>
+              </div>
+              <div class="contact_row field">
+                <label class="field__label">{{"Contact.email" | translate}}</label>
+                <div class="field__row">
+                  <img src="../../assets/img/icons/c-tg.png" alt="" width="24" height="24">
+                  <input class="contact_input" type="text" placeholder="test@gmail.com" formControlName="email">
+                </div>
+              </div>
+              <div class="contact_row field">
+                <label class="field__label">{{"Contact.phone" | translate}}</label>
+                <div class="field__row">
+                  <img src="../../assets/img/icons/c-phone.png" alt="" width="24" height="24">
+                  <input class="contact_input" type="text" placeholder="+" formControlName="phone">
+                </div>
+              </div>
+            </div>
+            <div class="contact_row field field-comment">
+              <label class="field__label">{{"Contact.message" | translate}}</label>
+              <div class="field__row field__row-comment">
+                <img src="../../assets/img/icons/c-comment.png" alt="" width="24" height="24">
+                <textarea placeholder="Your message" formControlName="text"></textarea>
+              </div>
+            </div>
+          </div>
+          <button class="contact__submit" type="submit">{{"Contact.submit" | translate}}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+<div class="basic-container" *ngIf="showLoader">
+  <div class="spinner-position">
+    <mat-spinner [diameter]="100"></mat-spinner>
+  </div>
+</div>
+<app-bottom *ngIf="!showLoader" style="position: relative"></app-bottom>

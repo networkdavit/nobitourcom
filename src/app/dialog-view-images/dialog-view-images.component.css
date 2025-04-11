@@ -1,0 +1,76 @@
+mat-divider{
+    width: 80%;
+}
+
+
+.left-arrow{
+    font-size: 120px;
+    color: #333;
+}
+
+.right-arrow{
+    font-size: 120px;
+    color: #333;
+}
+
+.left-arrow-bg{
+    opacity: 0.3;
+    cursor: pointer;
+    width: 50%;
+    position: absolute;
+    left: 0px;
+    transition: opacity 0.8s;
+    top: 0px;
+    bottom: 0px;
+}
+
+.left-arrow-bg:hover{
+    opacity: 1;
+}
+
+
+.right-arrow-bg{
+    opacity: 0.3;
+    cursor: pointer;
+    width: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transition: opacity 0.8s;
+    top: 0px;
+    bottom: 0px;
+}
+
+.right-arrow-bg:hover{
+    opacity: 1;
+}
+
+
+.left-arrow.cdk-overlay-dark-backdrop {
+  background: rgba(0,0,0,.66);
+}
+
+.left-arrow.cdk-overlay-dark-backdrop {
+  background: rgba(0,0,0,.66);
+}
+
+button {
+    outline:none
+}
+.close-btn{
+    float: right;
+}
+mat-dialog-content{
+    max-height: none!important;
+}
+::ng-deep.cdk-overlay-pane{
+    height: auto!important;
+}
+
+.mat-dialog-title {
+  color: #ccc;
+}
+
+.mat-dialog-container{
+  background-color: #333;
+}

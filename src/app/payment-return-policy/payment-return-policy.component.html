@@ -1,0 +1,33 @@
+<app-header></app-header>
+<app-carousel></app-carousel>
+<div>
+  <div *ngIf="showLoader" class="spinner-position faq_spinner">
+    <mat-spinner [diameter]="100"></mat-spinner>
+  </div>
+  <div *ngIf="reveal">
+    <div class="text_style">
+      <h2 class="text__title section-title">{{"PaymentReturnPolicy.h1" | translate}}</h2>
+      <li class="text__txt">{{"PaymentReturnPolicy.p1" | translate}}</li>
+      <li class="text__txt">{{"PaymentReturnPolicy.p2" | translate}}</li>
+      <li class="text__txt">{{"PaymentReturnPolicy.p3" | translate}}</li>
+      <br>
+      <h2 class="text__title section-title">{{"PaymentReturnPolicy.h2" | translate}}</h2>
+      <li class="text__txt">{{"PaymentReturnPolicy.p4" | translate}}</li>
+      <li class="text__txt">{{"PaymentReturnPolicy.p5" | translate}}</li>
+      <li class="text__txt">{{"PaymentReturnPolicy.p6" | translate}}</li>
+      <li class="text__txt">{{"PaymentReturnPolicy.p7" | translate}}</li>
+      <li class="text__txt">{{"PaymentReturnPolicy.p8" | translate}}</li>
+      <li class="text__txt">{{"PaymentReturnPolicy.p9" | translate}}</li>
+      <li class="text__txt">{{"PaymentReturnPolicy.p10" | translate}}</li>
+      <br>
+      <h2 class="text__title section-title">{{"PaymentReturnPolicy.h3" | translate}}</h2>
+      <li class="text__txt">{{"PaymentReturnPolicy.p11" | translate}}</li>
+      <li class="text__txt">{{"PaymentReturnPolicy.p12" | translate}}</li>
+      <li class="text__txt">{{"PaymentReturnPolicy.p13" | translate}}</li>
+      <li class="text__txt">{{"PaymentReturnPolicy.p14" | translate}}</li>
+      <li class="text__txt">{{"PaymentReturnPolicy.p15" | translate}}</li>
+      <li class="text__txt">{{"PaymentReturnPolicy.p16" | translate}}</li>
+    </div>
+  </div>
+</div>
+<app-bottom *ngIf="!showLoader" style="position: relative;bottom: -190px;"></app-bottom>

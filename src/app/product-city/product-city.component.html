@@ -1,0 +1,111 @@
+<app-header (showLoader)="onShowLoader($event)" (currencyEvent)="onCurrencyDataReceived($event)"></app-header>
+<app-carousel></app-carousel>
+      <!-- <mat-spinner [diameter]="100"></mat-spinner>
+      <p class="loading_text">{{"Home.loading_adv" | translate}}</p> -->
+<div *ngIf="showHotels" class="recommended_container">
+    <div *ngIf="showRecommendedLoaderEstates" class="spinner-position-estate faq_spinner">
+      <mat-spinner [diameter]="100"></mat-spinner>
+      <!-- <p class="loading_text">{{"Home.loading_adv" | translate}}</p> -->
+    </div>
+    <section class="hotels on-main">
+      <div class="wrapper">
+        <h2  class="hotels_title section-title hotels_title-mob">
+          {{"Home.recommendedHotelsIntro" | translate }}</h2>
+        <div class="hotels__main">
+  
+          <div class="hotels__content">
+            <div class="hotels__row">
+              <div class="hotels__cards">
+                <div class="hotels__card xs-card" 
+                  *ngFor="let recommendedHotel of recommended_ratehawk_hotels; index as i">
+                  <div class="xs-card__img">
+                    <a (click)="redirect_to_zenhotels(recommendedHotel.id, recommendedHotel.mid, recommendedHotel.city, recommendedHotel.country, recommendedHotel.region_id)">
+                      <img [src]="(recommendedHotel.imageUrl | parseJson)[0]" alt="" width="340" height="428">
+                      <p style="text-align: center;" class="main_color">{{ recommendedHotel.city === 'anapa' ? 'Анапа' : (recommendedHotel.city | nameTranslator | async) }}
+                      <div class="xs-card__main">
+                        <p style="text-align: center; height: 10px;" class="main_color">
+                          {{recommendedHotel.title | nameTranslator |async}}
+                          </p>
+                        <p class="xs-card__name card_text_name" style="height: 20px;">{{recommendedHotel.name | nameTranslator |async}}</p>
+
+                        <p  class="xs-card__cost" >
+                          <span>{{"Paddhotel.from" | translate}}: </span>{{ (recommendedHotel.daily_prices | sumPrices) * conversion_rate | roundUp }} {{default_curr}}
+                          <!-- <span>{{"Paddhotel.from" | translate}}: </span>{{ (recommendedHotel.daily_prices | sumPrices) | roundUp }} ₽ -->
+                        </p>
+                        <span>
+                          <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+                            <mat-icon *ngIf="star <= recommendedHotel.star_rating">stars</mat-icon>
+                          </ng-container>
+                        </span>
+                        <!-- <span>
+                          <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+                            <mat-icon *ngIf="star <= recommendedHotel.stars">stars</mat-icon>
+                          </ng-container>
+                        </span> -->
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <button (click)="navigateToMore('estate')" class="check-more-btn">{{"Home.checkMore" | translate}}</button>
+
+  </div>
+  
+
+  <div *ngIf="showAdventures" class="recommended_container">
+  
+    <div *ngIf="showRecommendedLoaderAdventures" class="spinner-position-adventures faq_spinner">
+      <mat-spinner [diameter]="100"></mat-spinner>
+      <!-- <p class="loading_text">{{"Home.loading_adv" | translate}}</p> -->
+    </div>
+    <section class="hotels on-main">
+      <div class="wrapper">
+        <h2  class="hotels_title section-title hotels_title-mob">{{"Home.popularForYou" |
+          translate}}</h2>
+        <div class="hotels__main">
+  
+          <div class="hotels__content">
+            <div class="hotels__row">
+              <div class="hotels__cards">
+                <div class="hotels__card xs-card"  *ngFor="let recommended_adventure of recommended_adventures; index as i">
+              
+                  <div class="xs-card__img">
+                    <a routerLink="/{{website_language}}/home/adventure/{{recommended_adventure.id}}-{{recommended_adventure.slug}}" 
+                    (click)="navigateToIpRecommendedAdventureOrEstate(recommended_adventure.id, recommended_adventure.slug, 'adventure')">
+                      <img src={{recommended_adventure.imageUrl}} alt="" width="340" height="428">
+                      <p style="text-align: center;" class="main_color">{{recommended_adventure.cityName | nameTranslator |async}} - {{recommended_adventure.countryName | nameTranslator |async}}</p>
+                      <div class="xs-card__main">
+                        <p class="xs-card__name card_text_name" style="height: 30px;">{{recommended_adventure.name | nameTranslator |async}}</p>
+                        <br>
+                        <p class="xs-card__cost"  >
+                          {{recommended_adventure.originalPrice * conversion_rate | roundUp}} {{default_curr}}
+                          <!-- {{recommended_adventure.price | roundUp}} 
+                          ₽ -->
+                        </p>
+                        <div>
+                          <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+                            <mat-icon *ngIf="star <= recommended_adventure.rating">stars</mat-icon>
+                          </ng-container>
+                        </div>
+                        
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <button (click)="navigateToMore('adventure')" class="check-more-btn">{{"Home.checkMore" | translate}}</button>
+
+  </div>
+
+  
+<app-bottom></app-bottom>

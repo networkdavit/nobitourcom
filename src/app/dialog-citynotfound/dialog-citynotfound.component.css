@@ -1,0 +1,28 @@
+.popup-container {
+  background-color: #f7f7f7;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top:20%;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.space {
+  margin: 0 5px;
+  text-transform: capitalize;
+}
+
+.button-citynotfound {
+  color: rgb(96 211 236 / 87%);
+  width: 50%;
+  margin: 0 auto;
+  display: block;
+}

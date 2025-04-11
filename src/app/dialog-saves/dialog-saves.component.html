@@ -1,0 +1,63 @@
+<h2 mat-dialog-title>{{'Dsaves.mysaves' | translate }}</h2>
+
+<mat-dialog-content>
+
+
+    <mat-card *ngFor="let favorite of favorites">
+        <div fxLayout="row" fxLayoutAlign="space-around start">
+            <!-- <img fxFlex="20" src="{{favorite.image}}" width="80px" height="80px" alt="img" style="border-radius: 5px;"> -->
+            <img fxFlex="20" src="../../assets/rec-rome.png" width="80px" height="80px" alt="img" style="border-radius: 5px;">
+            <span fxFlex="5"></span>
+            <div fxFlex="70" fxLayout="column" fxLayoutAlign="space-around start">
+                <div fxLayout="row">
+                    <p>{{favorite.productName}}</p>
+                    <span fxLayout="row" fxFlex="100" fxLayoutAlign="start start"
+                        style="margin-top: -8px;margin-left: 10px ;cursor: pointer; text-decoration: none;">
+                        <button mat-icon-button fxFlex="12" style="margin-left: -2%;">
+                            <mat-icon style="color: rgb(224, 81, 81);font-size: 100%;">favorite</mat-icon>
+                        </button>
+                        <button mat-icon-button fxFlex="12" style="margin-left: -5%;">
+                            <mat-icon style="color: rgb(224, 81, 81);font-size: 100%;">favorite</mat-icon>
+                        </button>
+                        <button mat-icon-button fxFlex="12" style="margin-left: -5%;">
+                            <mat-icon style="color: rgb(224, 81, 81);font-size: 100%;">favorite</mat-icon>
+                        </button>
+                        <button mat-icon-button fxFlex="12" style="margin-left: -5%;">
+                            <mat-icon style="color: rgb(224, 81, 81);font-size: 100%;">favorite</mat-icon>
+                        </button>
+                        <button mat-icon-button fxFlex="12" style="margin-left: -5%;">
+                            <mat-icon style="color: rgb(238, 180, 180);font-size: 100%;">favorite</mat-icon>
+                        </button>
+                    </span>
+
+                </div>
+                <!-- <div style="width:250px;font-size: 12px;">
+                    <p style="text-align: justify;">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard...
+                    </p>
+                </div> -->
+                <div>
+                    <!-- <button mat-stroked-button style="padding: 0px 10px;">{{'Dsaves.reservation' | translate }}</button> -->
+                    <button mat-icon-button (click)="onDeleteFavorite(favorite.productId, favorite.productType);">
+                        <mat-icon class="save">favorite</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </mat-card>
+
+    <div class="basic-container" *ngIf="showLoader">
+        <div class="spinner-position">
+            <mat-spinner [diameter]="100"></mat-spinner>
+        </div>
+    </div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <!-- <button class="mat-raised-button mat-primary" style="margin: 0px 10px;" (click)="save()">Save</button> -->
+    <button class="mat-raised-button" fxFlex="end" style="margin: 0px 10px;text-decoration: none;"
+        (click)="close()">Close</button>
+</mat-dialog-actions>

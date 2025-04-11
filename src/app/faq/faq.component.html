@@ -1,0 +1,470 @@
+<app-header></app-header>
+<app-carousel></app-carousel>
+
+<div *ngIf="reveal">
+
+  <div *ngIf="isClient">
+    <main>
+
+
+      <div class="container">
+        <label class="accordion accordion--1" for="open-1">
+          <input class="accordion__open" id="open-1" type="radio" name="acoordion-1">
+          <input class="accordion__close" id="close-1" type="radio" name="acoordion-1">
+          <div class="accordion__tab">Question</div>
+          <div class="accordion__wrapper">
+            <dl class="accordion__box">
+              <dt class="accordion__patition">
+                <!-- <span class="accordion__number">01</span> -->
+                <span class="accordion__title">{{"FrequentlyAskedQuestions.q1" | translate}}</span>
+              </dt>
+              <dd class="accordion__text">
+                <!-- <ul> -->
+                <!-- <li>Subscribe</li>
+                        <li>Like</li>
+                        <li>Comment</li> -->
+                <p>{{"FrequentlyAskedQuestions.a1p1" | translate}} <a href="https://nobiarts.com" target="_blank"
+                    style="text-decoration: underline; color:rgb(151, 14, 241); ">Nobiarts.com </a>
+                  {{"FrequentlyAskedQuestions.a1p2" | translate}} </p>
+                <!-- </ul> -->
+              </dd>
+            </dl>
+          </div>
+          <label for="close-1" class="accordion__button">
+            <span class="accordion__buttonText">CLOSE</span>
+          </label>
+        </label>
+
+        <label class="accordion accordion--1" for="open-2">
+          <input class="accordion__open" id="open-2" type="radio" name="acoordion-2">
+          <input class="accordion__close" id="close-2" type="radio" name="acoordion-2">
+          <div class="accordion__tab">Question</div>
+          <div class="accordion__wrapper">
+            <dl class="accordion__box">
+              <dt class="accordion__patition">
+                <!-- <span class="accordion__number">02</span> -->
+                <span class="accordion__title">{{"FrequentlyAskedQuestions.q2" | translate}}</span>
+              </dt>
+              <dd class="accordion__text">
+                <!-- <ul> -->
+                <!-- <li>Subscribe</li>
+                      <li>Like</li>
+                      <li>Comment</li> -->
+                <p>{{"FrequentlyAskedQuestions.a2" | translate}}</p>
+                <!-- </ul> -->
+              </dd>
+            </dl>
+          </div>
+          <label for="close-2" class="accordion__button">
+            <span class="accordion__buttonText">CLOSE</span>
+          </label>
+        </label>
+
+        <label class="accordion accordion--1" for="open-3">
+          <input class="accordion__open" id="open-3" type="radio" name="acoordion-3">
+          <input class="accordion__close" id="close-3" type="radio" name="acoordion-3">
+          <div class="accordion__tab">Question</div>
+          <div class="accordion__wrapper">
+            <dl class="accordion__box">
+              <dt class="accordion__patition">
+                <!-- <span class="accordion__number">03</span> -->
+                <span class="accordion__title">{{"FrequentlyAskedQuestions.q3" | translate}}</span>
+              </dt>
+              <dd class="accordion__text">
+                <!-- <ul> -->
+                <!-- <li>Subscribe</li>
+                    <li>Like</li>
+                    <li>Comment</li> -->
+                <p>{{"FrequentlyAskedQuestions.a3" | translate}}</p>
+                <!-- </ul> -->
+              </dd>
+            </dl>
+          </div>
+          <label for="close-3" class="accordion__button">
+            <span class="accordion__buttonText">CLOSE</span>
+          </label>
+        </label>
+
+        <label class="accordion accordion--1" for="open-4">
+          <input class="accordion__open" id="open-4" type="radio" name="acoordion-4">
+          <input class="accordion__close" id="close-4" type="radio" name="acoordion-4">
+          <div class="accordion__tab">Question</div>
+          <div class="accordion__wrapper">
+            <dl class="accordion__box">
+              <dt class="accordion__patition">
+                <!-- <span class="accordion__number">04</span> -->
+                <span class="accordion__title">{{"FrequentlyAskedQuestions.q4" | translate}}</span>
+              </dt>
+              <dd class="accordion__text">
+                <!-- <ul> -->
+                <!-- <li>Subscribe</li>
+                  <li>Like</li>
+                  <li>Comment</li> -->
+                <p>{{"FrequentlyAskedQuestions.a4" | translate}}</p>
+                <!-- </ul> -->
+              </dd>
+            </dl>
+          </div>
+          <label for="close-4" class="accordion__button">
+            <span class="accordion__buttonText">CLOSE</span>
+          </label>
+        </label>
+
+        <label class="accordion accordion--1" for="open-5">
+          <input class="accordion__open" id="open-5" type="radio" name="acoordion-5">
+          <input class="accordion__close" id="close-5" type="radio" name="acoordion-5">
+          <div class="accordion__tab">Question</div>
+          <div class="accordion__wrapper">
+            <dl class="accordion__box">
+              <dt class="accordion__patition">
+                <!-- <span class="accordion__number">05</span> -->
+                <span class="accordion__title">{{"FrequentlyAskedQuestions.q5" | translate}}</span>
+              </dt>
+              <dd class="accordion__text">
+                <p>{{"FrequentlyAskedQuestions.a5" | translate}}</p>
+              </dd>
+            </dl>
+          </div>
+          <label for="close-5" class="accordion__button">
+            <span class="accordion__buttonText">CLOSE</span>
+          </label>
+        </label>
+
+        <label class="accordion accordion--1" for="open-6">
+          <input class="accordion__open" id="open-6" type="radio" name="acoordion-6">
+          <input class="accordion__close" id="close-6" type="radio" name="acoordion-6">
+          <div class="accordion__tab">Question</div>
+          <div class="accordion__wrapper">
+            <dl class="accordion__box">
+              <dt class="accordion__patition">
+                <!-- <span class="accordion__number">06</span> -->
+                <span class="accordion__title">{{"FrequentlyAskedQuestions.q6" | translate}}</span>
+              </dt>
+              <dd class="accordion__text">
+                <!-- <ul> -->
+                <!-- <li>Subscribe</li>
+              <li>Like</li>
+              <li>Comment</li> -->
+                <p>{{"FrequentlyAskedQuestions.a6" | translate}}</p>
+                <p>{{"FrequentlyAskedQuestions.a6.2" | translate}}</p>
+                <!-- </ul> -->
+              </dd>
+            </dl>
+          </div>
+          <label for="close-6" class="accordion__button">
+            <span class="accordion__buttonText">CLOSE</span>
+          </label>
+        </label>
+
+        <label class="accordion accordion--1" for="open-7">
+          <input class="accordion__open" id="open-7" type="radio" name="acoordion-7">
+          <input class="accordion__close" id="close-7" type="radio" name="acoordion-7">
+          <div class="accordion__tab">Question</div>
+          <div class="accordion__wrapper">
+            <dl class="accordion__box">
+              <dt class="accordion__patition">
+                <!-- <span class="accordion__number">07</span> -->
+                <span class="accordion__title">{{"FrequentlyAskedQuestions.q7" | translate}}</span>
+              </dt>
+              <dd class="accordion__text">
+                <p>{{"FrequentlyAskedQuestions.a7" | translate}}</p>
+              </dd>
+            </dl>
+          </div>
+          <label for="close-7" class="accordion__button">
+            <span class="accordion__buttonText">CLOSE</span>
+          </label>
+        </label>
+
+        <label class="accordion accordion--1" for="open-8">
+          <input class="accordion__open" id="open-8" type="radio" name="acoordion-8">
+          <input class="accordion__close" id="close-8" type="radio" name="acoordion-8">
+          <div class="accordion__tab">Question</div>
+          <div class="accordion__wrapper">
+            <dl class="accordion__box">
+              <dt class="accordion__patition">
+                <!-- <span class="accordion__number">08</span> -->
+                <span class="accordion__title">{{"FrequentlyAskedQuestions.q8" | translate}}</span>
+              </dt>
+              <dd class="accordion__text">
+                <p>{{"FrequentlyAskedQuestions.a8" | translate}}</p>
+              </dd>
+            </dl>
+          </div>
+          <label for="close-8" class="accordion__button">
+            <span class="accordion__buttonText">CLOSE</span>
+          </label>
+        </label>
+
+        <label class="accordion accordion--1" for="open-9">
+          <input class="accordion__open" id="open-9" type="radio" name="acoordion-9">
+          <input class="accordion__close" id="close-9" type="radio" name="acoordion-9">
+          <div class="accordion__tab">Question</div>
+          <div class="accordion__wrapper">
+            <dl class="accordion__box">
+              <dt class="accordion__patition">
+                <!-- <span class="accordion__number">09</span> -->
+                <span class="accordion__title">{{"FrequentlyAskedQuestions.q9" | translate}}</span>
+              </dt>
+              <dd class="accordion__text">
+                <p>{{"FrequentlyAskedQuestions.a9" | translate}}</p>
+                <p>{{"FrequentlyAskedQuestions.a9.2" | translate}}</p>
+              </dd>
+            </dl>
+          </div>
+          <label for="close-9" class="accordion__button">
+            <span class="accordion__buttonText">CLOSE</span>
+          </label>
+        </label>
+
+        <label class="accordion accordion--1" for="open-10">
+          <input class="accordion__open" id="open-10" type="radio" name="acoordion-10">
+          <input class="accordion__close" id="close-10" type="radio" name="acoordion-10">
+          <div class="accordion__tab">Question</div>
+          <div class="accordion__wrapper">
+            <dl class="accordion__box">
+              <dt class="accordion__patition">
+                <!-- <span class="accordion__number">10</span> -->
+                <span class="accordion__title">{{"FrequentlyAskedQuestions.q10" | translate}}</span>
+              </dt>
+              <dd class="accordion__text">
+                <p>{{"FrequentlyAskedQuestions.a10" | translate}}</p>
+              </dd>
+            </dl>
+          </div>
+          <label for="close-10" class="accordion__button">
+            <span class="accordion__buttonText">CLOSE</span>
+          </label>
+        </label>
+
+        <label class="accordion accordion--1" for="open-11">
+          <input class="accordion__open" id="open-11" type="radio" name="acoordion-11">
+          <input class="accordion__close" id="close-11" type="radio" name="acoordion-11">
+          <div class="accordion__tab">Question</div>
+          <div class="accordion__wrapper">
+            <dl class="accordion__box">
+              <dt class="accordion__patition">
+                <!-- <span class="accordion__number">11</span> -->
+                <span class="accordion__title">{{"FrequentlyAskedQuestions.q11" | translate}}</span>
+              </dt>
+              <dd class="accordion__text">
+                <p>{{"FrequentlyAskedQuestions.a11" | translate}}</p>
+              </dd>
+            </dl>
+          </div>
+          <label for="close-11" class="accordion__button">
+            <span class="accordion__buttonText">CLOSE</span>
+          </label>
+        </label>
+
+        <label class="accordion accordion--1" for="open-12">
+          <input class="accordion__open" id="open-12" type="radio" name="acoordion-12">
+          <input class="accordion__close" id="close-12" type="radio" name="acoordion-12">
+          <div class="accordion__tab">Question</div>
+          <div class="accordion__wrapper">
+            <dl class="accordion__box">
+              <dt class="accordion__patition">
+                <!-- <span class="accordion__number">12</span> -->
+                <span class="accordion__title">{{"FrequentlyAskedQuestions.q12" | translate}}</span>
+              </dt>
+              <dd class="accordion__text">
+                <p>{{"FrequentlyAskedQuestions.a12" | translate}}</p>
+              </dd>
+            </dl>
+          </div>
+          <label for="close-12" class="accordion__button">
+            <span class="accordion__buttonText">CLOSE</span>
+          </label>
+        </label>
+
+        <label class="accordion accordion--1" for="open-13">
+          <input class="accordion__open" id="open-13" type="radio" name="acoordion-13">
+          <input class="accordion__close" id="close-13" type="radio" name="acoordion-13">
+          <div class="accordion__tab">Question</div>
+          <div class="accordion__wrapper">
+            <dl class="accordion__box">
+              <dt class="accordion__patition">
+                <!-- <span class="accordion__number">13</span> -->
+                <span class="accordion__title">{{"FrequentlyAskedQuestions.q13" | translate}}</span>
+              </dt>
+              <dd class="accordion__text">
+                <p>{{"FrequentlyAskedQuestions.a13" | translate}}</p>
+              </dd>
+            </dl>
+          </div>
+          <label for="close-13" class="accordion__button">
+            <span class="accordion__buttonText">CLOSE</span>
+          </label>
+        </label>
+
+        <label class="accordion accordion--1" for="open-14">
+          <input class="accordion__open" id="open-14" type="radio" name="acoordion-14">
+          <input class="accordion__close" id="close-14" type="radio" name="acoordion-14">
+          <div class="accordion__tab">Question</div>
+          <div class="accordion__wrapper">
+            <dl class="accordion__box">
+              <dt class="accordion__patition">
+                <!-- <span class="accordion__number">14</span> -->
+                <span class="accordion__title">{{"FrequentlyAskedQuestions.q14" | translate}}</span>
+              </dt>
+              <dd class="accordion__text">
+                <p>{{"FrequentlyAskedQuestions.a14" | translate}}</p>
+              </dd>
+            </dl>
+          </div>
+          <label for="close-14" class="accordion__button">
+            <span class="accordion__buttonText">CLOSE</span>
+          </label>
+        </label>
+
+        <label class="accordion accordion--1" for="open-15">
+          <input class="accordion__open" id="open-15" type="radio" name="acoordion-15">
+          <input class="accordion__close" id="close-15" type="radio" name="acoordion-15">
+          <div class="accordion__tab">Question</div>
+          <div class="accordion__wrapper">
+            <dl class="accordion__box">
+              <dt class="accordion__patition">
+                <!-- <span class="accordion__number">15</span> -->
+                <span class="accordion__title">{{"FrequentlyAskedQuestions.q15" | translate}}</span>
+              </dt>
+              <dd class="accordion__text">
+                <p>{{"FrequentlyAskedQuestions.a15" | translate}}</p>
+                <p>{{"FrequentlyAskedQuestions.a15.2" | translate}}</p>
+              </dd>
+            </dl>
+          </div>
+          <label for="close-15" class="accordion__button">
+            <span class="accordion__buttonText">CLOSE</span>
+          </label>
+        </label>
+
+        <label class="accordion accordion--1" for="open-16">
+          <input class="accordion__open" id="open-16" type="radio" name="acoordion-16">
+          <input class="accordion__close" id="close-16" type="radio" name="acoordion-16">
+          <div class="accordion__tab">Question</div>
+          <div class="accordion__wrapper">
+            <dl class="accordion__box">
+              <dt class="accordion__patition">
+                <!-- <span class="accordion__number">16</span> -->
+                <span class="accordion__title">{{"FrequentlyAskedQuestions.q16" | translate}}</span>
+              </dt>
+              <dd class="accordion__text">
+                <p>{{"FrequentlyAskedQuestions.a16" | translate}}</p>
+              </dd>
+            </dl>
+          </div>
+          <label for="close-16" class="accordion__button">
+            <span class="accordion__buttonText">CLOSE</span>
+          </label>
+        </label>
+
+        <label class="accordion accordion--1" for="open-17">
+          <input class="accordion__open" id="open-17" type="radio" name="acoordion-17">
+          <input class="accordion__close" id="close-17" type="radio" name="acoordion-17">
+          <div class="accordion__tab">Question</div>
+          <div class="accordion__wrapper">
+            <dl class="accordion__box">
+              <dt class="accordion__patition">
+                <!-- <span class="accordion__number">17</span> -->
+                <span class="accordion__title">{{"FrequentlyAskedQuestions.q17" | translate}}</span>
+              </dt>
+              <dd class="accordion__text">
+                <p>{{"FrequentlyAskedQuestions.a17" | translate}}</p>
+              </dd>
+            </dl>
+          </div>
+          <label for="close-17" class="accordion__button">
+            <span class="accordion__buttonText">CLOSE</span>
+          </label>
+        </label>
+
+        <label class="accordion accordion--1" for="open-18">
+          <input class="accordion__open" id="open-18" type="radio" name="acoordion-18">
+          <input class="accordion__close" id="close-18" type="radio" name="acoordion-18">
+          <div class="accordion__tab">Question</div>
+          <div class="accordion__wrapper">
+            <dl class="accordion__box">
+              <dt class="accordion__patition">
+                <!-- <span class="accordion__number">18</span> -->
+                <span class="accordion__title">{{"FrequentlyAskedQuestions.q18" | translate}}</span>
+              </dt>
+              <dd class="accordion__text">
+                <p>{{"FrequentlyAskedQuestions.a18" | translate}}</p>
+              </dd>
+            </dl>
+          </div>
+          <label for="close-18" class="accordion__button">
+            <span class="accordion__buttonText">CLOSE</span>
+          </label>
+        </label>
+
+        <label class="accordion accordion--1" for="open-19">
+          <input class="accordion__open" id="open-19" type="radio" name="acoordion-19">
+          <input class="accordion__close" id="close-19" type="radio" name="acoordion-19">
+          <div class="accordion__tab">Question</div>
+          <div class="accordion__wrapper">
+            <dl class="accordion__box">
+              <dt class="accordion__patition">
+                <!-- <span class="accordion__number">19</span> -->
+                <span class="accordion__title">{{"FrequentlyAskedQuestions.q19" | translate}}</span>
+              </dt>
+              <dd class="accordion__text">
+                <p>{{"FrequentlyAskedQuestions.a19" | translate}}</p>
+              </dd>
+            </dl>
+          </div>
+          <label for="close-19" class="accordion__button">
+            <span class="accordion__buttonText">CLOSE</span>
+          </label>
+        </label>
+
+        <label class="accordion accordion--1" for="open-20">
+          <input class="accordion__open" id="open-20" type="radio" name="acoordion-20">
+          <input class="accordion__close" id="close-20" type="radio" name="acoordion-20">
+          <div class="accordion__tab">Question</div>
+          <div class="accordion__wrapper">
+            <dl class="accordion__box">
+              <dt class="accordion__patition">
+                <!-- <span class="accordion__number">20</span> -->
+                <span class="accordion__title">{{"FrequentlyAskedQuestions.q20" | translate}}</span>
+              </dt>
+              <dd class="accordion__text">
+                <p>{{"FrequentlyAskedQuestions.a20" | translate}}</p>
+              </dd>
+            </dl>
+          </div>
+          <label for="close-20" class="accordion__button">
+            <span class="accordion__buttonText">CLOSE</span>
+          </label>
+        </label>
+
+        <label class="accordion accordion--1" for="open-21">
+          <input class="accordion__open" id="open-21" type="radio" name="acoordion-21">
+          <input class="accordion__close" id="close-21" type="radio" name="acoordion-21">
+          <div class="accordion__tab">Question</div>
+          <div class="accordion__wrapper">
+            <dl class="accordion__box">
+              <dt class="accordion__patition">
+                <!-- <span class="accordion__number">21</span> -->
+                <span class="accordion__title">{{"FrequentlyAskedQuestions.q21" | translate}}</span>
+              </dt>
+              <dd class="accordion__text">
+                <p>{{"FrequentlyAskedQuestions.a21" | translate}}</p>
+              </dd>
+            </dl>
+          </div>
+          <label for="close-21" class="accordion__button">
+            <span class="accordion__buttonText">CLOSE</span>
+          </label>
+        </label>
+</div> 
+
+       
+
+
+    </main>
+  </div>
+
+</div>
+
+<app-bottom *ngIf="!showLoader" style="position: relative;"></app-bottom>

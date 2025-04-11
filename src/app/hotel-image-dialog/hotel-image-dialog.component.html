@@ -1,0 +1,10 @@
+<div mat-dialog-content>
+  <img [src]="currentImage" alt="hotel">
+  <div class="arrow prev" (click)="prevImage()">&#8249;</div>
+  <div class="arrow next" (click)="nextImage()">&#8250;</div>
+</div>
+<p class="image-counter">{{"Paddhotel.image" | translate}} {{currentImageIndex + 1}}/{{images.length}}</p>
+
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</div>

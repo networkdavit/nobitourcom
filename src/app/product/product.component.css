@@ -1,0 +1,104 @@
+.material-icons-header{
+    margin-left: 15%;
+    color: rgba(0, 0, 0, 0.507);
+}
+
+.md-48-bottom-header{
+    margin: 0px 30px;
+    font-size: 200%;
+    color: rgba(0, 0, 0, 0.507);
+}
+
+mat-divider{
+    width: 80%;
+}
+
+.mat-card{
+    color:rgba(0, 0, 0, 0.507);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    padding: 9px;
+}
+
+.container-hover{
+    transition: transform .5s;
+    transform: scale(0.98);
+}
+
+.container-hover:hover{
+    cursor: pointer;
+    transition: transform .5s;
+    transform: scale(1.02);
+}
+
+.gallery-icon{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 45%;
+    opacity: 0;
+    transition-duration: 0.5s;
+}
+
+.gallery-icon:hover{
+    filter: none;
+    -webkit-filter: none;
+    opacity: 1;
+    transition-duration: 0.5s;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.700);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0px 0px 100px rgb(255, 255, 255, 0.500);
+}
+
+.img-blur:hover{
+    filter: blur(1px);
+    -webkit-filter: blur(1px);
+}
+
+::ng-deep.mat-menu-panel {
+    max-width: none !important;
+    width: 506px;
+}
+
+button {
+    outline:none
+}
+
+.basic-container{
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    z-index: 2;
+    background-color:  rgb(0, 0, 0, 0.3);
+    height: 100%;
+    width: 100%;
+}
+  
+.spinner-position{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+}
+
+/* Spinner is color */
+::ng-deep.mat-progress-spinner circle, .mat-spinner circle {
+    stroke:rgba(0, 74, 97, 0.74)!important;
+}
+
+.num{
+    width: 50px;
+    border: 1px solid rgba(0, 0, 0, 0.107);
+    box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+    border-radius: 7px;
+    text-align: center;
+}
+
+/* Header navigate */
+
+.mat-card:hover{
+    box-shadow: 0px 5px 10px rgb(184, 184, 184); 
+}

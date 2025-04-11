@@ -1,0 +1,527 @@
+<app-header></app-header>
+
+<div fxLayoutAlign="center center">
+
+    <div style="z-index: -10;height:400px; width: 100%;">
+        <video fxFill autoplay onloadedmetadata="this.muted=true" oncanplay="this.play()" loop="loop"
+            style="object-fit: cover;will-change: auto">
+            <source src="../assets/header-bg-final.mp4" type="video/mp4">
+        </video>
+    </div>
+
+</div>
+
+<div fxLayoutAlign="space-around center" style="position: sticky; top: 80px;z-index: 2;">
+    <mat-card class="mat-icons" fxLayout="row" style="border-radius: 0 0 50px 50px;height: 80px;">
+        <a fxLayoutAlign="center" style="cursor: pointer; text-decoration: none;color: inherit;" href="#">
+            <div fxLayout="column" style="margin-left: 100px; margin: 0px 20px;">
+                <i class="material-icons md-48 md-48-bottom-header" style="margin-bottom: 10px;">fastfood</i>
+                <p fxLayoutAlign="center">{{'Home.restaurants' | translate }}</p>
+            </div>
+        </a>
+
+        <a fxLayoutAlign="center" style="cursor: pointer; text-decoration: none;color: inherit;" href="#">
+            <div fxLayout="column" style="margin: 0px 20px;">
+                <i class="material-icons md-48 md-48-bottom-header" style="margin-bottom: 10px;">hotel</i>
+                <p fxLayoutAlign="center">{{'Home.hotel' | translate }}</p>
+            </div>
+        </a>
+
+        <a fxLayoutAlign="center" style="cursor: pointer; text-decoration: none;color: inherit;" href="#">
+            <div fxLayout="column" style="margin: 0px 20px;">
+                <i class="material-icons md-48 md-48-bottom-header" style="margin-bottom: 10px;">car_rental</i>
+                <p fxLayoutAlign="center">{{'Home.rentcar' | translate }}</p>
+            </div>
+        </a>
+
+        <a fxLayoutAlign="center" style="cursor: pointer; text-decoration: none;color: inherit;" href="#">
+            <div fxLayout="column" style="margin-right: 100px; margin: 0px 20px;">
+                <i class="material-icons md-48 md-48-bottom-header" style="margin-bottom: 10px;">account_balance</i>
+                <p fxLayoutAlign="center">{{'Home.adventure' | translate }}</p>
+            </div>
+        </a>
+
+    </mat-card>
+</div>
+
+
+<div style="background-color: rgb(253, 252, 249);" fxLayout="column" fxLayoutAlign="space-around center"
+    *ngIf="!showLoader">
+
+    <!-- TITLE -->
+    <div style="width: 80%;">
+        <p style="font-size: 30px; font-weight: 400;">{{product.name}}</p>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <!-- Product Header -->
+    <div fxLayout="row" style=" margin: 10px 0px; width: 100%;">
+
+        <div fxFlex="60" fxLayoutAlign="center center">
+            <mat-card fxLayoutAlign="center start">
+                <div style="margin-top: -5px;z-index: 1;">
+                    <div class="container-hover" style="border: 1px solid#439BBE;" (click)="openViewImages(0)">
+                        <img class="img-blur" src="{{product.images[0]}}" alt="" width="500" height="402"
+                            style="margin: 1px;object-fit: cover;">
+                        <img class="gallery-icon" src="../../assets/images_view_logo.png" alt="" width="200"
+                            height="200">
+                    </div>
+                </div>
+                <div fxLayout="column" fxLayoutAlign="center start" style="height: 396px;">
+                    <div class="container-hover" style="border: 1px solid#439BBE;" (click)="openViewImages(1)">
+                        <img class="img-blur" src="{{product.images[1]}}" alt="" width="96" height="96"
+                            style="margin: 1px;object-fit: cover;">
+                        <img class="gallery-icon" src="../../assets/images_view_logo.png" alt="" width="50" height="50">
+                    </div>
+                    <div class="container-hover" style="border: 1px solid#439BBE;" (click)="openViewImages(2)">
+                        <img class="img-blur" src="{{product.images[2]}}" alt="" width="96" height="96"
+                            style="margin: 1px;object-fit: cover;">
+                        <img class="gallery-icon" src="../../assets/images_view_logo.png" alt="" width="50" height="50">
+                    </div>
+                    <div class="container-hover" style="border: 1px solid#439BBE;" (click)="openViewImages(3)">
+                        <img class="img-blur" src="{{product.images[3]}}" alt="" width="96" height="96"
+                            style="margin: 1px;object-fit: cover;">
+                        <img class="gallery-icon" src="../../assets/images_view_logo.png" alt="" width="50" height="50">
+                    </div>
+                    <div class="container-hover" style="border: 1px solid#439BBE;" (click)="openViewImages(4)">
+                        <img class="img-blur" src="{{product.images[4]}}" alt="" width="96" height="96"
+                            style="margin: 1px;object-fit: cover;">
+                        <img class="gallery-icon" src="../../assets/images_view_logo.png" alt="" width="50" height="50">
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+
+        <div fxFlex="40" fxLayoutAlign="start center">
+            <mat-card fxLayout="column" fxLayoutAlign="space-around center">
+
+                <p style="font-size:20px">{{'Product.request' | translate }}</p>
+                <form fxLayout="column" fxLayoutAlign="space-around center" [formGroup]="bookingFormGroup"
+                    #resetBookingForm="ngForm" (ngSubmit)="bookingNextStep()">
+                    <div fxLayout="row" fxLayoutAlign=" center space-around">
+
+                        <mat-form-field class="example-full-width" appearance="fill"
+                            style="margin: 0px 20px;font-size:13px;">
+                            <mat-label>{{'Product.checkin' | translate }}</mat-label>
+                            <input matInput formControlName="checkin" [matDatepickerFilter]="myFilter"
+                                [matDatepicker]="CheckIn">
+                            <mat-datepicker-toggle matSuffix [for]="CheckIn">
+                                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #CheckIn></mat-datepicker>
+                            <!-- touchUi before #picker for bigger calendar -->
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width" appearance="fill"
+                            style="margin: 0px 20px;font-size:13px;">
+                            <mat-label>{{'Product.checkout' | translate }}</mat-label>
+                            <input matInput formControlName="checkout" [matDatepickerFilter]="myFilterDate"
+                                [matDatepicker]="CheckOut">
+                            <mat-datepicker-toggle matSuffix [for]="CheckOut">
+                                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #CheckOut></mat-datepicker>
+                            <!-- touchUi before #picker for bigger calendar -->
+                        </mat-form-field>
+                    </div>
+
+                    <mat-card fxLayout="row" style="cursor: pointer;margin: 10px 0px; width: 93%;"
+                        [matMenuTriggerFor]="menu">
+                        <mat-icon>people</mat-icon>
+                        <div fxLayout="column" style="margin-left:10px;">
+                            <p style="font-size: 12px; opacity: 0.5; margin:-5px 0px">{{'Product.guests' | translate }}
+                            </p>
+                            <p style="font-weight: 500; margin-bottom: -5px;">
+                                {{valueRoom}} {{'Product.room' | translate }},
+                                {{valueAdults}} {{'Product.adult' | translate }},
+                                {{valueChildren}} {{'Product.children' | translate }}</p>
+                        </div>
+
+                    </mat-card>
+                    <mat-menu #menu="matMenu">
+                        <div fxLayout="column">
+                            <div fxLayout="row" fxLayoutAlign="start center" (click)="$event.stopPropagation();"
+                                style="margin-left:20px;border-bottom: 1px solid rgb(230, 230, 230);">
+                                {{'Product.rooms' | translate }}:<button mat-button style="margin-left: 9px;"
+                                    (click)="handleMinusRoom()" [disabled]="!enableRoom">-</button>
+                                <!-- <input type="text" class="num" value="0" [(ngModel)]="valueRoom" /> -->
+                                <input type="text" class="num" value="0" />
+                                <button mat-button (click)="handlePlusRoom()">+</button>
+                            </div>
+
+
+                            <div fxLayout="row" fxLayoutAlign="start center" (click)="$event.stopPropagation();"
+                                style="margin-left:20px;border-bottom: 1px solid rgb(230, 230, 230);">
+                                {{'Product.adults' | translate }}:<button mat-button style="margin-left: 13px;"
+                                    (click)="handleMinusAdult()" [disabled]="!enableAdult">-</button>
+                                <!-- <input type="text" class="num" value="0" [(ngModel)]="valueAdults" /> -->
+                                <input type="text" class="num" value="0" />
+                                <button mat-button (click)="handlePlusAdults()">+</button>
+                            </div>
+
+
+                            <div fxLayout="row" fxLayoutAlign="start center" (click)="$event.stopPropagation();"
+                                style="margin-left:20px;">
+                                {{'Product.childrens' | translate }}:<button mat-button (click)="handleMinusChildren()"
+                                    [disabled]="!enableChildren">-</button>
+                                <!-- <input type="text" class="num" value="0" [(ngModel)]="valueChildren" /> -->
+                                <input type="text" class="num" value="0" />
+                                <button mat-button (click)="handlePlusChildren()">+</button>
+                            </div>
+
+                            <div fxLayout="row" fxLayoutAlign="space-around center">
+                                <button mat-stroked-button color="warn" (click)="OnSaveChoice()">Save</button>
+                                <button mat-stroked-button (click)="OnCancelChoice()">Close</button>
+                            </div>
+                        </div>
+                    </mat-menu>
+                    <span style="margin-left: 50%;margin-top: 10px;margin-bottom: 10px;">
+                        <h3>{{product.price}} €</h3>
+                    </span>
+                    <button mat-raised-button style="width: 93%" type="submit" value="Submit">{{'Product.booking' |
+                        translate }}</button>
+                </form>
+            </mat-card>
+        </div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div fxLayout="row" fxLayoutAlign="space-around start" style="width: 93%;">
+        <div fxFlex="60" fxLayout="column" fxLayoutAlign="space-around center">
+            <!-- Product Info -->
+
+            <mat-card fxLayout="column" fxLayoutAlign="center start" style="margin: 10px 0px;width: 100%;">
+                <p style="font-size: 20px; font-weight: 500;float: left;">{{'Product.about' | translate }}</p>
+                <p>
+                    <mat-divider style="width: 80%;"></mat-divider>
+                </p>
+
+                <div fxLayout="row" fxLayoutAlign="start start" style="width: 100%;">
+                    <div fxFlex="45" fxLayout="column" fxLayoutAlign="start start">
+                        <p style="font-size: 16px; font-weight: 500;">{{'Product.rating' | translate }}</p>
+                        <span>
+                            <mat-divider style="width: 40%;margin-top: -18px;"></mat-divider>
+                        </span>
+                        <div>
+                            <h1>5,0/<mat-icon style="color: rgb(224, 81, 81);">favorite</mat-icon>
+                            </h1>
+                        </div>
+                        <p style="font-size: 16px; font-weight: 500;">{{'Product.host' | translate }}</p>
+                        <span>
+                            <mat-divider style="width: 40%;margin-top: -18px;"></mat-divider>
+                        </span>
+                        <p style="text-align: justify;">{{product.hostInformation}}</p>
+
+                    </div>
+                    <div fxFlex="10"></div>
+                    <div fxFlex="45" fxLayout="column" fxLayoutAlign="start start">
+                        <p style="font-size: 16px; font-weight: 500;">{{'Product.ammenities' | translate }}</p>
+                        <span>
+                            <mat-divider style="width: 40%;margin-top: -18px;margin-left: 55% ;"></mat-divider>
+                        </span>
+                        <div>
+                            <h6>{{'Product.general' | translate }}</h6>
+                            <span>
+                                <mat-divider style="width: 20%;margin-top: -5px;margin-left: 55% ;"></mat-divider>
+                            </span>
+                            <span fxLayout="row" *ngIf="product.airConditioning">
+                                <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">ac_unit
+                                </mat-icon>
+                                <p style="font-size: 14px;">{{'Product.air' | translate }}</p>
+                            </span>
+                            <span fxLayout="row" *ngIf="product.heating">
+                                <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">wb_sunny
+                                </mat-icon>
+                                <p style="font-size: 14px;">{{'Product.heating' | translate }}</p>
+                            </span>
+                            <span fxLayout="row" *ngIf="product.freeWifi">
+                                <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">wifi
+                                </mat-icon>
+                                <p style="font-size: 14px;">{{'Product.wifi' | translate }}</p>
+                            </span>
+                            <span fxLayout="row" *ngIf="product.freeParking">
+                                <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">
+                                    local_parking</mat-icon>
+                                <p style="font-size: 14px;">{{'Product.parking' | translate }}</p>
+                            </span>
+                            <span fxLayout="row" *ngIf="product.carChargingStation">
+                                <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">
+                                    ev_station</mat-icon>
+                                <p style="font-size: 14px;">{{'Product.electcar' | translate }}</p>
+                            </span>
+                            <h6>{{'Product.cooking' | translate }}</h6>
+                            <span>
+                                <mat-divider style="width: 20%;margin-top: -5px;margin-left: 55% ;"></mat-divider>
+                            </span>
+                            <span fxLayout="row" *ngIf="product.kitchen">
+                                <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">kitchen
+                                </mat-icon>
+                                <p style="font-size: 14px;">{{'Product.kitchen' | translate }}</p>
+                            </span>
+                            <span fxLayout="row">
+                                <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">
+                                    expand_more</mat-icon>
+                                <p style="font-size: 14px;">...</p>
+                            </span>
+                            <button mat-button (click)="openViewAmenities()">{{'Product.showall' | translate }}</button>
+                        </div>
+                    </div>
+                </div>
+
+            </mat-card>
+
+            <mat-divider></mat-divider>
+
+            <!-- Reviews and comments -->
+
+            <mat-card fxLayout="column" fxLayoutAlign="center start" style="margin: 10px 0px;width: 100%;">
+                <p style="font-size: 20px; font-weight: 500;float: left;">{{'Product.reviews' | translate }}</p>
+                <p>
+                    <mat-divider style="width: 80%;"></mat-divider>
+                </p>
+                <div fxLayout="row">
+                    <img width="80" height="80" src="../../assets/person-on-a-bridge-near-a-lake-747964.jpg"
+                        alt="profile" style="border-radius: 50%;">
+                    <div fxLayout="column" style="margin-left: 10px;">
+                        <div fxLayout="row">
+                            <p style="font-size: 16px; font-weight: 500;">Julius Ceaser</p>
+                            <p style="margin-left: 5px;">4,0/</p>
+                            <mat-icon style="color: rgb(224, 81, 81);font-size: 14px;margin-top: 4px;">favorite
+                            </mat-icon>
+                        </div>
+                        <div>
+                            <p style="opacity: 0.5;font-size: 10px;font-weight: 800;margin:-20px 0px; ">
+                                12/10/2020{{'Product.y' | translate }}.</p>
+                        </div>
+                        <div style="margin-right: 30px;">
+                            <p style="text-align: justify;">Impeccable services ( accommodation, staff, cleaning,
+                                breakfast, underground parking )
+                                My family was delighted at this hotel
+                                We will return with pleasure
+                                The hotel has adapted perfectly to the current situation (covid 19)
+                                I recommend this hotel.</p>
+                        </div>
+                    </div>
+                </div>
+                <p>
+                    <mat-divider style="width: 80%;"></mat-divider>
+                </p>
+
+                <div fxLayout="row">
+                    <img width="80" height="80" src="../../assets/person-on-a-bridge-near-a-lake-747964.jpg"
+                        alt="profile" style="border-radius: 50%;">
+                    <div fxLayout="column" style="margin-left: 10px;">
+                        <div fxLayout="row">
+                            <p style="font-size: 16px; font-weight: 500;">Julius Ceaser</p>
+                            <p style="margin-left: 5px;">4,0/</p>
+                            <mat-icon style="color: rgb(224, 81, 81);font-size: 14px;margin-top: 4px;">favorite
+                            </mat-icon>
+                        </div>
+                        <div>
+                            <p style="opacity: 0.5;font-size: 10px;font-weight: 800;margin:-20px 0px; ">12/10/2020y.</p>
+                        </div>
+                        <div style="margin-right: 30px;">
+                            <p style="text-align: justify;">Impeccable services ( accommodation, staff, cleaning,
+                                breakfast, underground parking )
+                                My family was delighted at this hotel
+                                We will return with pleasure
+                                The hotel has adapted perfectly to the current situation (covid 19)
+                                I recommend this hotel.</p>
+                        </div>
+                    </div>
+                </div>
+                <p>
+                    <mat-divider style="width: 80%;"></mat-divider>
+                </p>
+                <div fxLayout="row">
+                    <img width="80" height="80" src="../../assets/person-on-a-bridge-near-a-lake-747964.jpg"
+                        alt="profile" style="border-radius: 50%;">
+                    <div fxLayout="column" style="margin-left: 10px;">
+                        <div fxLayout="row">
+                            <p style="font-size: 16px; font-weight: 500;">Julius Ceaser</p>
+                            <p style="margin-left: 5px;">4,0/</p>
+                            <mat-icon style="color: rgb(224, 81, 81);font-size: 14px;margin-top: 4px;">favorite
+                            </mat-icon>
+                        </div>
+                        <div>
+                            <p style="opacity: 0.5;font-size: 10px;font-weight: 800;margin:-20px 0px; ">12/10/2020y.</p>
+                        </div>
+                        <div style="margin-right: 30px;">
+                            <p style="text-align: justify;">Impeccable services ( accommodation, staff, cleaning,
+                                breakfast, underground parking )
+                                My family was delighted at this hotel
+                                We will return with pleasure
+                                The hotel has adapted perfectly to the current situation (covid 19)
+                                I recommend this hotel.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+            </mat-card>
+
+            <mat-divider></mat-divider>
+
+            <!-- Location -->
+
+            <mat-card fxLayout="column" fxLayoutAlign="center start" style="margin: 10px 0px;width: 100%;">
+                <p style="font-size: 20px; font-weight: 500;float: left;">{{'Product.location' | translate }}</p>
+                <p>
+                    <mat-divider style="width: 80%;"></mat-divider>
+                </p>
+                <div fxLayoutAlign="center center" style="width: 100%;">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2905.049390380769!2d26.915625415923916!3d43.27134107913629!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40a58a8a7677e543%3A0x428b76882f054e46!2z0J_QvtC_0YjQtdC50YLQsNC90L7QstCwINC60YrRidCw!5e0!3m2!1sbg!2sbg!4v1599234069046!5m2!1sbg!2sbg"
+                        width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""
+                        aria-hidden="false" tabindex="0"></iframe>
+                </div>
+            </mat-card>
+
+            <mat-divider></mat-divider>
+
+            <!-- Things to know -->
+
+            <mat-card fxLayout="column" fxLayoutAlign="center start" style="margin: 10px 0px;width: 100%;">
+                <p style="font-size: 20px; font-weight: 500;float: left;">{{'Product.know' | translate }}</p>
+                <p>
+                    <mat-divider style="width: 80%;"></mat-divider>
+                </p>
+
+
+
+                <div fxLayout="column" fxLayoutAlign="start start">
+
+                    <div>
+                        <h6>{{'Product.rules' | translate }}</h6>
+                        <span>
+                            <mat-divider style="width: 20%;margin-top: -5px;"></mat-divider>
+                        </span>
+                        <span fxLayout="row" *ngIf="product.smoking">
+                            <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">smoking_rooms
+                            </mat-icon>
+                            <p style="font-size: 14px;">{{'Product.smoking' | translate }}</p>
+                        </span>
+                        <span fxLayout="row" *ngIf="product.pets">
+                            <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">pets
+                            </mat-icon>
+                            <p style="font-size: 14px;">{{'Product.pets' | translate }}</p>
+                        </span>
+                        <span fxLayout="row" *ngIf="product.kids">
+                            <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">
+                                child_friendly</mat-icon>
+                            <p style="font-size: 14px;">{{'Product.kids' | translate }}</p>
+                        </span>
+                        <span fxLayout="row" *ngIf="product.parties">
+                            <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">party_mode
+                            </mat-icon>
+                            <p style="font-size: 14px;">{{'Product.events' | translate }}</p>
+                        </span>
+                    </div>
+                </div>
+
+
+            </mat-card>
+
+            <mat-divider></mat-divider>
+        </div>
+        <div fxFlex="20">
+            <mat-card fxLayout="column" style="margin: 10px 0px;" fxLayoutAlign="center start">
+
+                <div fxLayout="column" >
+                    <img fxFill style="border:black 1px; border-radius:5px; box-shadow: grey;" src="../assets/rec-1.png"
+                        alt="">
+                    <p>Santorini</p>
+                    <span fxLayout="row" fxFlex="100" fxLayoutAlign="start start"
+                        style="margin-top: -18px;cursor: pointer; text-decoration: none;">
+                        <button mat-icon-button fxFlex="12" style="margin-left: -2%;">
+                            <mat-icon style="color: rgb(224, 81, 81);font-size: 100%;">favorite</mat-icon>
+                        </button>
+                        <button mat-icon-button fxFlex="12" style="margin-left: -5%;">
+                            <mat-icon style="color: rgb(224, 81, 81);font-size: 100%;">favorite</mat-icon>
+                        </button>
+                        <button mat-icon-button fxFlex="12" style="margin-left: -5%;">
+                            <mat-icon style="color: rgb(224, 81, 81);font-size: 100%;">favorite</mat-icon>
+                        </button>
+                        <button mat-icon-button fxFlex="12" style="margin-left: -5%;">
+                            <mat-icon style="color: rgb(224, 81, 81);font-size: 100%;">favorite</mat-icon>
+                        </button>
+                        <button mat-icon-button fxFlex="12" style="margin-left: -5%;">
+                            <mat-icon style="color: rgb(238, 180, 180);font-size: 100%;">favorite</mat-icon>
+                        </button>
+                    </span>
+                    <button mat-stroked-button>{{'Product.showmore' | translate }}...</button>
+                    <p>
+                        <mat-divider style="margin:10px 0px; width:100%"></mat-divider>
+                    </p>
+                </div>
+                <div fxLayout="column" >
+                    <img fxFill style="border:black 1px; border-radius:5px; box-shadow: grey;" src="../assets/rec-1.png"
+                        alt="">
+                    <p>Santorini</p>
+                    <span fxLayout="row" fxFlex="100" fxLayoutAlign="start start"
+                        style="margin-top: -18px;cursor: pointer; text-decoration: none;">
+                        <button mat-icon-button fxFlex="12" style="margin-left: -2%;">
+                            <mat-icon style="color: rgb(224, 81, 81);font-size: 100%;">favorite</mat-icon>
+                        </button>
+                        <button mat-icon-button fxFlex="12" style="margin-left: -5%;">
+                            <mat-icon style="color: rgb(224, 81, 81);font-size: 100%;">favorite</mat-icon>
+                        </button>
+                        <button mat-icon-button fxFlex="12" style="margin-left: -5%;">
+                            <mat-icon style="color: rgb(224, 81, 81);font-size: 100%;">favorite</mat-icon>
+                        </button>
+                        <button mat-icon-button fxFlex="12" style="margin-left: -5%;">
+                            <mat-icon style="color: rgb(224, 81, 81);font-size: 100%;">favorite</mat-icon>
+                        </button>
+                        <button mat-icon-button fxFlex="12" style="margin-left: -5%;">
+                            <mat-icon style="color: rgb(238, 180, 180);font-size: 100%;">favorite</mat-icon>
+                        </button>
+                    </span>
+                    <button mat-stroked-button>Show me more...</button>
+                    <p>
+                        <mat-divider style="margin:10px 0px; width:100%"></mat-divider>
+                    </p>
+                </div>
+                <div fxLayout="column" >
+                    <img fxFill style="border:black 1px; border-radius:5px; box-shadow: grey;" src="../assets/rec-1.png"
+                        alt="">
+                    <p>Santorini</p>
+                    <span fxLayout="row" fxFlex="100" fxLayoutAlign="start start"
+                        style="margin-top: -18px;cursor: pointer; text-decoration: none;">
+                        <button mat-icon-button fxFlex="12" style="margin-left: -2%;">
+                            <mat-icon style="color: rgb(224, 81, 81);font-size: 100%;">favorite</mat-icon>
+                        </button>
+                        <button mat-icon-button fxFlex="12" style="margin-left: -5%;">
+                            <mat-icon style="color: rgb(224, 81, 81);font-size: 100%;">favorite</mat-icon>
+                        </button>
+                        <button mat-icon-button fxFlex="12" style="margin-left: -5%;">
+                            <mat-icon style="color: rgb(224, 81, 81);font-size: 100%;">favorite</mat-icon>
+                        </button>
+                        <button mat-icon-button fxFlex="12" style="margin-left: -5%;">
+                            <mat-icon style="color: rgb(224, 81, 81);font-size: 100%;">favorite</mat-icon>
+                        </button>
+                        <button mat-icon-button fxFlex="12" style="margin-left: -5%;">
+                            <mat-icon style="color: rgb(238, 180, 180);font-size: 100%;">favorite</mat-icon>
+                        </button>
+                    </span>
+                    <button mat-stroked-button>{{'Product.showmore' | translate }}...</button>
+                    <p>
+                        <mat-divider style="margin:10px 0px; width:100%"></mat-divider>
+                    </p>
+                </div>
+
+            </mat-card>
+
+        </div>
+    </div>
+
+</div>
+
+<div class="basic-container" *ngIf="showLoader">
+    <div class="spinner-position">
+        <mat-spinner [diameter]="100"></mat-spinner>
+    </div>
+</div>
+
+<app-bottom *ngIf="!showLoader"></app-bottom>

@@ -1,0 +1,39 @@
+<button class="button-citynotfound mat-stroked-button" color="warn" type="submit" (click)="close()">
+  <mat-icon>close</mat-icon>
+</button>
+<div class="popup-container">
+  
+    <h3  class="center-text">
+      Спасибо за заказ!
+    <span>&#x2764;&#xFE0F;</span>
+
+    </h3>
+    <h5 class="center-text">
+        Для уточнения деталей поездки менеджер свяжется с вами в WhatsApp в ближайшее время.
+    </h5>
+    <p class="thank_you_p">Ваш заказ:</p>
+    <p class="thank_you_p">
+      Откуда - {{showFrom}}
+    </p>
+    <p class="thank_you_p">
+      Куда -  {{showTo}}
+    </p>
+    <p class="thank_you_p">
+      Дата: {{date}}, Время: {{time}}
+    </p>
+    <p class="thank_you_p">
+      Машина: {{carTypeRu}},
+    </p>
+    <p class="thank_you_p">
+      Количество детей: {{childrenCount}} Количесиво взрослых: {{adultCount}}
+    </p>
+    <p class="thank_you_p">
+      Номер телефона: {{countryCode}} {{phoneNumber}}
+    </p>
+
+
+
+  
+
+  </div>
+  

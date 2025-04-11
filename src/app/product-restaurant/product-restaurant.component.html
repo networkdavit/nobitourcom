@@ -1,0 +1,580 @@
+<app-header></app-header>
+
+<div style="z-index: -10;">
+    <div style="z-index: -10;">
+        <!-- <video fxFill autoplay onloadedmetadata="this.muted=true" oncanplay="this.play()" loop="loop"
+            style="object-fit: cover;will-change: auto">
+            <source src="../assets/header-bg-final.mp4" type="video/mp4">
+        </video> -->
+        <div>
+            <img class="img-header" height="300px" width="100%" style="position: relative;"
+                src="../../assets/restaurant.jpg" alt="">
+        </div>
+    </div>
+</div>
+
+<div fxLayoutAlign="center center">
+    <div id="ScrollTo"></div>
+</div>
+
+<div fxLayoutAlign="space-around center" style="position: sticky; top: 80px;z-index: 2;">
+    <mat-card class="mat-icons" fxLayout="row" style="border-radius: 0 0 50px 50px;height: 80px;"
+        [style.height.px]="[navigationHeight]">
+
+        <a fxLayoutAlign="center" (click)="goToHome('estate')"
+            class="menu_a_cursor" href="#">
+            <div class="div-icons-header" fxLayout="column">
+                <i class="material-icons md-48 md-48-bottom-header" style="margin-bottom: 10px;">hotel</i>
+                <p *ngIf="!hideTextInNavigation" class="p-icon" fxLayoutAlign="center">{{'Home.hotel' | translate }}</p>
+            </div>
+        </a>
+
+        <a fxLayoutAlign="center" (click)="goToHome('restaurant')"
+            class="menu_a_cursor" href="#">
+            <div class="div-icons-header" fxLayout="column">
+                <i class="material-icons md-48 md-48-bottom-header" style="margin-bottom: 10px;">fastfood</i>
+                <p *ngIf="!hideTextInNavigation" class="p-icon" fxLayoutAlign="center">{{'Home.restaurants' | translate
+                    }}</p>
+            </div>
+        </a>
+
+        <a fxLayoutAlign="center" (click)="goToHome('adventure')"
+            class="menu_a_cursor" href="#">
+            <div class="div-icons-header" fxLayout="column">
+                <i class="material-icons md-48 md-48-bottom-header" style="margin-bottom: 10px;">account_balance</i>
+                <p *ngIf="!hideTextInNavigation" class="p-icon" fxLayoutAlign="center">{{'Home.adventure' | translate }}
+                </p>
+            </div>
+        </a>
+
+        <a fxLayoutAlign="center" (click)="goToHome('flight')"
+            class="menu_a_cursor">
+            <div class="div-icons-header" fxLayout="column">
+                <i class="material-icons md-48 md-48-bottom-header" style="margin-bottom: 10px;">airplanemode_active</i>
+                <p *ngIf="!hideTextInNavigation" class="p-icon" fxLayoutAlign="center">{{'Home.flights' | translate }}
+                </p>
+            </div>
+        </a>
+
+        <div class="div-icons-header" fxLayout="column" style="margin: 0px 30px 0px 20px">
+            <button mat-icon-button [matMenuTriggerFor]="menu"
+                style="font-size: 36px;margin: -13% 0px 7px 0px;height: 40px;width: 40px;">
+                <mat-icon>more_vert</mat-icon>
+                <p *ngIf="!hideTextInNavigation" class="p-icon more-btn" fxLayoutAlign="center">{{'Home.more' |
+                    translate }}</p>
+            </button>
+        </div>
+
+        <mat-menu #menu="matMenu" class="moreMenu">
+            <a fxLayoutAlign="center" (click)="goToHome('rent-a-car')"
+                class="menu_a_cursor">
+                <div class="div-icons-header" fxLayout="column">
+                    <i class="material-icons md-48 md-48-bottom-header" style="margin-bottom: 10px;">car_rental</i>
+                    <p *ngIf="!hideTextInNavigation" class="p-icon" fxLayoutAlign="center">{{'Home.rentcar' | translate
+                        }}</p>
+                </div>
+            </a>
+        </mat-menu>
+
+    </mat-card>
+</div>
+
+
+<div style="background-color: rgb(253, 252, 249);" fxLayout="column" fxLayoutAlign="space-around center"
+    *ngIf="!showLoader">
+
+    <!-- TITLE -->
+    <div fxLayout="row" fxLayoutAlign="space-between center" style="width: 80%;">
+        <div fxLayout="column" fxLayoutAlign="start start">
+            <div class="product-name" style="font-size: 30px; font-weight: 400;">{{restaurant.name}}</div>
+            <div class="product-name" style="font-size: 16px; font-weight: 400;color: rgba(0, 0, 0, 0.507);">
+                <span *ngIf="restaurant.country">{{restaurant.country}}, </span>
+                <span *ngIf="restaurant.city">{{restaurant.city}}, </span>
+                <span *ngIf="restaurant.address">{{restaurant.address}}</span>
+            </div>
+        </div>
+        <div fxLayout="row">
+            <span class="img-favorite dropdown" style="z-index: 0;">
+                <button mat-button class="share-btn">
+                    <span class="material-icons">share</span><span style="margin-left: 10px;">{{'Home.share' | translate
+                        }}</span>
+                </button>
+                <div class="dropdown-content">
+                    <button mat-button *ngIf="!copied" (click)="onCopyLink()">
+                        <span class="material-icons">insert_link</span><span
+                            style="margin-left: 10px;">{{'Home.copyLink' |
+                            translate }}</span>
+                    </button>
+                    <button mat-button *ngIf="copied">
+                        <span class="material-icons">insert_link</span><span
+                            style="margin-left: 10px;">{{'Home.linkCopied'
+                            | translate }}</span>
+                    </button>
+                </div>
+            </span>
+            <span *ngIf="clientId != '0'" class="img-favorite" style="z-index: 0;">
+                <button mat-button class="favorite-check" *ngIf="!isFavorite" (click)="onAddFavorite()">
+                    <mat-icon>favorite</mat-icon><span style="margin-left: 10px;">{{'Home.save' | translate }}</span>
+                </button>
+                <button mat-button class="favorite-uncheck" *ngIf="isFavorite" (click)="onDeleteFavorite()">
+                    <mat-icon>favorite</mat-icon><span style="margin-left: 10px;">{{'Home.save' | translate }}</span>
+                </button>
+            </span>
+        </div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <!-- Restaurant Header -->
+    <div class="div-view" fxLayout="row" style=" margin: 10px 0px; width: 100%;">
+
+        <div class="div-cat-image" fxFlex="60" fxLayoutAlign="center center">
+            <mat-card class="mat-image" fxLayoutAlign="center start">
+                <div style="margin-top: -5px;z-index: 1;">
+                    <div class="container-hover" style="border: 1px solid#439BBE;" (click)="openViewImages(0)">
+                        <img class="img-blur"
+                            src="{{restaurant.images[0].imagePath+'/500/'+restaurant.images[0].imageName}}" alt=""
+                            width="500" height="402" style="margin: 1px;object-fit: cover;">
+                        <!-- <img class="img-blur" src="../../assets/mountain-png-transparent-free-images-clip-art-mountain-logo-11562903198rqfbyusjl7.png" alt="" width="500" height="402"
+                            style="margin: 1px;object-fit: cover;"> -->
+                        <img class="gallery-icon" src="../../assets/images_view_logo.png" alt="" width="200"
+                            height="200">
+                    </div>
+                </div>
+                <div class="div-images" fxLayout="column" fxLayoutAlign="center start" style="height: 396px;">
+                    <div class="container-hover container-hover-img" style="border: 1px solid#439BBE;"
+                        (click)="openViewImages(1)">
+                        <img class="img-blur"
+                            src="{{restaurant.images[1].imagePath+'/100/'+restaurant.images[1].imageName}}" alt=""
+                            width="96" height="96" style="margin: 1px;object-fit: cover;">
+                        <img class="gallery-icon" src="../../assets/images_view_logo.png" alt="" width="50" height="50">
+                    </div>
+                    <div class="container-hover container-hover-img" style="border: 1px solid#439BBE;"
+                        (click)="openViewImages(2)">
+                        <img class="img-blur"
+                            src="{{restaurant.images[2].imagePath+'/100/'+restaurant.images[2].imageName}}" alt=""
+                            width="96" height="96" style="margin: 1px;object-fit: cover;">
+                        <img class="gallery-icon" src="../../assets/images_view_logo.png" alt="" width="50" height="50">
+                    </div>
+                    <div *ngIf="restaurant.images.length > 3" class="container-hover container-hover-img"
+                        style="border: 1px solid#439BBE;" (click)="openViewImages(3)">
+                        <img class="img-blur"
+                            src="{{restaurant.images[3].imagePath+'/100/'+restaurant.images[3].imageName}}" alt=""
+                            width="96" height="96" style="margin: 1px;object-fit: cover;">
+                        <img class="gallery-icon" src="../../assets/images_view_logo.png" alt="" width="50" height="50">
+                    </div>
+                    <div *ngIf="restaurant.images.length > 4" class="container-hover container-hover-img"
+                        style="border: 1px solid#439BBE;" (click)="openViewImages(4)">
+                        <img class="img-blur"
+                            src="{{restaurant.images[4].imagePath+'/100/'+restaurant.images[4].imageName}}" alt=""
+                            width="96" height="96" style="margin: 1px;object-fit: cover;">
+                        <img class="gallery-icon" src="../../assets/images_view_logo.png" alt="" width="50" height="50">
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+
+        <!-- <div class="div-details" fxFlex="40" fxLayoutAlign="start center">
+            <mat-card fxLayout="column" fxLayoutAlign="space-around start" style="width: 80%;">
+
+                <p style="font-size:20px">{{'PRestaurants.location' | translate}}</p>
+                <div>
+                    <div fxLayout="column" fxLayoutAlign="center start">
+                        <span fxLayout="row" fxLayoutAlign="center start">
+                            <mat-icon style="color: rgb(0, 0, 0);margin-right: 5px;font-size: 26px;">place
+                            </mat-icon>
+                            <p style="font-size: 14px;"><a style="color: rgb(156, 155, 155);text-decoration: underline;"
+                                    href="{{restaurant.address}}" target="blank">{{restaurant.address}}<mat-icon
+                                        style="font-size: 18px;transform: rotate(-45deg);">arrow_forward</mat-icon> </a>
+                            </p>
+                        </span>
+                        <span fxLayout="row" fxLayoutAlign="center start">
+                            <mat-icon style="color: rgb(0, 0, 0);margin-right: 5px;font-size: 26px;">phone
+                            </mat-icon>
+                            <p style="font-size: 14px;"><a style="color: rgb(156, 155, 155);text-decoration: none;"
+                                    href="tel:{{restaurant.phone}}" target="_top">{{restaurant.phone}}</a>
+                            </p>
+                        </span>
+                        <span fxLayout="row" fxLayoutAlign="center start">
+                            <mat-icon style="color: rgb(0, 0, 0);margin-right: 5px;font-size: 26px;">laptop_mac
+                            </mat-icon>
+                            <p style="font-size: 14px;"><a style="color: rgb(156, 155, 155);text-decoration: underline;"
+                                    href="{{restaurant.website}}" target="blank">{{'PRestaurants.website' | translate}}
+                                    <mat-icon style="font-size: 18px;transform: rotate(-45deg);">
+                                        arrow_forward</mat-icon>
+                                </a>
+                            </p>
+                        </span>
+                        <span fxLayout="row" fxLayoutAlign="center start">
+                            <mat-icon style="color: rgb(0, 0, 0);margin-right: 5px;font-size: 26px;">mail_outline
+                            </mat-icon>
+                            <p style="font-size: 14px;"><a style="color: rgb(156, 155, 155);text-decoration: underline;"
+                                    href="mailto:{{restaurant.partneEmail}}">{{'PRestaurants.email' | translate}}
+                                    <mat-icon style="font-size: 18px;transform: rotate(-45deg);">
+                                        arrow_forward</mat-icon>
+                                </a>
+                            </p>
+                        </span>
+                    </div>
+                </div>
+            </mat-card>
+        </div> -->
+
+
+        <div class="div-details" fxFlex="40" fxLayoutAlign="start center">
+            <mat-card fxLayout="column" fxLayoutAlign="space-around center" style="width: 80%;">
+
+                <p>{{'PAdventures.reservation' | translate}}</p>
+                <form fxLayout="column" fxLayoutAlign="space-around center" [formGroup]="bookingFormGroup"
+                    #resetBookingForm="ngForm" (ngSubmit)="bookingNextStep()">
+                    <div class="div-check" fxLayout="row" fxLayoutAlign=" center space-around">
+
+                        <mat-form-field class="example-full-width" appearance="fill"
+                            style="margin: 0px 20px;font-size:13px;">
+                            <mat-label>{{'Product.checkin' | translate }}</mat-label>
+                            <input matInput formControlName="checkin" [matDatepicker]="CheckIn" [min]="minDate">
+                            <mat-datepicker-toggle matSuffix [for]="CheckIn">
+                                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #CheckIn></mat-datepicker>
+                            <!-- touchUi before #picker for bigger calendar -->
+                        </mat-form-field>
+                    </div>
+
+                    <mat-card fxLayout="row" style="cursor: pointer;margin: 10px 0px; width: 93%;"
+                        [matMenuTriggerFor]="menu">
+                        <mat-icon>people</mat-icon>
+                        <div fxLayout="column" style="margin-left:10px;">
+                            <p style="font-size: 12px; opacity: 0.5; margin:-5px 0px">{{'Product.guests' | translate }}
+                            </p>
+                            <p style="font-weight: 500; margin-bottom: -5px;">
+                                <!-- {{valueRoom}} {{'Product.room' | translate }}, -->
+                                {{valueAdults}} {{'Product.adult' | translate }},
+                                {{valueChildren}} {{'Product.children' | translate }}
+                            </p>
+                        </div>
+
+                    </mat-card>
+                    <mat-menu #menu="matMenu">
+                        <div fxLayout="column">
+                            <!-- <div fxLayout="row" fxLayoutAlign="start center" (click)="$event.stopPropagation();"
+                                style="margin-left:20px;border-bottom: 1px solid rgb(230, 230, 230);">
+                                {{'Product.rooms' | translate }}:<button mat-button style="margin-left: 9px;"
+                                    (click)="handleMinusRoom()" [disabled]="!enableRoom">-</button>
+                                <input type="text" class="num" value="0" [(ngModel)]="valueRoom" />
+                                <input type="text" class="num" value="0"/>
+                                <button mat-button (click)="handlePlusRoom()">+</button>
+                            </div> -->
+
+
+                            <div fxLayout="row" fxLayoutAlign="start center" (click)="$event.stopPropagation();"
+                                style="margin-left:20px;border-bottom: 1px solid rgb(230, 230, 230);">
+                                {{'Product.adults' | translate }}:<button mat-button style="margin-left: 13px;"
+                                    (click)="handleMinusAdult()" [disabled]="!enableAdult">-</button>
+                                <!-- <input type="text" class="num" value="0" [(ngModel)]="valueAdults" /> -->
+                                <input type="text" class="num" value="{{valueAdults}}" />
+                                <button mat-button (click)="handlePlusAdults()">+</button>
+                            </div>
+
+
+                            <div fxLayout="row" fxLayoutAlign="start center" (click)="$event.stopPropagation();"
+                                style="margin-left:20px;">
+                                {{'Product.childrens' | translate }}:<button mat-button (click)="handleMinusChildren()"
+                                    [disabled]="!enableChildren">-</button>
+                                <!-- <input type="text" class="num" value="0" [(ngModel)]="valueChildren" /> -->
+                                <input type="text" class="num" value="{{valueChildren}}" />
+                                <button mat-button (click)="handlePlusChildren()">+</button>
+                            </div>
+
+                            <div fxLayout="row" fxLayoutAlign="space-around center">
+                                <button mat-stroked-button color="warn" (click)="OnSaveChoice()">{{'PAdventures.save' |
+                                    translate}}</button>
+                                <button mat-stroked-button (click)="OnCancelChoice()">{{'PAdventures.close' |
+                                    translate}}</button>
+                            </div>
+                        </div>
+                    </mat-menu>
+                    <span fxLayout="row" style="margin-left: 20%;margin-top: 10px;margin-bottom: 10px;">
+                        <h5>{{restaurant.rangeFrom}} €</h5> - <h5>{{restaurant.rangeOn}} €</h5>
+                    </span>
+                    <button mat-raised-button style="width: 93%" type="submit" value="Submit">{{'Product.booking' |
+                        translate }}</button>
+                </form>
+            </mat-card>
+        </div>
+
+
+
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="div-view" fxLayout="row" fxLayoutAlign="space-around start" style="width: 93%;">
+        <div fxFlex="60" fxLayout="column" fxLayoutAlign="space-around center">
+            <!-- Product Info -->
+
+            <mat-card fxLayout="column" fxLayoutAlign="center start" style="margin: 10px 0px;width: 100%;">
+                <p style="font-size: 20px; font-weight: 500;float: left;">{{'Product.about' | translate }}</p>
+                <p>
+                    <!-- <mat-divider style="width: 80%;"></mat-divider> -->
+                </p>
+
+                <div class="div-information" fxLayout="row" fxLayoutAlign="start start" style="width: 100%;">
+                    <div fxFlex="45" fxLayout="column" fxLayoutAlign="start start">
+                        <p style="font-size: 16px; font-weight: 500;">{{'Product.rating' | translate }}</p>
+                        <span>
+                            <!-- <mat-divider style="width: 40%;margin-top: -18px;"></mat-divider> -->
+                        </span>
+                        <div>
+                            <h1>5,0/<mat-icon style="color: rgb(224, 81, 81);">favorite</mat-icon>
+                            </h1>
+                        </div>
+                        <p style="font-size: 16px; font-weight: 500;">{{'Product.host' | translate }}</p>
+                        <span>
+                            <!-- <mat-divider style="width: 40%;margin-top: -18px;"></mat-divider> -->
+                        </span>
+                        <p style="text-align: justify;">{{restaurant.hostInformation}}</p>
+
+                    </div>
+                    <div fxFlex="10"></div>
+                    <div fxFlex="45" fxLayout="column" fxLayoutAlign="start start">
+                        <p style="font-size: 16px; font-weight: 500;">{{'PRestaurants.details' | translate}}</p>
+                        <span>
+                            <!-- <mat-divider class="driver-line" style="width: 40%;margin-top: -18px;"></mat-divider> -->
+                        </span>
+                        <div>
+                            <h6>{{'PRestaurants.price' | translate}}</h6>
+                            <span>
+                                <!-- <mat-divider class="driver-line" style="width: 20%;margin-top: -5px;"></mat-divider> -->
+                            </span>
+                            <span fxLayout="row">
+                                <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">
+                                    attach_money
+                                </mat-icon>
+                                <p style="font-size: 14px;">{{restaurant.rangeFrom}} - {{restaurant.rangeOn}}</p>
+                            </span>
+
+                            <h6>{{'PRestaurants.cuisines' | translate}}</h6>
+                            <span>
+                                <!-- <mat-divider class="driver-line" style="width: 20%;margin-top: -5px;"></mat-divider> -->
+                            </span>
+                            <span fxLayout="row">
+                                <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">
+                                    restaurant_menu
+                                </mat-icon>
+                                <p style="font-size: 14px;">{{restaurant.cuisines}}</p>
+                            </span>
+
+                            <h6>{{'PRestaurants.diets' | translate}}</h6>
+                            <span>
+                                <!-- <mat-divider class="driver-line" style="width: 20%;margin-top: -5px;"></mat-divider> -->
+                            </span>
+                            <span fxLayout="row">
+                                <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">
+                                    restaurant_menu
+                                </mat-icon>
+                                <p style="font-size: 14px;">{{restaurant.specialDiets}}</p>
+                            </span>
+
+                            <h6>{{'PRestaurants.meals' | translate}}</h6>
+                            <span>
+                                <!-- <mat-divider class="driver-line" style="width: 20%;margin-top: -5px;"></mat-divider> -->
+                            </span>
+                            <span fxLayout="row">
+                                <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">
+                                    restaurant_menu
+                                </mat-icon>
+                                <p style="font-size: 14px;">{{restaurant.meals}}</p>
+                            </span>
+
+                            <!-- <button mat-button (click)="openViewAmenities()">{{'Product.showall' | translate }}</button> -->
+                        </div>
+                    </div>
+                </div>
+
+            </mat-card>
+
+            <mat-divider></mat-divider>
+
+            <!-- Reviews and comments -->
+
+            <mat-card fxLayout="column" fxLayoutAlign="center start" style="margin: 10px 0px;width: 100%;">
+                <p style="font-size: 20px; font-weight: 500;float: left;">{{'Product.reviews' | translate }}</p>
+                <p>
+                    <mat-divider style="width: 80%;"></mat-divider>
+                </p>
+                <div *ngIf="reviews.length == 0">
+                    <p>{{'Product.noReviews' | translate }}.</p>
+                </div>
+                <div fxLayout="column" *ngFor="let review of reviews;">
+                    <div fxLayout="row">
+                        <img width="80" height="80" src="{{review.imageUrl}}" alt="profile" style="border-radius: 50%;">
+                        <div fxLayout="column" style="margin-left: 10px;">
+                            <div fxLayout="row">
+                                <p style="font-size: 16px; font-weight: 500;">{{review.userName}}</p>
+                                <p style="margin-left: 5px;">{{review.rating}},0/</p>
+                                <mat-icon style="color: rgb(224, 81, 81);font-size: 14px;margin-top: 4px;">favorite
+                                </mat-icon>
+                            </div>
+                            <div>
+                                <p style="opacity: 0.5;font-size: 13px;font-weight: 800;margin:-20px 0px; ">
+                                    {{review.date}} {{'Product.y' | translate }}.</p>
+                            </div>
+                            <p>
+                                <mat-divider style="width: 20%;margin-left: 100px;"></mat-divider>
+                            </p>
+                            <div style="margin-right: 30px;">
+                                <p style="text-align: justify;">{{review.comment}}</p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <p style="margin-top: 10px;">
+                        <mat-divider style="width: 80%;"></mat-divider>
+                    </p>
+                </div>
+
+            </mat-card>
+
+            <mat-divider></mat-divider>
+
+            <!-- Location -->
+
+            <mat-card fxLayout="column" fxLayoutAlign="center start" style="margin: 10px 0px;width: 100%;">
+                <p style="font-size: 20px; font-weight: 500;float: left;">{{'Product.location' | translate }}</p>
+                <p>
+                    <mat-divider style="width: 80%;"></mat-divider>
+                </p>
+                <div fxLayoutAlign="center center" style="width: 100%;">
+                    <iframe width="600" height="450" frameborder="0" style="border:0" loading="lazy" allowfullscreen
+                        aria-hidden="false" [src]="googlePlaceUrl | safe"></iframe>
+                </div>
+            </mat-card>
+
+            <mat-divider></mat-divider>
+
+            <!-- Things to know -->
+
+            <mat-card fxLayout="column" fxLayoutAlign="center start" style="margin: 10px 0px;width: 100%;">
+                <p style="font-size: 20px; font-weight: 500;float: left;">{{'Product.know' | translate }}</p>
+                <p>
+                    <mat-divider style="width: 80%;"></mat-divider>
+                </p>
+
+                <div fxLayout="column" fxLayoutAlign="start start">
+
+                    <div>
+                        <h6>{{'PRestaurants.features' | translate}}</h6>
+                        <span>
+                            <!-- <mat-divider style="width: 20%;margin-top: -5px;"></mat-divider> -->
+                        </span>
+                        <div fxLayout="row">
+                            <p style="font-size: 14px;">{{restaurant.features}}</p>
+                        </div>
+                    </div>
+                </div>
+
+
+            </mat-card>
+
+            <mat-divider></mat-divider>
+        </div>
+        <div fxFlex="20">
+            <mat-card class="mat-favorite" fxLayout="column" style="margin: 10px 0px;" fxLayoutAlign="center start">
+
+                <div fxLayout="column" data-aos="fade-up">
+                    <img fxFill style="border:black 1px; border-radius:5px; box-shadow: grey;" src="../assets/rec-1.png"
+                        alt="">
+                    <p>Santorini</p>
+                    <span fxLayout="row" fxFlex="100" fxLayoutAlign="start start"
+                        style="margin-top: -18px;cursor: pointer; text-decoration: none;">
+                        <button mat-icon-button fxFlex="12" style="margin-left: -2%;">
+                            <mat-icon style="color: rgb(224, 81, 81);font-size: 100%;">favorite</mat-icon>
+                        </button>
+                        <button mat-icon-button fxFlex="12" style="margin-left: -5%;">
+                            <mat-icon style="color: rgb(224, 81, 81);font-size: 100%;">favorite</mat-icon>
+                        </button>
+                        <button mat-icon-button fxFlex="12" style="margin-left: -5%;">
+                            <mat-icon style="color: rgb(224, 81, 81);font-size: 100%;">favorite</mat-icon>
+                        </button>
+                        <button mat-icon-button fxFlex="12" style="margin-left: -5%;">
+                            <mat-icon style="color: rgb(224, 81, 81);font-size: 100%;">favorite</mat-icon>
+                        </button>
+                        <button mat-icon-button fxFlex="12" style="margin-left: -5%;">
+                            <mat-icon style="color: rgb(238, 180, 180);font-size: 100%;">favorite</mat-icon>
+                        </button>
+                    </span>
+                    <button mat-stroked-button>{{'Product.showmore' | translate }}...</button>
+                    <p>
+                        <mat-divider style="margin:10px 0px; width:100%"></mat-divider>
+                    </p>
+                </div>
+                <div fxLayout="column" data-aos="fade-up">
+                    <img fxFill style="border:black 1px; border-radius:5px; box-shadow: grey;" src="../assets/rec-1.png"
+                        alt="">
+                    <p>Santorini</p>
+                    <span fxLayout="row" fxFlex="100" fxLayoutAlign="start start"
+                        style="margin-top: -18px;cursor: pointer; text-decoration: none;">
+                        <button mat-icon-button fxFlex="12" style="margin-left: -2%;">
+                            <mat-icon style="color: rgb(224, 81, 81);font-size: 100%;">favorite</mat-icon>
+                        </button>
+                        <button mat-icon-button fxFlex="12" style="margin-left: -5%;">
+                            <mat-icon style="color: rgb(224, 81, 81);font-size: 100%;">favorite</mat-icon>
+                        </button>
+                        <button mat-icon-button fxFlex="12" style="margin-left: -5%;">
+                            <mat-icon style="color: rgb(224, 81, 81);font-size: 100%;">favorite</mat-icon>
+                        </button>
+                        <button mat-icon-button fxFlex="12" style="margin-left: -5%;">
+                            <mat-icon style="color: rgb(224, 81, 81);font-size: 100%;">favorite</mat-icon>
+                        </button>
+                        <button mat-icon-button fxFlex="12" style="margin-left: -5%;">
+                            <mat-icon style="color: rgb(238, 180, 180);font-size: 100%;">favorite</mat-icon>
+                        </button>
+                    </span>
+                    <button mat-stroked-button>Show me more...</button>
+                    <p>
+                        <mat-divider style="margin:10px 0px; width:100%"></mat-divider>
+                    </p>
+                </div>
+                <div fxLayout="column" data-aos="fade-up">
+                    <img fxFill style="border:black 1px; border-radius:5px; box-shadow: grey;" src="../assets/rec-1.png"
+                        alt="">
+                    <p>Santorini</p>
+                    <span fxLayout="row" fxFlex="100" fxLayoutAlign="start start"
+                        style="margin-top: -18px;cursor: pointer; text-decoration: none;">
+                        <button mat-icon-button fxFlex="12" style="margin-left: -2%;">
+                            <mat-icon style="color: rgb(224, 81, 81);font-size: 100%;">favorite</mat-icon>
+                        </button>
+                        <button mat-icon-button fxFlex="12" style="margin-left: -5%;">
+                            <mat-icon style="color: rgb(224, 81, 81);font-size: 100%;">favorite</mat-icon>
+                        </button>
+                        <button mat-icon-button fxFlex="12" style="margin-left: -5%;">
+                            <mat-icon style="color: rgb(224, 81, 81);font-size: 100%;">favorite</mat-icon>
+                        </button>
+                        <button mat-icon-button fxFlex="12" style="margin-left: -5%;">
+                            <mat-icon style="color: rgb(224, 81, 81);font-size: 100%;">favorite</mat-icon>
+                        </button>
+                        <button mat-icon-button fxFlex="12" style="margin-left: -5%;">
+                            <mat-icon style="color: rgb(238, 180, 180);font-size: 100%;">favorite</mat-icon>
+                        </button>
+                    </span>
+                    <button mat-stroked-button>{{'Product.showmore' | translate }}...</button>
+                    <p>
+                        <mat-divider style="margin:10px 0px; width:100%"></mat-divider>
+                    </p>
+                </div>
+
+            </mat-card>
+
+        </div>
+    </div>
+
+</div>
+
+<div class="basic-container" *ngIf="showLoader">
+    <div class="spinner-position">
+        <mat-spinner [diameter]="100"></mat-spinner>
+    </div>
+</div>
+
+<app-bottom *ngIf="!showLoader"></app-bottom>

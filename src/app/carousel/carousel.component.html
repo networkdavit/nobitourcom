@@ -1,0 +1,183 @@
+<!-- <div class="h-search search-container ">
+  <div class="field__row none-content">
+    <input class="search_input rounded-input" matInput type="text" 
+      [(ngModel)]="searchValue" (input)="search(searchValue)" placeholder="{{'Home.letsGoTravel' | translate }}" [matAutocomplete]="auto"
+      (ngModelChange)="getByKeyword($event)">
+  </div>
+  <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+    <mat-option class="options-container" *ngFor="let nobiCity of nobiCities" [value]="nobiCity.city"
+    (click)="selectResult(nobiCity.city, nobiCity.countryIso, nobiCity.cityId)">
+      <div *ngIf="nobiCity.city" >
+        <span>
+          {{nobiCity.city}}
+        </span>
+        <span>
+          {{nobiCity.country}}
+        </span>
+      </div>
+    </mat-option>
+  </mat-autocomplete>
+</div> -->
+
+<section class="hero fix_gap">
+  <div class="hero__top ">
+    <div height="300px" width="100%" id="carouselExampleControls" class="carousel slide" data-ride="carousel"
+      data-interval="6000">
+
+      <div class="hero__bg">
+        <div class=" carousel-inner" style="margin-top: -290px">
+          <div class="carousel-item active" style="height:520px">
+            <a style="cursor: pointer;" (click)="navigateToRecommendedCity('yerevan', 'am', 'estate')">
+              <img 
+               class="d-block w-100 carousel-image" src="../../assets/img/carousel/yereavan_carousel.jpg"
+                alt="Yerevan">
+              <div class="slogan mobile-slogan">{{'Slideshow.yerevanSlideshow' | translate }}</div>
+            </a>
+          </div>
+          <div class="carousel-item" style="height:520px">
+            <a style="cursor: pointer;" (click)="navigateToRecommendedCity('moscow', 'ru', 'estate')">
+              <img 
+               class="d-block w-100 carousel-image" src="../../assets/img/carousel/moscow_carousel.jpg"
+                alt="Tbilisi">
+              <div class="slogan mobile-slogan">{{'Slideshow.moscowSlideshow' | translate }}</div>
+            </a>
+          </div>
+          <div class="carousel-item" style="height:520px">
+            <a style="cursor: pointer;" (click)="navigateToRecommendedCity('tbilisi', 'ge', 'estate')">
+              <img 
+               class="d-block w-100 carousel-image" src="../../assets/img/carousel/tbilisi_carousel.jpeg"
+                alt="Tbilisi">
+              <div class="slogan mobile-slogan">{{'Slideshow.tbilisiSlideshow' | translate }}</div>
+            </a>
+          </div>
+          <div class="carousel-item" style="height:520px">
+            <a style="cursor: pointer;" (click)="navigateToRecommendedCity('sofia', 'bg', 'estate')">
+              <img 
+               class="d-block w-100 carousel-image" src="../../assets/img/carousel/sofia_carousel.jpg"
+                alt="Sofia">
+              <div class="slogan mobile-slogan">{{'Slideshow.sofiaSlideshow' | translate }}</div>
+            </a>
+          </div>
+          <div class="carousel-item" style="height:520px">
+            <a style="cursor: pointer;" (click)="navigateToRecommendedCity('athens', 'gr', 'estate')">
+              <img 
+               class="d-block w-100 carousel-image" src="../../assets/img/carousel/athens_carousel.jpeg"
+                alt="Athens">
+              <div class="slogan mobile-slogan">{{'Slideshow.athensSlideshow' | translate }}</div>
+            </a>
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="showForm" class="search-container" style="margin-top:-5vh">
+   
+
+    <div class="search-bar">
+      <div class="input-wrapper city-search-input">
+        <!-- <label for="search-input">{{'Paddhotel.city' | translate }}</label> -->
+        <input class="search-input" style="width:32vh;" matInput type="text" [(ngModel)]="searchCityValue"  (input)="search(searchCityValue)"
+        placeholder="{{'Home.letsGoTravel' | translate }}" [matAutocomplete]="auto"
+        (keydown.enter)="handleEnterClickCity()" [value]="searchCityValue">
+    </div>
+
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+      <mat-option class="options-container" *ngFor="let nobiCity of nobiCities" [value]="nobiCity.city"
+        (click)="selectResult(nobiCity.city, nobiCity.countryIso, nobiCity.cityId)">
+        <!-- Show loader if nobiCity is undefined -->
+        <div *ngIf="showLoader" class="loader"></div>
+        <!-- Show city and country if nobiCity is defined -->
+        <div *ngIf="nobiCity && !showLoader">
+          <span class="main_color">
+            {{nobiCity.city | nameTranslator | async}}
+          </span>
+          <span class="main_color">
+            {{nobiCity.country | nameTranslator | async}}
+          </span>
+        </div>
+      </mat-option>
+    </mat-autocomplete>
+    
+
+
+      <button class="search-button" style="width:32vh; margin-top:-1.8vh; border-radius: 14px;" (click)="searchForCityFull()">{{'Home.search' | translate }}</button>
+    </div>
+
+
+  </div>
+
+  
+
+
+</section>
+<section class="main_menu" style="margin-top:-100px;">
+<div class="hero__bottom">
+  <div class="hero__slider">
+    <span class="hero__clip hero__clip-left"></span>
+    <span class="hero__clip hero__clip-right"></span>
+    <div class="hero-swiper swiper">
+      <swiper [config]="config" #usefulSwiperMenu>
+        <div class="swiper-wrapper">
+          <a routerLink="/{{website_language}}/home/estate" (click)="goToHome('estate')"
+            class="hero__slide swiper-slide">
+            <img src="../../assets/img/h-slider/icon-1.png" alt="" width="50" height="50">
+            {{'Home.hotel' | translate }}
+          </a>
+          <a routerLink="/{{website_language}}/home/adventure" (click)="goToHome('adventure')"
+            class="hero__slide swiper-slide">
+            <img src="../../assets/img/h-slider/icon-2.png" alt="" width="50" height="50">
+            {{'Home.adventure' | translate }}
+          </a>
+          <a (click)="goToHome('flight')" class="hero__slide swiper-slide">
+            <img src="../../assets/img/h-slider/icon-3.png" alt="" width="50" height="50">
+            {{'Home.flights' | translate }}
+            <a routerLink="/{{website_language}}/home/flight" style="display:none"></a>
+          </a>
+          <a routerLink="/{{website_language}}/home/rent-a-car" (click)="goToHome('rent-a-car')"
+            class="hero__slide swiper-slide">
+            <img src="../../assets/img/h-slider/icon-7.png" alt="" width="50" height="50">
+            {{'Home.rentcar' | translate }}
+          </a>
+
+          <a *ngIf="showGLobalTransfer" routerLink="/{{website_language}}/home/personal-transfer" (click)="goToHome('personal-transfer')"
+            class="hero__slide swiper-slide">
+            <img src="../../assets/img/h-slider/icon-6.png" alt="" width="50" height="50">
+            {{'Home.personalTransfer' | translate }}
+          </a>
+          <a *ngIf="showLocalTransfer" routerLink="/{{website_language}}/transfer" 
+            class="hero__slide swiper-slide">
+            <img src="../../assets/img/h-slider/icon-6.png" alt="" width="50" height="50">
+            {{'Home.personalTransfer' | translate }}
+          </a>
+          <!-- <a routerLink="/{{website_language}}/home/insurance" (click)="goToHome('insurance')"
+            class="hero__slide swiper-slide">
+            <img src="../../assets/img/h-slider/icon-4.png" alt="" width="50" height="50">
+            {{'Home.insurance' | translate }}
+          </a> -->
+          <!-- <a routerLink="/{{website_language}}/shop" 
+            class="hero__slide swiper-slide">
+            <img src="../../assets/img/h-slider/icon-4.png" alt="" width="50" height="50">
+            Marketplace
+          </a> -->
+        </div>
+      </swiper>
+    </div>
+    <button class="hero-btn-prev" type="button" (click)="prevMenu()"><</button>
+    <button class="hero-btn-next" type="button" (click)="nextMenu()">></button>
+    <div class="hero-pagination"></div>
+  </div>
+</div>
+</section>
+
+<!-- app.component.html -->
+
+<div style="margin-top: 2%;"></div>

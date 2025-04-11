@@ -1,0 +1,218 @@
+<app-header (showLoader)="onShowLoader($event)" (currencyEvent)="onCurrencyDataReceived($event)"></app-header>
+<app-carousel></app-carousel>
+
+<br>
+<div class="recommended_container">
+  <div *ngIf="showRecommendedLoader" class="spinner-position faq_spinner">
+  </div>
+  <section class="hotels on-main">
+    <div class="wrapper">
+      <h2  class="hotels_title section-title hotels_title-mob">
+        {{"Home.recommendedHotelsIntro" | translate }}</h2>
+      <div class="hotels__main">
+
+        <div class="hotels__content">
+          <div class="hotels__row">
+            <div class="hotels__cards">
+              <div class="hotels__card xs-card card_estate_adv" 
+                *ngFor="let recommended_hotel of recommendedEstatesFromRateHawk; index as i">
+                <div class="xs-card__img">
+                  <a (click)="redirect_to_zenhotels(recommended_hotel.id, recommended_hotel.mid, recommended_hotel.city, recommended_hotel.country, recommended_hotel.region_id)">
+                    <img [src]="(recommended_hotel.imageUrl | parseJson)[0]" alt="" width="340" height="428">
+                    <p  class="main_color hotel_adv_name" style="text-align: center;">{{recommended_hotel.city | nameTranslator |async}}
+                    <div class="xs-card__main">
+                      <p class="xs-card__name card_text_name" style="height: 20px;">{{recommended_hotel.title }}</p>
+                      <!-- <p *ngIf="!showConvertedPrice" class="xs-card__cost loader">
+                      </p> -->
+                      <p  class="xs-card__cost" >
+
+                        <!-- <span>{{"Paddhotel.from" | translate}}: </span><span class="rounded-purple"> {{ recommended_hotel.daily_prices | sumPrices }} ₽</span> -->
+                        <span class="rounded-purple">{{"Home.checkPrices" | translate}} </span>
+
+                      </p>
+                      <span>
+                        <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+                          <mat-icon *ngIf="star <= recommended_hotel.star_rating">stars</mat-icon>
+                        </ng-container>
+                      </span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- <section *ngIf="showBanners" class="market pc_banners"> -->
+<section class="market pc_banners">
+
+  <div class="wrapper">
+    <div class="market__items">
+      <div class="market__item">
+        <a href="https://nobitransfer.ru" target="_blank" class="market__img">
+          <img loading="lazy" class="inner_market" src="../../assets/img/markets/img-1.webp" alt="" width="243" height="164">
+        </a>
+        <div class="market__main">
+          <a href="https://nobitransfer.ru" target="_blank" class="market__logo">
+            <img src="../../assets/img/nobi_transfer_banner.webp" alt="" width="56" height="56">
+            Nobi Transfer
+          </a>
+          <p class="market__txt">{{"Home.nobitransfer" | translate}}</p>
+        </div>
+      </div>
+      <div class="market__item">
+        <a href="https://hotel-nobi.ru" target="_blank" class="market__img">
+          <img loading="lazy" class="inner_market" src="../../assets/img/markets/img-3.webp" alt="" width="243" height="164">
+        </a>
+        <div class="market__main">
+          <a href="https://hotel-nobi.ru" target="_blank" class="market__logo">
+            <img src="../../assets/img/nobi_base.webp" alt="" width="56" height="56">
+            Nobi Guest House 
+          </a>
+          <p class="market__txt">{{"Home.nobiGuestHouse" | translate}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- for ru version -->
+<section  class="market mobile_banners">
+  <div class="wrapper">
+    <div class="market__items">
+      <div class="market__item">
+        <a href="https://nobitransfer.ru" target="_blank" class="market__img">
+          <img loading="lazy" class="inner_market" src="../../assets/img/markets/img-1.webp" alt="" width="243" height="164">
+        </a>
+        <div class="market__main">
+          <a href="https://nobitransfer.ru" target="_blank" class="market__logo">
+            <img src="../../assets/img/nobi_transfer_banner.webp" alt="" width="56" height="56">
+            Nobi Transfer
+          </a>
+          <p class="market__txt">{{"Home.nobitransfer" | translate}}</p>
+        </div>
+      </div>
+      <div class="market__item">
+        <a href="https://hotel-nobi.ru" target="_blank" class="market__img">
+          <img loading="lazy" class="inner_market" src="../../assets/img/markets/img-3.webp" alt="" width="243" height="164">
+        </a>
+        <div class="market__main">
+          <a href="https://hotel-nobi.ru" target="_blank" class="market__logo">
+            <img src="../../assets/img/nobi_base.webp" alt="" width="56" height="56">
+            Nobi Guest House 
+          </a>
+          <p class="market__txt">{{"Home.nobiGuestHouse" | translate}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="recommended_container">
+  
+  <div *ngIf="showRecommendedLoader" class="spinner-position faq_spinner">
+    <!-- <mat-spinner [diameter]="100"></mat-spinner>
+    <p class="loading_text">{{"Home.loading_adv" | translate}}</p> -->
+  </div>
+  <section class="hotels on-main">
+    <div class="wrapper">
+      <h2  class="hotels_title section-title hotels_title-mob">{{"Home.popularForYou" |
+        translate}}</h2>
+      <div class="hotels__main">
+
+        <div class="hotels__content">
+          <div class="hotels__row">
+            <div class="hotels__cards">
+              <div class="hotels__card xs-card card_height"  *ngFor="let randomAdvByIp of recommendedAdventuresFromTripster; index as i">
+            
+                <div class="xs-card__img">
+                  <a routerLink="/{{language}}/home/adventure/{{randomAdvByIp.id}}-{{randomAdvByIp.slug}}" 
+                  (click)="navigateToIpRecommendedAdventureOrEstate(randomAdvByIp.id, randomAdvByIp.slug, 'adventure')">
+                    <img loading="lazy" src={{randomAdvByIp.imageUrl}} alt="" width="340" height="428">
+                    <p style="text-align: center;" class="main_color">{{randomAdvByIp.cityName | nameTranslator |async}} - {{randomAdvByIp.countryName | nameTranslator |async}}</p>
+                    <div class="xs-card__main">
+                      <p class="xs-card__name card_text_name" style="height: 50px;">{{randomAdvByIp.name | nameTranslator |async}}</p>
+                      <p *ngIf="!showConvertedPrice" class="xs-card__cost loader">
+                      </p>
+                      <p *ngIf="showConvertedPrice" class="xs-card__cost"  >
+                        <!-- <span class="rounded-purple">{{randomAdvByIp.price * conversion_rate | roundUp}} {{default_curr}}</span> -->
+                        <span class="rounded-purple">{{randomAdvByIp.price }} ₽</span>
+
+                      </p>
+                      
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+
+
+<section class="partner" *ngIf="!showLoader">
+  <div class="wrapper">
+    <h2 class="partner__title section-title">{{"Home.partners" | translate}}</h2>
+    <div class="partner__slider">
+      <div class="partner-swiper swiper">
+        <swiper [config]="config" #usefulSwiperPartner>
+          <div class="swiper-wrapper">
+            
+            <div class=" swiper-slide" fxLayoutAlign="center center">
+              <img loading="lazy" width="300" height="200" src="../../assets/img/partners/trip_insurance_large.webp" alt="">
+              <!-- tripinsurance -->
+            </div>
+            <div class=" swiper-slide" fxLayoutAlign="center center">
+              <img loading="lazy" width="300" height="200" src="../../assets/img/partners/intui_large.webp" alt="">
+              <!-- intuitravel -->
+            </div>
+            <div class=" swiper-slide" fxLayoutAlign="center center">
+              <img loading="lazy" width="300" height="200" src="../../assets/img/partners/localrent_large.webp" alt="">
+              <!-- localrent -->
+            </div>
+            <div class=" swiper-slide" fxLayoutAlign="center center">
+              <img loading="lazy" width="300" height="200" src="../../assets/img/partners/tripster_large.webp" alt="">
+              <!-- tripster -->
+            </div>
+            <div class=" swiper-slide" fxLayoutAlign="center center">
+              <img loading="lazy" width="300" height="200" src="../../assets/img/partners/aviasales_large.webp" alt="">
+              <!-- aviasales -->
+            </div>
+            <div class=" swiper-slide" fxLayoutAlign="center center">
+              <img loading="lazy" width="300" height="200" src="../../assets/img/partners/tiqets_large.webp" alt="">
+              <!-- tiqets -->
+            </div>
+            <div class=" swiper-slide" fxLayoutAlign="center center">
+              <img loading="lazy" width="300" height="200" src="../../assets/img/partners/agoda_large.webp" alt="">
+              <!-- agoda -->
+            </div>
+            <div class=" swiper-slide" fxLayoutAlign="center center">
+              <img loading="lazy" width="300" height="200" src="../../assets/img/partners/hotellook_large.webp" alt="">
+              <!-- hotellook -->
+            </div>
+          </div>
+
+        </swiper>
+      </div>
+      <button class="partner-btn-prev" type="button" (click)="prevPartner()"><img
+        loading="lazy" src="../../assets/img/icons/arrow-left.webp" alt="" width="40" height="40"></button>
+      <button class="partner-btn-next" type="button" (click)="nextPartner()"><img loading="lazy"
+          src="../../assets/img/icons/arrow-right.webp" alt="" width="40" height="40"></button>
+      <div class="partner-pagination"></div>
+    </div>
+  </div>
+</section>
+
+<div class="basic-container" *ngIf="showLoader">
+  <div class="spinner-position">
+    <mat-spinner [diameter]="100"></mat-spinner>
+  </div>
+</div>
+
+<app-bottom *ngIf="!showLoader" style="width:100%; position: relative"></app-bottom>

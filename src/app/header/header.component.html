@@ -1,0 +1,338 @@
+<!-- New Design -->
+
+<div *ngIf="loadingService.isLoading$ | async" class="loading-overlay">
+  <div class="spinner"></div>
+</div>
+
+<div class="lang-overlay"></div>
+<header class="header">
+
+  <div class="menu">
+    <div class="wrapper">
+      <div class="menu__main">
+        <a *ngIf="!isPartnerMT"
+          href="https://admin.nobitour.com/{{website_language}}/page/become-a-vendor" class="header__btn add_object_burger" style="width:54vh !important"
+          matTooltip="{{'Header.vendor_info_text' | translate }}" target="_blank">
+          {{ "Home.become_a_vendor" | translate }}
+        </a>
+        <div *ngIf="showLanguageIcon" class="dropdown-container">
+          <div class="dropdown">
+            <div *ngIf="isNotRussia" class="selected-item" (click)="toggleCurrDropdown()">
+              {{ selectedCurrency.toUpperCase() }}
+            </div>
+            <div class="dropdown-menu" [ngClass]="{'show': isCurrDropdownOpen}">
+              <div  class="dropdown-item" *ngFor="let currency of currencies" (click)="onChangeCurrency(currency.value)">
+                {{ currency.label }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="menu__title">{{"Home.services" | translate}}</p>
+        <ul class="menu__list">
+          <li>
+            <a (click)="goToHome('estate')">
+              <span>
+                <img src="../../assets/img/menu/icon-1.png" alt="" width="24" height="24">
+                <img src="../../assets/img/menu/icon-1-active.png" alt="" width="24" height="24">
+              </span>
+              {{'Home.hotel' | translate }}
+            </a>
+          </li>
+          <li>
+            <a (click)="goToHome('adventure')">
+              <span>
+                <img src="../../assets/img/menu/icon-2.png" alt="" width="24" height="24">
+                <img src="../../assets/img/menu/icon-2-active.png" alt="" width="24" height="24">
+              </span>
+              {{'Home.adventure' | translate }}
+            </a>
+          </li>
+          <li>
+            <a href="https://flights.nobitour.com/?locale={{website_language}}" target="_blank">
+              <span>
+                <img src="../../assets/img/menu/icon-3.png" alt="" width="24" height="24">
+                <img src="../../assets/img/menu/icon-3-active.png" alt="" width="24" height="24">
+              </span>
+              {{'Home.flights' | translate }}
+            </a>
+          </li>
+          <li>
+            <a (click)="goToHome('rent-a-car')">
+              <span>
+                <img src="../../assets/img/menu/icon-6.png" alt="" width="24" height="24">
+                <img src="../../assets/img/menu/icon-6-active.png" alt="" width="24" height="24">
+              </span>
+              {{'Home.rentcar' | translate }}
+            </a>
+          </li>
+          <!-- <li>
+            <a href="https://nobiarts.com" target="_blank">
+              <span>
+                <svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 24 24" style="height: 45px;margin-bottom: 5px;">
+                  <defs>
+                    <style>
+                      .a {
+                        fill: none;
+                        stroke: currentColor;
+                        stroke-linecap: round;
+                        stroke-linejoin: round;
+                        stroke-width: 0.7px;
+                      }
+                    </style>
+                  </defs>
+                  <title>products-shopping-bags</title>
+                  <path class="a"
+                    d="M15.75,8.25V7.5A1.5,1.5,0,0,0,14.25,6h-12A1.5,1.5,0,0,0,.75,7.5V21.656a1.583,1.583,0,0,0,1.5,1.594H10.5" />
+                  <rect class="a" x="14.25" y="14.156" width="9" height="9" rx="0.75" ry="0.75" />
+                  <path class="a" d="M11.25,9.75v-6a3.009,3.009,0,0,0-3-3h0a3.009,3.009,0,0,0-3,3v6" />
+                  <line class="a" x1="18.75" y1="14.156" x2="18.75" y2="23.156" />
+                  <line class="a" x1="14.25" y1="18.656" x2="23.25" y2="18.656" />
+                  <line class="a" x1="16.5" y1="11.156" x2="18.75" y2="14.156" />
+                  <line class="a" x1="21" y1="11.156" x2="18.75" y2="14.156" />
+                </svg>
+              </span>
+              {{'Home.marketNobiArts' | translate }}
+            </a>
+          </li> -->
+          <li>
+            <a (click)="goToHome('personal-transfer')">
+              <span>
+                <img src="../../assets/img/menu/icon-5.png" alt="" width="24" height="24">
+                <img src="../../assets/img/menu/icon-5-active.png" alt="" width="24" height="24">
+              </span>
+              {{'Home.personalTransfer' | translate }}
+            </a>
+          </li>
+          <!-- <li>
+            <a (click)="goToHome('avia-bus-russia')">
+              <span>
+                <svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 24 24" style="height: 45px;margin-bottom: 5px;">
+                  <defs>
+                    <style>
+                      .a {
+                        fill: none;
+                        stroke: currentColor;
+                        stroke-linecap: round;
+                        stroke-linejoin: round;
+                        stroke-width: 0.7px;
+                      }
+                    </style>
+                  </defs>
+                  <title>bus-1</title>
+                  <path class="a" d="M3,20.213v1.5a1.5,1.5,0,0,0,3,0v-1.5"></path>
+                  <path class="a" d="M21,20.213v1.5a1.5,1.5,0,0,1-3,0v-1.5"></path>
+                  <path class="a"
+                    d="M22.5,18.713a1.5,1.5,0,0,1-1.5,1.5H3a1.5,1.5,0,0,1,0-3H21A1.5,1.5,0,0,1,22.5,18.713Z"></path>
+                  <path class="a" d="M5,11.213H19a2,2,0,0,1,2,2v4a0,0,0,0,1,0,0H3a0,0,0,0,1,0,0v-4A2,2,0,0,1,5,11.213Z">
+                  </path>
+                  <path class="a" d="M6,13.838a.375.375,0,0,1,.375.375"></path>
+                  <path class="a" d="M5.625,14.213A.375.375,0,0,1,6,13.838"></path>
+                  <path class="a" d="M6,14.588a.375.375,0,0,1-.375-.375"></path>
+                  <path class="a" d="M6.375,14.213A.375.375,0,0,1,6,14.588"></path>
+                  <path class="a" d="M18,13.838a.375.375,0,0,1,.375.375"></path>
+                  <path class="a" d="M17.625,14.213A.375.375,0,0,1,18,13.838"></path>
+                  <path class="a" d="M18,14.588a.375.375,0,0,1-.375-.375"></path>
+                  <path class="a" d="M18.375,14.213a.375.375,0,0,1-.375.375"></path>
+                  <line class="a" x1="10.5" y1="14.213" x2="13.5" y2="14.213"></line>
+                  <path class="a" d="M19.5,11.276V3.713a3,3,0,0,0-3-3h-9a3,3,0,0,0-3,3v7.563"></path>
+                  <line class="a" x1="4.5" y1="3.713" x2="19.5" y2="3.713"></line>
+                  <line class="a" x1="12" y1="3.713" x2="12" y2="11.213"></line>
+                  <path class="a" d="M4.5,5.213H3a1.5,1.5,0,0,0-1.5,1.5v3"></path>
+                  <path class="a" d="M19.5,5.213H21a1.5,1.5,0,0,1,1.5,1.5v3"></path>
+                </svg>
+              </span>
+              {{'Home.bus' | translate }}
+            </a>
+          </li> -->
+          <li>
+            <!-- <a (click)="goToHome('insurance')">
+              <span>
+                <img src="../../assets/img/menu/icon-4.png" alt="" width="24" height="24">
+                <img src="../../assets/img/menu/icon-4-active.png" alt="" width="24" height="24">
+              </span>
+              {{'Home.insurance' | translate }}
+            </a> -->
+          </li>
+
+
+        </ul>
+        <ul class="menu__list">
+          <li>
+            <a (click)="openHeaderLink('contact-us')">
+              {{'Bottom.contactus' | translate }}
+            </a>
+          </li>
+          <li>
+            <a (click)="openHeaderLink('policy')">
+              {{'Bottom.policy' | translate}}
+            </a>
+          </li>
+          <li>
+            <a (click)="openHeaderLink('user_terms_and_conditions')">
+              {{'Bottom.user_terms_and_conditions' | translate}}
+            </a>
+          </li>
+          <li>
+            <a (click)="openHeaderLink('payment_return_policy')">
+              {{'PaymentReturnPolicy.name' | translate}}
+            </a>
+          </li>
+          <li>
+            <a (click)="openHeaderLink('about-us')">
+              {{'Bottom.about' | translate}}
+            </a>
+          </li>
+          <li>
+            <a (click)="openHeaderLink('faq')">
+              {{'FrequentlyAskedQuestions.faq' | translate}}
+            </a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrapper">
+    <div class="header__row">
+      <a  *ngIf="!showShopName" (click)="goBackToIntro()" class="header__logo">
+        <img src="../../assets/img/logo2.png" alt="" width="70" height="70">
+        <span class="logo_text">Nobi Tour </span>
+      </a>
+      <a  *ngIf="showShopName" (click)="goToShop()" class="header__logo">
+        <img src="../../assets/img/logo2.png" alt="" width="70" height="70">
+        <span class="logo_text">Nobi Tour Shop</span>
+      </a>
+      <div class="header__right">
+        <a *ngIf="isLoggedIn && isPartnerMT && !is_device_mobile"
+          href="https://admin.nobitour.com/{{website_language}}/user/dashboard" class="header__btn"
+          matTooltip="{{'Header.vendor_info_text' | translate }}" target="_blank">
+          {{"Home.vendor_dashboard" | translate }}
+        </a>
+        <a *ngIf="!isPartnerMT && !is_device_mobile"
+          href="https://admin.nobitour.com/{{website_language}}/page/become-a-vendor" class="header__btn add_object"
+          matTooltip="{{'Header.vendor_info_text' | translate }}" target="_blank">
+          {{ "Home.become_a_vendor" | translate }}
+        </a>
+
+
+
+        <div class="dropdown header__user">
+          <img src="../../assets/img/icons/user.png" style="cursor:pointer" alt="" width="32" height="32"
+            (click)="toggleDropdown()">
+          <a *ngIf="!isLoggedIn" class="truncate-text" (click)="toggleDropdown()">{{userName}}</a>
+          <div *ngIf="!isLoggedIn" class="dropdown-menu " [ngClass]="{ 'show': isDropdownOpen }">
+            <a style="width:75% !important" class="header__btn" (click)="saveCurrentUrl()"
+              href="https://admin.nobitour.com/{{website_language}}/login">{{"Plogin.loginbtn" |
+              translate }}</a>
+            <a style="width:75% !important" class="header__btn" (click)="saveCurrentUrl()"
+              href="https://admin.nobitour.com/{{website_language}}/register"
+              >{{"Plogin.register" | translate }}</a>
+            <!-- <a *ngIf="!isPartnerMT && is_device_mobile"
+              href="https://admin.nobitour.com/{{website_language}}/page/become-a-vendor" class="header__btn"
+             target="_blank">{{"Home.become_a_vendor" | translate }}</a> -->
+          </div>
+        </div>
+
+        <div *ngIf="isLoggedIn" class="dropdown header__user">
+          <a *ngIf="isLoggedIn" class="dropdown-toggle truncate-text" (click)="toggleDropdown()">{{userName}}</a>
+          <div class="dropdown-menu" [ngClass]="{ 'show': isDropdownOpen }">
+            <a class="dropdown-item" href="https://admin.nobitour.com/{{website_language}}/user/profile"
+              target="_blank">{{"Home.my_profile"
+              | translate }}</a>
+            <a *ngIf="isPartnerMT" class="dropdown-item"
+              href="https://admin.nobitour.com/{{website_language}}/user/dashboard"
+              target="_blank">{{"Home.vendor_dashboard" | translate }}</a>
+            <a *ngIf="isPartnerMT" class="dropdown-item"
+              href="https://admin.nobitour.com/{{website_language}}/user/hotel/create"
+              target="_blank">{{"Home.create_a_hotel" | translate }}</a>
+            <a *ngIf="isPartnerMT" class="dropdown-item"
+              href="https://admin.nobitour.com/{{website_language}}/user/hotel" target="_blank">{{"Home.view_my_hotels"
+              | translate }}</a>
+            <a *ngIf="isPartnerMT" class="dropdown-item"
+              href="https://admin.nobitour.com/{{website_language}}/user/tour/create"
+              target="_blank">{{"Home.create_a_tour"
+              | translate }}</a>
+            <a *ngIf="isPartnerMT" class="dropdown-item"
+              href="https://admin.nobitour.com/{{website_language}}/user/tour" target="_blank">{{"Home.view_my_tours"
+              | translate }}</a>
+            <a class="dropdown-item" href="https://admin.nobitour.com/{{website_language}}/user/booking-history"
+              target="_blank">{{"Home.booking_history" | translate }}</a>
+            <a class="dropdown-item" href="https://admin.nobitour.com/user/profile/change-password"
+              target="_blank">{{"Home.change_password" | translate }}</a>
+            <form id="logout-form-topbar" action="https://admin.nobitour.com/logout" method="POST"
+              style="display: none;">
+              <input type="hidden" name="_token" value={{token}}>
+            </form>
+            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form-topbar').submit();"><i
+                class="fa fa-sign-out"></i> {{'Home.logout' | translate }}</a>
+          </div>
+
+        </div>
+
+        <div class="header__lang lang" *ngIf="isNotRussia">
+          <button *ngIf="showLanguageIcon; else hiddenIcon" type="button" class="lang__btn" (click)="onClickLangBtn()">
+            {{currentLang.lang | uppercase}} <img [src]="'../../assets/img/langs/' + currentLang.lang + '.png'" alt=""
+              width="64" height="64">
+          </button>
+          <ng-template #hiddenIcon>
+            <div class="hidden-icon"></div>
+          </ng-template>
+          <ul class="lang__list">
+            <li>
+              <button type="button" class="lang__list_btn" (click)="onClickLangBtns('en', 'EN')">
+                English
+                <img src="../../assets/img/langs/en.png" alt="" width="64" height="64">
+              </button>
+            </li>
+            <li>
+              <button type="button" class="lang__list_btn" (click)="onClickLangBtns('bg', 'BG')">
+                Български
+                <img src="../../assets/img/langs/bg.png" alt="" width="64" height="64">
+              </button>
+            </li>
+            <li>
+              <button type="button" class="lang__list_btn" (click)="onClickLangBtns('el', 'EL')">
+                Ελληνική
+                <img src="../../assets/img/langs/el.png" alt="" width="64" height="64">
+              </button>
+            </li>
+            <li>
+              <button type="button" class="lang__list_btn" (click)="onClickLangBtns('hy', 'HY')">
+                Հայերեն
+                <img src="../../assets/img/langs/hy.png" alt="" width="64" height="64">
+              </button>
+            </li>
+            <li>
+              <button type="button" class="lang__list_btn" (click)="onClickLangBtns('ru', 'RU')">
+                Русский
+                <img src="../../assets/img/langs/ru.png" alt="" width="64" height="64">
+              </button>
+            </li>
+          </ul>
+        </div>
+        <div *ngIf="showLanguageIcon && !is_device_mobile && isNotRussia" class="dropdown-container" >
+          <div class="dropdown">
+            <div class="selected-item" (click)="toggleCurrDropdown()">
+              {{ selectedCurrency.toUpperCase() }}
+            </div>
+            <div class="dropdown-menu" [ngClass]="{'show': isCurrDropdownOpen}">
+              <div class="dropdown-item" *ngFor="let currency of currencies" (click)="onChangeCurrency(currency.value)">
+                {{ currency.label }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="burger" (click)="onClickMenu()">
+          <span class="burger__item"></span>
+          <span class="burger__item"></span>
+          <span class="burger__item"></span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>

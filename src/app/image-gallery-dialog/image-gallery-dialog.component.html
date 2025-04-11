@@ -1,0 +1,29 @@
+<div class="modal-header">
+  <h5 class="modal-title">{{ data.title }}</h5>
+  <button type="button" class="close" (click)="onClose()">
+    <span>&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="image-container">
+    <ng-container *ngIf="gallery && gallery.length > 1">
+      <span class="arrow left" (click)="previousImage()">&lt;</span>
+    </ng-container>
+    <img [src]="currentImage" alt="Room Image" class="room-image">
+    <ng-container *ngIf="gallery && gallery.length > 1">
+      <span class="arrow right" (click)="nextImage()">&gt;</span>
+    </ng-container>
+  </div>
+  <div class="room-details">
+    <p>{{ data.room.beds_html.slice(1) }} {{ "Paddhotel.beds" | translate }}</p>
+    <p>{{ data.room.adults_html.slice(1) }} {{ "Product.adult" | translate }}</p>
+    <p>{{ data.room.children_html.slice(1) }} {{ "Product.childrens" | translate }}</p>
+    <p [innerHTML]="sanitizer.bypassSecurityTrustHtml(data.room.size_html)"></p>
+  </div>
+  <div class="term-features">
+    <div *ngFor="let term of amenities">
+      <mat-icon class="check_icon">check_circle</mat-icon>
+      <p>{{ term.title | nameTranslator | async }}</p>
+    </div>
+  </div>
+</div>

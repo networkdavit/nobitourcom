@@ -1,0 +1,95 @@
+<app-header (showLoader)="onShowLoader($event)" (currencyEvent)="onCurrencyDataReceived($event)"></app-header>
+<app-carousel></app-carousel>
+
+<div class="recommended_container">
+    <h2 style="text-transform: capitalize;" class="hotels_title section-title hotels_title-mob">
+        {{"Home.recommendedHotels" |translate}}{{country}}</h2>
+    <section class="hotels on-main">
+        <div class="wrapper">
+            <div class="hotels__main">
+
+                <div class="hotels__content">
+                    <div class="hotels__row">
+                        <div class="hotels__cards">
+                            <div class="hotels__card xs-card" *ngFor="let hotel of country_hotels; index as i">
+                                <div class="xs-card__img">
+                                    <a routerLink="/{{website_language}}/home/estate/a-{{hotel.id}}-{{hotel.slug}}"
+                                        (click)="navigateToIpRecommendedAdventureOrEstate(hotel.id, hotel.slug, 'estate')">
+                                        <img src={{hotel.imageUrl}} alt="" width="340" height="428">
+                                        <p style="text-align: center;" class="main_color">{{hotel.cityName}} -
+                                            {{hotel.countryName}}</p>
+                                        <div class="xs-card__main">
+                                            <p class="xs-card__name card_text_name">{{hotel.name}}</p>
+                                            <!-- <p *ngIf="!showConvertedPrice" class="xs-card__cost loader">
+                                            </p>
+                                            <p *ngIf="showConvertedPrice" class="xs-card__cost">
+                                                {{hotel.price * conversion_rate | roundUp}} {{default_curr}}
+                                            </p> -->
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <h2 style="text-transform: capitalize;" class="hotels_title section-title hotels_title-mob">
+        {{"Home.recommendedAdventures" |translate}}{{country}}</h2>
+
+    <section class="hotels on-main">
+        <div class="wrapper">
+            <div class="hotels__main">
+
+                <div class="hotels__content">
+                    <div class="hotels__row">
+                        <div class="hotels__cards">
+                            <div class="hotels__card xs-card" *ngFor="let adventure of country_adventures; index as i">
+                                <div class="xs-card__img">
+                                    <a routerLink="/{{website_language}}/home/adventure/{{adventure.id}}-{{adventure.slug}}"
+                                        (click)="navigateToIpRecommendedAdventureOrEstate(adventure.id, adventure.slug, 'adventure')">
+                                        <img src={{adventure.imageUrl}} alt="" width="340" height="428">
+                                        <p style="text-align: center;" class="main_color">{{adventure.cityName}} -
+                                            {{adventure.countryName}}</p>
+                                        <div class="xs-card__main">
+                                            <p class="xs-card__name card_text_name">{{adventure.name}}</p>
+                                            <p *ngIf="!showConvertedPrice" class="xs-card__cost loader">
+                                            </p>
+                                            <p *ngIf="showConvertedPrice" class="xs-card__cost">
+                                                {{adventure.price * conversion_rate | roundUp}} {{default_curr}}
+                                            </p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="city-buttons">
+        <h3>Featured Cities</h3>
+        <div class="city-button-row">
+            <div class="city-button" *ngFor="let city of cities">
+                <button class="square-button" (click)="navigateToCity(city.city, city.countryIso.toLowerCase())">
+                    <p>{{ city.city }}</p>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="basic-container" *ngIf="showLoader">
+    <div class="spinner-position">
+        <mat-spinner [diameter]="100"></mat-spinner>
+    </div>
+</div>
+
+<app-bottom *ngIf="!showLoader" style="position: relative;bottom: -190px;"
+    class="mobile_bottom"></app-bottom>

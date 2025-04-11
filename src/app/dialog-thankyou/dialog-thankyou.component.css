@@ -1,0 +1,54 @@
+.popup-container {
+  background-color: #f7f7f7;
+  width: 50vh; 
+  height: 60vh !important; 
+  text-align: center;
+}
+
+.thank_you_p{
+  text-align: left;
+}
+.center-text {
+  text-align: center;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.space {
+  margin: 0 5px;
+  text-transform: capitalize;
+}
+
+.button-citynotfound {
+  color: rgb(96 211 236 / 87%);
+  width: 50%;
+  margin: 0 auto;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .popup-container {
+    width: 60vw; /* Adjust the width for smaller screens */
+    height: auto; /* Allow height to adjust based on content */
+    margin-bottom:10%;
+  }
+
+  .center-text {
+    text-align: center;
+    font-size: 20px;
+  }
+
+  .button-citynotfound{
+    margin-bottom:10%;
+  }
+
+  .mat-stroked-button{
+    margin: bottom 10%;
+  }
+
+
+}

@@ -1,0 +1,171 @@
+mat-divider {
+    width: 80%;
+}
+
+@media only screen and (min-width: 1000px) {
+    .city__item {
+        width: 15%;
+    }
+
+    .city__items {
+        margin-left: 10% !important;
+    }
+}
+
+.basic-container {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    z-index: 2;
+    background-color: rgb(0, 0, 0, 0.3);
+    height: 100%;
+    width: 100%;
+}
+
+.spinner-position {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+}
+
+@media (max-width:700px) {
+    mat-form-field {
+        display: contents !important;
+    }
+}
+
+.ex__btn,
+.ex__back {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.path__crnt {
+    margin-bottom: 0rem;
+}
+
+.check_icon {
+    color: rgba(111, 29, 128, 0.92);
+    vertical-align: middle;
+    margin-right: 20px;
+}
+
+.price_row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.row li {
+    margin-right: 30px;
+    margin-left: 20px;
+}
+
+@keyframes sweep {
+    0% {
+        opacity: 0;
+        margin-top: -10px
+    }
+
+    100% {
+        opacity: 1;
+        margin-top: 0px
+    }
+}
+
+.main-image img {
+    width: 100%;
+    height: 470px;
+    object-fit: cover;
+    /* margin-left: 5px; */
+    margin-top: 30px;
+    cursor: pointer;
+}
+
+.carousel-container {
+    display: flex;
+    align-items: center;
+    margin: 30px;
+}
+
+.thumbnail-images-container {
+    flex-grow: 1;
+    position: relative;
+}
+
+.thumbnail-images {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 10px;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+    overflow: hidden
+}
+
+.image-container {
+    position: relative;
+}
+
+.image-container img {
+    width: 230px;
+    height: 230px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+
+.overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: .3s ease;
+}
+
+.image-container:hover .overlay {
+    opacity: 1;
+}
+
+.icon {
+    color: white;
+    font-size: 100px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.fa-search-plus:hover {
+    color: #eee;
+}
+
+.mat-datepicker-toggle {
+    z-index: 1000;
+}
+
+.tag-grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 10px; 
+}
+
+.tag_ex__item {
+  border: 1px solid #ccc; 
+  padding: 10px; 
+}
+
+.tag_ex__char {
+  font-weight: bold;
+}
+
+.tag_ex__var {
+  font-style: italic;
+}

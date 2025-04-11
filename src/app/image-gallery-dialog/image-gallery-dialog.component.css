@@ -1,0 +1,100 @@
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #f8f8f8;
+}
+
+.modal-title {
+  margin: 0;
+  font-size: 24px;
+}
+
+.close {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-size: 24px;
+  color: #333;
+}
+
+.modal-body {
+  display: flex;
+  align-items: flex-start;
+  padding: 30px;
+}
+
+.room-image {
+  width: 500px;
+  height: auto;
+  margin-right: 30px;
+}
+
+.room-details p {
+  margin: 15px 0;
+  font-size: 18px;
+}
+
+.term-features {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  max-width: 300px;
+  justify-content: flex-start; /* Align items from start to end */
+}
+
+.term-features div {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  white-space: nowrap; /* Prevent wrapping of terms */
+}
+
+.term-features i {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.term-features p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  font-size: 54px;
+  color: #000;
+  background-color: rgba(255, 255, 255, 0.38);
+  padding: 5px;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.left {
+  left: 10px;
+}
+
+.right {
+  right: 10px;
+}
+
+.image-container {
+  position: relative;
+  margin-left:50px;
+  margin-right:50px;
+}
+
+.room-image {
+  width: 390px;
+  height: 300px;
+  object-fit: contain;
+}
+
+.modal-container {
+  width: 1000px; 
+  height: 390px; 
+  /* overflow: auto;  */
+}

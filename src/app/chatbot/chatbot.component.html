@@ -1,0 +1,55 @@
+<div class="bot_menu-container" [ngClass]="{'open': isMenuOpen}">
+    <div class="bot_menu-toggle" (click)="toggleMenu()">
+      <img src="https://cdn-icons-png.flaticon.com/512/4712/4712027.png">
+    </div>
+    <div class="bot_menu">
+      <img class="icon" src="https://img.freepik.com/free-vector/cute-bot-say-users-hello-chatbot-greets-online-consultation_80328-195.jpg?w=1380&t=st=1682148688~exp=1682149288~hmac=4cb7b13b609c18c9b3b045c3961e28ab7c60a2d099b8bbbe683eb10dc23958ff">
+      <h3 style="text-align: center; font-size: 17px; background-color: rgba(111, 29, 128, 0.92); color: white">{{ generated_text }}</h3>
+
+      <div *ngIf="!isFormOpen">
+        <p *ngIf="load_option" class="loader"></p>
+        <div *ngFor="let option of bot_options">
+          <div *ngIf="!load_option" class="option" (click)="selectOption(option.desc)">{{option.option}}</div>
+        </div>
+        <div class="feedback" *ngIf="is_response && !load_option">
+          <p>Was that helpful?</p>
+          <div>
+            <span>
+              <button>Yes</button>
+              <button>No</button>
+            </span>
+          </div>
+          <button (click)="get_bot_options()">Back to Start</button>
+        </div>
+      </div>
+      <div *ngIf="isFormOpen" class="form-container">
+        <p *ngIf="load_option" class="loader"></p>
+        <form  *ngIf="!load_option" [formGroup]="form" (ngSubmit)="submitForm()">
+            <div class="form-group">
+              <input type="text" id="name" formControlName="name" placeholder="name">
+              
+            </div>
+            <div class="form-group">
+              <input type="email" id="email" formControlName="email" placeholder="email">
+              
+            </div>
+            <div class="form-group">
+              <input type="text" id="phone" formControlName="phone" placeholder="phone">
+            </div>
+            <div class="form-group">
+              <textarea id="message" formControlName="message" placeholder="message"></textarea>
+              
+            </div>
+            <div class="form-group">
+              <button type="submit" [disabled]="!form.valid">Submit</button>
+            </div>
+          </form>
+          
+      </div>
+      <div class="bot_menu-buttons">
+        <button class="bot_menu-button" (click)="change_fields('bot')">Chat</button>
+        <button class="bot_menu-button" (click)="change_fields('form')">Message Us</button>
+      </div>
+    </div>
+  </div>
+  

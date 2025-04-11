@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>{{title}}
+    <span class="close-btn" (click)="close()"><i class="fa fa-times"></i></span>
+</h2>
+
+<span>
+    <mat-divider style="width: 80%;margin-top: -18px;"></mat-divider>
+</span>
+<mat-dialog-actions>
+    <!-- <button class="mat-raised-button mat-primary" style="margin: 0px 10px;" (click)="save()">Save</button> -->
+    
+</mat-dialog-actions>
+<mat-dialog-content>
+    <div fxLayoutAlign="space-around center"  style="margin: 20px 0px;position: relative;">
+            <img src="{{images[currentImg].imageUrl}}" alt="Property Image" [style.max-width.px]="width" [style.max-height.px]="height">
+       
+        <div fxLayout="row" fxLayoutAlign="center center" class="left-arrow-bg" (click)="changeImagePrev()">
+            <mat-icon fxLayout="row" fxLayoutAlign="center center" class="left-arrow">keyboard_arrow_left</mat-icon>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center center" class="right-arrow-bg" (click)="changeImageNext()">
+            <mat-icon fxLayout="row" fxLayoutAlign="center center" class="right-arrow">keyboard_arrow_right</mat-icon>
+        </div>
+    </div>
+
+</mat-dialog-content>
+

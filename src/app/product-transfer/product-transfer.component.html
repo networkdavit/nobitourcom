@@ -1,0 +1,562 @@
+<!-- <app-header></app-header>
+<app-carousel></app-carousel> -->
+<br>
+
+<div class="header-container">
+  <!-- Logo on the left -->
+  <img 
+    class="left-logo" 
+    (click)="goBackToIntro()" 
+    src="../../assets/img/logo2.png" 
+    alt="Tour Logo" 
+    width="80" 
+    height="80"
+  />
+
+  <!-- Nobi Transfer in the center -->
+  <div class="center-logo" (click)="scrollTo('order')">
+    <img 
+      src="../../assets/img/nobitransferlogo.PNG" 
+      alt="Nobi Transfer" 
+      width="70" 
+      height="70"
+    />
+    <span class="logo-text">Nobi Transfer</span>
+  </div>
+</div>
+
+<section style="margin-left:25%" class="contact-information">
+    
+    <div class="header-links">
+
+        <!-- <i  (click)="toggleMenu()" class="fas fa-bars hide-large-screen-for-sandwich sandwich" ></i>
+
+        <div class="hide-large-screen-for-sandwich" *ngIf="isMenuVisible" [@slideAnimation]="'visible'" style="position: fixed; top: 30%; left: 40%; transform: translate(-50%, -50%); z-index: 9999; background-color: white;">
+          
+          <div class="mobile-menu-links">
+            <a href="https://vk.com/nobi_travel" target="_blank"><img src="../../assets/img/contact_icons/vkicon2.PNG" alt="VK Icon"></a>
+            <a href="https://instagram.com/nobi_transfer?utm_source=qr" target="_blank"><img src="../../assets/img/contact_icons/instaicon2.PNG" alt="Instagram Icon"></a>
+            <a href="https://wa.me/79409103010?text=Мы%20с%20сайта%20nobitour.com%20Хотим%20задать%20вопрос." target="_blank">
+              <img src="../../assets/img/contact_icons/whatsappicon3.PNG" alt="WhatsApp Icon">
+            </a>
+          </div>
+        </div> -->
+        <button mat-icon-button class="contact-menu-position" [matMenuTriggerFor]="beforeMenu" fxHide.gt-md>
+          <mat-icon>menu</mat-icon>
+        </button>
+        <mat-menu #beforeMenu="matMenu" xPosition="before">
+          <button mat-menu-item>
+            <div class="nav-link" (click)="scrollTo('order')">
+              <h3>{{"Transfer.order" | translate}}</h3>
+            </div>
+          </button>
+          <button mat-menu-item>
+            <div class="nav-link" (click)="scrollTo('faq')">
+              <h3>{{"Transfer.faq" | translate}}</h3>
+            </div>
+          </button>
+          <button mat-menu-item>
+            <div class="nav-link" (click)="scrollTo('reviews')">
+              <h3>{{"Transfer.reviews" | translate}}</h3>
+            </div>
+          </button>
+          <button mat-menu-item>
+            <div class="nav-link" (click)="scrollTo('cooperation')">
+              <h3>{{"Transfer.partnership" | translate}}</h3>
+            </div>
+          </button>
+
+          <div class="mobile-menu-links" style="margin:7px">
+            <a href="https://vk.com/nobi_travel" target="_blank"><img src="../../assets/img/contact_icons/vkicon2.PNG" alt="VK Icon"></a>
+            <a href="https://instagram.com/nobi_transfer?utm_source=qr" target="_blank"><img src="../../assets/img/contact_icons/instaicon2.PNG" alt="Instagram Icon"></a>
+            <a href="https://wa.me/79409103010?text=Мы%20с%20сайта%20nobitour.com%20Хотим%20задать%20вопрос." target="_blank">
+              <img src="../../assets/img/contact_icons/whatsappicon3.PNG" alt="WhatsApp Icon">
+            </a>
+          </div>
+        </mat-menu>
+      
+        <div class="nav-link hide-mobile-style" (click)="scrollTo('order')">
+            <h3>{{"Transfer.order" | translate}}</h3>
+          </div>
+
+          
+          <div class="nav-link hide-mobile-style" (click)="scrollTo('faq')">
+            <h3>{{"Transfer.faq" | translate}}</h3>
+          </div>
+
+        <div class="nav-link hide-mobile-style" (click)="scrollTo('reviews')">
+          <h3>{{"Transfer.reviews" | translate}}</h3>
+        </div>
+
+        <div class="nav-link hide-mobile-style" (click)="scrollTo('cooperation')">
+          <h3>{{"Transfer.partnership" | translate}}</h3>
+        </div>
+
+        <div class="contact-fields">
+        
+
+          <div class="contact-field hide-mobile-style">
+          <a href="https://vk.com/nobi_travel" target="_blank"><img src="../../assets/img/contact_icons/vkicon2.PNG" alt="Phone Icon"></a>
+          </div>
+          <div class="contact-field hide-mobile-style">
+          <a href="https://instagram.com/nobi_transfer?utm_source=qr" target="_blank"><img src="../../assets/img/contact_icons/instaicon2.PNG" alt="Phone Icon"></a>
+          </div>
+          <div class="contact-field hide-mobile-style" style="display: flex; align-items: center; text-align: center;">
+            <a href="https://wa.me/79409103010?text=Мы%20с%20сайта%20nobitour.com%20Хотим%20задать%20вопрос." target="_blank" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+              <img class="hide-mobile-style" src="../../assets/img/contact_icons/whatsappicon3.PNG" alt="WhatsApp Icon" style="width: 40px; height: 40px; margin-right: 10px;">
+              <p class="hide-mobile-style" style="margin: 0;">+7 (940) 910-30-10</p>
+            </a>
+          </div>
+          
+        
+            
+      </div>
+      </div>
+      
+      
+   
+    </section>
+    
+    
+<section class="order">
+  
+  <div class="">
+    <div class="wrapper">
+      <div class="order__content">
+        <h2 style="color:black !important;" class="order__title section-title transfer_title_section">{{ "Transfer.transfer" | translate }}</h2>
+
+        <form class="form_order" [formGroup]="orderForm" (ngSubmit)="onSubmitOrder()">
+          <div class="order__main">
+            <div class="">
+              <div class="order_row field">
+                <div class="location-input" style="margin-right: 35px">
+                  <label class="required fromLocation">{{ "Transfer.fromLocation" | translate }}</label>
+                  <mat-form-field class="input_location">
+                    <mat-select formControlName="from" [placeholder]="'Аэропорт, адрес и тд.'" (selectionChange)="checkPrice()">
+                      <mat-option *ngFor="let location of fromLocations" [value]="location.value">
+                        {{ location.label }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <div *ngIf="orderForm.get('from').value === 'custom_address_from'">
+                    <mat-form-field class="input_location">
+                      <input matInput formControlName="customAddressFrom" placeholder="Другой адрес" />
+                    </mat-form-field>
+                  </div>
+                </div>
+              
+                <div class="location-input">
+                  <div style="margin-top:8px;"></div>
+                  <label class="required toLocation">{{ "Transfer.toLocation" | translate }}</label>
+                  <mat-form-field class="input_location">
+                    <mat-select formControlName="to" [placeholder]="'Аэропорт, адрес и тд.'" (selectionChange)="checkPrice()">
+                      <mat-option *ngFor="let location of toLocations" [value]="location.value">
+                        {{ location.label }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <div *ngIf="orderForm.get('to').value === 'custom_address_to'">
+                    <mat-form-field class="input_location">
+                      <input matInput formControlName="toCustomAddress" placeholder="Другой адрес" />
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+              
+              
+                
+                  
+      
+                
+              <div class="order_row field car-types">
+                <div class="car-types-container">
+                  <div class="carousel"  [class.sliding-left]="isSliding && direction === 'left'" [class.sliding-right]="isSliding && direction === 'right'" >
+                    <div class="arrow-left" (click)="scrollCarousel('left')">
+                      <img width="20px" style="margin-right:20px" src="../../assets/img/car_arrow_left.png" alt="Left Arrow">
+                    </div>
+                    <div class="car-type" style="margin-left:3vh " *ngFor="let carType of visibleCarTypes" (click)="selectCarType(carType)" [class.selected]="carType.name === selectedCarType">
+                      <div class="exclamation-container" (click)="toggleInfoBox($event, carType)">
+                        <div class="exclamation-circle"></div>
+                        <img src="../../assets/img/exclamation_mark.png" alt="Exclamation Mark" class="exclamation-mark" (click)="toggleInfoBox($event, carType)">
+                      </div>
+                
+                      <span style="font-size: 15px; margin-right:3vh;">{{ carType.name | nameTranslator | async }} <span *ngIf="carType.name === 'Comfort'"> +</span></span>
+                
+                      <img [src]="carType.image" alt="{{ carType.name }}" class="car-type-image">
+                
+                      <div class="info-box" *ngIf="showInfo && carType.name === selectedCarType" [style.top.px]="infoBoxTop" [style.left.px]="infoBoxLeft">
+                        <button class="close-button" (click)="closeInfoBox()">X</button>
+                        <img [src]="carType.image" alt="{{ selectedCarType }}" class="car-type-image-info">
+                        <h2 style="text-align: center;">{{ getCarType(carType) }}</h2>
+                        <p style="text-align: center;">{{ getTooltipText(carType) }}</p>
+                        <p style="text-align: center;">{{ getCarBrands(carType) }}</p>
+                      </div>
+                      
+                
+                      <div *ngIf="carType.name == 'Econom'" style="color:#6f1d80">{{"Home.price" | translate}}: {{economPrice}}</div>
+                      <div *ngIf="carType.name == 'Comfort'" style="color:#6f1d80">{{"Home.price" | translate}}: {{comfortPrice}}</div>
+                      <div *ngIf="carType.name == 'Minivan'" style="color:#6f1d80">{{"Home.price" | translate}}: {{minivanPrice}}</div>
+                      <div *ngIf="carType.name == 'Business'" style="color:#6f1d80">{{"Home.price" | translate}}: {{newBusiness_Price}}</div>
+                      <div *ngIf="carType.name == 'Minibus'" style="color:#6f1d80">{{"Home.price" | translate}}: {{minibusPrice}}</div>
+                      <div *ngIf="carType.name == 'Bus'" style="color:#6f1d80">{{"Home.price" | translate}}: {{newBusiness_Price}}</div>
+                    </div>
+                    <div class="arrow-right" (click)="scrollCarousel('right')">
+                      <img width="20px" style="margin-left:20px" src="../../assets/img/car_arrow_right.png" alt="Right Arrow">
+                    </div>                    </div>
+                  </div>
+                  <input type="hidden" formControlName="carType" [value]="selectedCarType">
+                </div>
+                
+                
+
+
+
+                <div class="order_row field">
+                    <div class="" style="max-height: 70px;">
+                        <label  class="required">{{ "Transfer.orderDate" | translate }}</label>
+                        <div class="field__row order_date" >
+                            <input style="margin-top:-10px"  class="order_input" type="date" formControlName="date" [min]="minDate()">
+                        </div>
+                    </div>
+                    
+                
+                    <div class="">
+                        <label  class="required  order_time_label">{{ "Transfer.orderTime" | translate }}</label>
+                        <div class="field__row order_time" >
+                            <input style="margin-top:-10px"  class="order_input" type="time" formControlName="time">
+                        </div>
+                    </div>
+                
+                    <div class=" ">
+                      <label class="required">{{ "Transfer.adultCount" | translate }}(12+)</label>
+                      <div class="field__row peopleCount">
+                          <div class="number-input">
+                              <button type="button" (click)="decrement('adultCount')" style="font-size: 30px; margin-bottom: -30px !important">-</button>
+                              <input style="margin-top: -10px" class="order_input" type="number" formControlName="adultCount" min="0">
+                              <button type="button" (click)="increment('adultCount')" style="font-size: 30px; margin-bottom: -30px !important">+</button>
+                          </div>
+                      </div>
+                  </div>
+                  
+                  <div class="">
+                      <label class="required" >{{ "Transfer.childrenCount" | translate }}(0-11)</label>
+                      <div class="field__row peopleCount">
+                          <div class="number-input">
+                              <button type="button" (click)="decrement('childrenCount')" style="font-size: 30px; margin-bottom: -30px !important">-</button>
+                              <input style="margin-top: -10px" class="order_input" type="number" formControlName="childrenCount" min="0">
+                              <button type="button" (click)="increment('childrenCount')" style="font-size: 30px; margin-bottom: -30px !important">+</button>
+                          </div>
+                      </div>
+                  </div>
+                  
+                </div>
+              
+                
+
+              <div class="order_row field">
+                
+                <div class="order_row field">
+                  <label class="required_v2"></label>
+
+                    <div class="field__row name_field">
+                        <input class="full_name" type="text" placeholder="{{ 'Transfer.fullName' | translate }}" formControlName="fullName">
+                    </div>
+                    <label class="required_v2"></label>
+
+                    <div class="country-selector" style="border: 1px solid #6f1d80; border-radius: 15px; display: flex; align-items: center;">
+                        <img  [src]="'../../assets/img/langs/' + getFlagImage()" alt="Country Flag" style="width: 24px; height: 24px; margin-right: 5px; margin-left:2vh !important">
+                        <select class="country-code" formControlName="countryCode" (change)="onCountryCodeChange($event)">
+                            <option *ngFor="let country of countryCodes" [value]="country.code">{{ country.code }}</option>
+                        </select>
+                        <input class="phone-input" type="tel" formControlName="phoneNumber">
+                    </div>
+                </div>
+            </div>
+            
+
+              
+              <div class=" comment_field">
+                <textarea   placeholder="{{ 'Transfer.yourComment' | translate }}" formControlName="comment"  class="comment_text_area"></textarea>
+              </div>
+            </div>
+            
+    
+            
+          </div>
+          <div >
+            <br>
+            <div class="warning-div" [hidden]="!showWarning" >
+              {{ 'Transfer.invalidForm' | translate }}
+          </div>
+            <div class="order_row field " >
+              <input type="checkbox" style="width: 20px; height: 20px" formControlName="returnTransfer" (change)="toggleReturnTransfer()">
+              <label class="back_transfer" >{{ "Transfer.returnTransfer" | translate }}</label>
+            </div>
+            
+            <div formGroupName="returnTransferDetails" [hidden]="!orderForm.get('returnTransfer').value">
+
+               
+                          <div class="order__main">
+                            <div class="">
+                              <div class="order_row field">
+                                <div class="location-input" style="margin-right:35px">
+                                  <label class="required fromLocation">{{ "Transfer.fromLocation" | translate }}</label>
+                                  <mat-form-field class="input_location">
+                                    <input matInput formControlName="fromReturn" [matAutocomplete]="autoFrom" [value]="getSelectedLocationLabelReturn()"  placeholder="Аэропорт, адрес и тд." style="margin-left:2vh">
+                                    <mat-autocomplete #autoFrom="matAutocomplete" [displayWith]="displayLocationLabel">
+                                      <mat-option *ngFor="let location of fromLocations" [value]="location.value">
+                                        {{ location.label }}
+                                      </mat-option>
+                                    </mat-autocomplete>
+                                  </mat-form-field>
+                                  <div *ngIf="orderForm.get('returnTransferDetails.fromReturn').value === 'custom_address_from'">
+                                    <mat-form-field class="input_location">
+                                      <input matInput formControlName="customAddressFromReturn" placeholder="Другой адрес" />
+                                    </mat-form-field>
+                                  </div>
+                                </div>
+                              
+                                <div class="location-input">
+                                  <div style="margin-top:8px;"></div>
+                                  <label class="required toLocation">{{ "Transfer.toLocation" | translate }}</label>
+                                  <mat-form-field class="input_location">
+                                    <input matInput formControlName="toReturn" [matAutocomplete]="autoTo" [value]="getSelectedLocationLabelToReturn()"  placeholder="Аэропорт, адрес и тд." style="margin-left:2vh">
+                                    <mat-autocomplete #autoTo="matAutocomplete" [displayWith]="displayLocationLabel">
+                                      <mat-option *ngFor="let location of toLocations" [value]="location.value">
+                                        {{ location.label }}
+                                      </mat-option>
+                                    </mat-autocomplete>
+                                  </mat-form-field>
+                                  <div *ngIf="orderForm.get('returnTransferDetails.toReturn').value === 'custom_address_to'">
+                                    <mat-form-field class="input_location">
+                                      <input matInput formControlName="customAddressToReturn" placeholder="Другой адрес" />
+                                    </mat-form-field>
+                                  </div>
+                                </div>
+                              </div>
+        
+                        <div class="order_row field">
+                         
+
+                            <div class="" style="max-height: 70px;">
+                              <label  class="required">{{ "Transfer.orderDate" | translate }}</label>
+                              <div class="field__row order_date" >
+                                  <input style="margin-top:-10px"  class="order_input" type="date" formControlName="dateReturn"  [min]="minDate()">
+                              </div>
+                          </div>
+                            
+                        
+                            <div class="">
+                              <label  class="required  order_time_label">{{ "Transfer.orderTime" | translate }}</label>
+                              <div class="field__row order_time" >
+                                  <input style="margin-top:-10px"  class="order_input" type="time" formControlName="timeReturn">
+                                </div>
+                            </div>
+                        
+                            <div class="">
+                              <label  class="required">{{ "Transfer.adultCount" | translate }}(12+)</label>
+                              <div class="field__row peopleCount" >
+                                  <div class="number-input">
+                                        <button type="button" (click)="decrementReturn('adultCountReturn')" style="font-size: 30px; margin-bottom: -30px !important">-</button>
+                                        <input style="margin-top:-10px"  class="order_input" type="number" formControlName="adultCountReturn" min="0">
+                                        <button type="button" (click)="incrementReturn('adultCountReturn')" style="font-size: 30px; margin-bottom: -30px !important">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="">
+                              <label  class="required"  >{{ "Transfer.childrenCount" | translate }}(0-11)</label>
+                              <div class="field__row peopleCount" >
+                                  <div class="number-input">
+                                        <button type="button" (click)="decrementReturn('childrenCountReturn')" style="font-size: 30px; margin-bottom: -30px !important">-</button>
+                                        <input style="margin-top:-10px" class="order_input" type="number" formControlName="childrenCountReturn" min="0">
+                                        <button type="button" (click)="incrementReturn('childrenCountReturn')" style="font-size: 30px; margin-bottom: -30px !important">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      
+                      <div class="order_row field">                
+                        <div class="order_row field">  
+                          <label class="required_v2"></label>
+ 
+                          <div class="field__row name_field">
+                                
+                                <input class="full_name"  type="text" placeholder="{{ 'Transfer.fullName' | translate }}" formControlName="fullNameReturn">
+                              </div>
+                              <label class="required_v2"></label>
+
+                              <div class="country-selector" style="border: 1px solid #6f1d80; border-radius: 15px; display: flex; align-items: center;">
+                                <img [src]="'../../assets/img/langs/' + getFlagImageReturn()" alt="Country Flag" style="width: 24px; height: 24px; margin-right: 5px; margin-left:2vh !important">
+                                <select class="country-code" formControlName="countryCodeReturn" (change)="onCountryCodeChangeReturn($event)">
+                                    <option *ngFor="let country of countryCodes" [value]="country.code">{{ country.code }}</option>
+                                </select>
+                                <input class="phone-input" type="tel"  formControlName="phoneNumberReturn">
+                              </div>
+                           
+                          </div>
+                      </div>
+                      <div class=" comment_field" >
+                        <textarea placeholder="{{ 'Transfer.yourComment' | translate }}" class="comment_text_area" formControlName="commentReturn"></textarea>
+                      </div>
+                    </div>
+     
+                  </div>
+                  <div class="warning-div" [hidden]="!showWarning" >
+                    {{ 'Transfer.invalidForm' | translate }}
+                </div>
+              </div>
+              
+            </div>
+            
+          <button class="contact__submit_transfer" type="submit" >{{ "Transfer.order" | translate }}</button>
+        </form>
+        <!-- <div class="image-container">
+          <img src="../../assets/img/nobi_transfer_background.jpg" alt="Your Image" class="side-image">
+      </div> -->
+      </div>
+      <!-- Your Component HTML -->
+      <div class="hide-mobile-style"> 
+        <h2 style="color:black !important; margin-left:30% !important" class="order__title section-title">{{ "Transfer.popularExcursions" | translate }}</h2>
+
+        <section class="adventure-grid">
+          <div class="adventure" *ngFor="let adventure of recommendedAdventures">
+            <div class="xs-card__img">
+              <a routerLink="/{{website_language}}/home/adventure/{{adventure.cityName.toLowerCase()}}/{{adventure.iso}}/1">
+                <img class="adventure_image" [src]="adventure.imageUrl" alt="">
+                <p style="text-align: center;" class="main_color">{{adventure.cityName | nameTranslator | async}} - {{adventure.countryName | nameTranslator | async}}</p>
+                
+              </a>
+            </div>
+          </div>
+        </section>
+      </div>
+
+    
+      
+    </div>
+  </div>
+
+</section>
+
+<section class="adventure-grid-mobile hide-large-screen">
+  <h2 style="color:black !important; margin-left:20% !important" class="order__title section-title">{{ "Transfer.popularExcursions" | translate }}</h2>
+
+  <div class="adventure-item-mobile" *ngFor="let adventure of recommendedAdventures">
+    <div class="adventure-card-mobile">
+      <a routerLink="/{{website_language}}/home/adventure/{{adventure.id}}-{{adventure.slug}}">
+        <img class="adventure-image-mobile" [src]="adventure.imageUrl" alt="">
+        <p class="adventure-location-mobile">{{adventure.cityName | nameTranslator | async}} - {{adventure.countryName | nameTranslator | async}}</p>
+
+      </a>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="how-to-order">
+
+    <div class="perks">
+        <div class="perk">
+          <img src="../../assets/img/perk1.png" alt="Park One Icon">
+          <p>{{ "Transfer.perkTwo" | translate }}</p>
+
+        </div>
+        <div class="perk">
+          <img src="../../assets/img/perk2.png" alt="Perk Two Icon">
+          <p>{{ "Transfer.perkThree" | translate }}</p>
+
+        </div>
+        <div class="perk">
+          <img src="../../assets/img/perk3.png" alt="Perk Three Icon">
+          <p>{{ "Transfer.perkOne" | translate }}</p>
+
+        </div>
+      </div>
+  </section>
+
+
+
+
+<!-- <mat-faq [faqList]="list" ></mat-faq> -->
+<hr>
+<section class="faq-container">
+  <h2 style="text-align: center; color: black">{{"Transfer.faq" | translate}}</h2>
+<div *ngFor="let item of faqlist; let i = index">
+  <div class="faq-question" (click)="toggleAnswer(i)">
+    {{ item.question }}
+    <span *ngIf="item.isOpen">-</span><span *ngIf="!item.isOpen">+</span>
+  </div>
+  <div *ngIf="item.isOpen" class="faq-answer">
+    {{ item.answer }}
+  </div>
+</div>
+</section>
+
+<hr>
+<section class="reviews">
+    <h2 class="section-title">{{"Transfer.reviews" | translate }}</h2>
+    <div class="review">
+        </div>
+        <div class="review-content" *ngFor="let review of reviews">
+            <h3 style="color: black">{{review.name}}</h3>
+            <h6>{{review.timestamp}}</h6>
+            <p>{{review.text}}</p>
+    </div>
+    <br>
+    <div class="yandex-reviews-button" (click)="openYandexReviews()">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Yandex_icon.svg/2048px-Yandex_icon.svg.png" alt="Yandex Icon" width="40" height="40">
+      <p>{{"Transfer.yandexReviews" | translate}}</p>
+    </div>
+</section>
+  
+<hr>
+<section class="cooperation-section">
+  <div class="cooperation-content">
+    <h2 class="cooperation-heading">Сотрудничество</h2>
+    <p>
+      Компания «Nobi Transfer» приглашает к взаимовыгодному сотрудничеству: юридические и физические лица, туристические компании, отели, гостиницы, гостевые дома, базы отдыха.
+      Наша команда готова помочь в организации индивидуального трансфера на автомобилях эконом и бизнес класса, а также минивенах и автобусах.
+    </p>
+
+    <h2 class="cooperation-heading">Мы предлагаем:</h2>
+    <ul class="cooperation-ul">
+      <li>Качественные и безопасные услуги по перевозке пассажиров</li>
+      <li>Обеспечение надежного трансфера из Аэропортов/Жд вокзалов в отели и обратно</li>
+      <li>Наши водители встретят ваших гостей в любое время дня и ночи, и доставят к месту назначения с максимальным комфортом</li>
+      <li>Поддерживаем связь 24/7</li>
+      <li>Соблюдаем график и условия, согласованные с партнером</li>
+      <li>Ожидаем туристов в случае задержки рейса</li>
+    </ul>
+
+    <h2 class="cooperation-heading">Правовая информация</h2>
+    <p>
+      Наименование: ИП Багарян Ашот Робертович<br>
+      ОГРН: 323774600416833<br>
+      ИНН: 772098762602<br>
+      Режим работы: с 00:00 до 00:00<br>
+      Номер телефона: +7 (940) 910-30-10<br>
+      E-mail: nobitransfer@mail.ru
+    </p>
+  </div>
+</section>
+
+
+<div class="bottom-right-element">
+  <a href="https://wa.me/79409103010?text=Мы%20с%20сайта%20nobitour.com%20Хотим%20задать%20вопрос." target="_blank" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+    <img class="hide-mobile-style" src="../../assets/img/contact_icons/whatsappicon3.PNG" alt="WhatsApp Icon" style="width: 60px; height: 60px; margin-right: 10px;">
+    <p class="hide-mobile-style" style="margin: 0;">+7 (940) 910-30-10</p>
+  </a>
+</div>
+
+
+<div class="bottom-right-element-mobile hide-large-screen">
+  <a href="https://wa.me/79409103010?text=Мы%20с%20сайта%20nobitour.com%20Хотим%20задать%20вопрос." target="_blank" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+    <img class="" src="../../assets/img/contact_icons/whatsappicon3.PNG" alt="WhatsApp Icon" style="width: 60px; height: 60px; margin-right: 10px;">
+    <p class="" style="margin: 0;"></p>
+  </a>
+</div>
+
+
+<!-- <app-bottom></app-bottom> -->

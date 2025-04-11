@@ -1,0 +1,17 @@
+<app-header></app-header>
+<app-carousel></app-carousel>
+
+<div class="text_style">
+  <h1>{{'AboutUs.information' | translate }}</h1>
+  <p>{{'AboutUs.information-text-p1' | translate }}</p>
+  <p>{{'AboutUs.information-text-p2' | translate }}<a href="https://nobiarts.com" target="_blank"
+      style="text-decoration: underline;">Nobiarts.com </a></p>
+  <p>{{'AboutUs.information-text-p4' | translate }}</p>
+</div>
+
+<div class="basic-container" *ngIf="showLoader">
+  <div class="spinner-position">
+    <mat-spinner [diameter]="100"></mat-spinner>
+  </div>
+</div>
+<app-bottom *ngIf="!showLoader" style="position: relative;bottom: -190px;"></app-bottom>

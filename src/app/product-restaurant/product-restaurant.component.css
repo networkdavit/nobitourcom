@@ -1,0 +1,231 @@
+.material-icons-header{
+    margin-left: 15%;
+    color: rgba(0, 0, 0, 0.507);
+}
+
+.md-48-bottom-header{
+    margin: 0px 30px;
+    font-size: 200%;
+    color: rgba(0, 0, 0, 0.507);
+}
+
+mat-divider{
+    width: 80%;
+}
+
+.mat-card{
+    color:rgba(0, 0, 0, 0.507);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    padding: 9px;
+}
+
+.container-hover{
+    transition: transform .5s;
+    transform: scale(0.98);
+}
+
+.container-hover:hover{
+    cursor: pointer;
+    transition: transform .5s;
+    transform: scale(1.02);
+}
+
+.gallery-icon{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 45%;
+    opacity: 0;
+    transition-duration: 0.5s;
+}
+
+.gallery-icon:hover{
+    filter: none;
+    -webkit-filter: none;
+    opacity: 1;
+    transition-duration: 0.5s;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.700);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0px 0px 100px rgb(255, 255, 255, 0.500);
+}
+
+.img-blur:hover{
+    filter: blur(1px);
+    -webkit-filter: blur(1px);
+}
+
+::ng-deep.mat-menu-panel {
+    max-width: none !important;
+    max-width: 506px;
+}
+
+button {
+    outline:none
+}
+
+.basic-container{
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    z-index: 2;
+    background-color:  rgb(0, 0, 0, 0.3);
+    height: 100%;
+    width: 100%;
+}
+  
+.spinner-position{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+}
+
+/* Spinner is color */
+::ng-deep.mat-progress-spinner circle, .mat-spinner circle {
+    stroke:rgba(0, 74, 97, 0.74)!important;
+}
+
+.num{
+    width: 50px;
+    border: 1px solid rgba(0, 0, 0, 0.107);
+    box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+    border-radius: 7px;
+    text-align: center;
+}
+
+/* Header navigate */
+
+.mat-card:hover{
+    box-shadow: 0px 5px 10px rgb(184, 184, 184); 
+}
+
+::ng-deep.mat-menu-panel.moreMenu {
+    margin-left: -35%!important;
+    min-height: 58px!important;
+}
+  
+.more-btn {
+    font-size: 16px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    line-height: 37px;
+}
+
+/* Responsive */
+@media (max-width:700px){
+    .p-icon{
+      font-size: 0px;
+    }
+    .mat-icons a{
+        width: 25%;
+    }
+    .mat-image, .div-cat-image{
+        display: block!important;
+    }
+    .div-images{
+        flex-direction: row!important;
+        height: auto!important;
+    }
+    .div-icons-header{
+        margin: 0px 0px!important;
+    }
+    .container-hover img{
+        width: 100%!important;
+        height: 250px;
+    }
+    .div-images .container-hover-img img{
+        width: 60px!important;
+        height: 60px!important;
+    }
+    .div-images{
+        overflow-x: scroll!important;
+    }
+    .div-information{
+        display: block!important;
+    }
+    .driver-line{
+        margin-left: 0%!important;
+    }
+    mat-form-field{
+        display: contents!important;
+    }
+    .div-details mat-card{
+        width: 93%!important;
+    }
+}
+@media (max-width:1100px){
+    .div-view div{
+        max-width: 100%!important;
+    }
+    .div-view, .mat-favorite{
+        display: block!important;
+    }
+    .div-details{
+        place-content: center!important;
+        margin-top: 1%;
+    }
+    .product-name{
+        text-align: center!important;
+    }
+}
+.img-header{
+    object-fit: cover;
+  }
+.div-icons-header{
+    margin: 0px 20px;
+}
+.driver-line{
+    margin-left: 55%;
+}
+h6{
+    border-bottom: 1px solid rgba(0,0,0,.12);
+    padding-top: 5px;
+    height: 35px;
+}
+.favorite-check, .favorite-uncheck{
+    height: 35px;
+    border: white;
+    background: transparent;
+    color:rgba(255, 0, 0, 0.363);
+  }
+  button:focus{
+    outline: none;
+  }
+  .favorite-check:hover, .favorite-uncheck:hover{
+    color: red;
+    transition: opacity 1s;
+    opacity: 1;
+  }
+  .favorite-uncheck{
+    color: red;
+  }
+  .img-favorite{
+      float: right;
+  }
+  .share-btn{
+    background: transparent;
+    border: none;
+    color: rgba(0, 0, 0, 0.507);
+  }
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 5px 5px;
+    z-index: 1;
+    cursor: pointer;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }

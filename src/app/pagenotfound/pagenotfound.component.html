@@ -1,0 +1,14 @@
+<app-header></app-header>
+  <div class="basic-container" *ngIf="showLoader">
+      <div class="pagenotfound_spinner">
+        <mat-spinner [diameter]="100"></mat-spinner>
+      </div>
+  </div>
+  <div class="pagenotfound_spinner" *ngIf="reveal">
+      <img src="../../assets/notfoundimage.jpg">
+      <h3>{{'Pagenotfound.sorry' | translate }} <br> {{'Pagenotfound.pageNotFound' | translate }}</h3>
+      <button mat-stroked-button color="warn" class="buttonStyle" routerLink="">{{'Pagenotfound.goToMain' | translate }}</button>
+      <button mat-stroked-button color="warn" class="buttonStyle" (click)="goBack()">{{'Pagenotfound.goBack' | translate }}</button>
+  </div>
+
+<app-bottom *ngIf="!showLoader" style="position: relative;bottom: -700px"></app-bottom>

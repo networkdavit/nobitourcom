@@ -1,0 +1,41 @@
+<app-header></app-header>
+
+<div fxLayoutAlign="center center">
+
+    <div style="z-index: -10;">
+        <video fxFill autoplay onloadedmetadata="this.muted=true" oncanplay="this.play()" loop="loop">
+            <source src="../assets/header-bg-final.mp4" type="video/mp4">
+        </video>
+    </div>
+
+</div>
+
+<div fxLayoutAlign="center center" style="z-index: 1; margin-top: -60px;">
+
+    <mat-card class="example-card rating-wrapper">
+        <mat-card-title>{{'Reviewrating.helpful' | translate }}?</mat-card-title>
+        <div class="emoji-row">
+            <span class="span-emoji"><input type="radio" id="1-2" value="1" class="rating" name="rating"
+                    (click)="chooseEmoji(1)"><img for="1-2" class="img-emoji" src="../../assets/angry.png" alt=""></span>
+            <span class="span-emoji"><input type="radio" id="2-2" value="2" class="rating" name="rating"
+                    (click)="chooseEmoji(2)"><img for="2-2" class="img-emoji" src="../../assets/dissapointed.png"
+                    alt=""></span>
+            <span class="span-emoji"><input type="radio" id="3-2" value="3" class="rating" name="rating"
+                    (click)="chooseEmoji(3)"><img for="3-2" class="img-emoji" src="../../assets/expressionless.png"
+                    alt=""></span>
+            <span class="span-emoji"><input type="radio" id="4-2" value="4" class="rating" name="rating"
+                    (click)="chooseEmoji(4)"><img for="4-2" class="img-emoji" src="../../assets/grinning.png"
+                    alt=""></span>
+            <span class="span-emoji"><input type="radio" id="5-2" value="5" class="rating" name="rating"
+                    (click)="chooseEmoji(5)"><img for="5-2" class="img-emoji" src="../../assets/star-struck.png"
+                    alt=""></span>
+        </div>
+        <textarea *ngIf="showReview" [(ngModel)]='clientReview' (keyup)="onKeyUp($event)" class="review-text" matInput
+            #message maxlength="256" placeholder="{{'Reviewrating.improve' | translate }}?"></textarea>
+        <button *ngIf="showReview" mat-button class="btn-action btn-review" style="width: 100%;" (click)="onReviewRating()"
+            [disabled]="!enableSubmit">
+            <span style="margin-left: 10px;">{{'Reviewrating.sendreview' | translate }}</span></button>
+    </mat-card>
+
+
+</div>

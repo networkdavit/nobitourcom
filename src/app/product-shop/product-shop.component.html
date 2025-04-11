@@ -1,0 +1,47 @@
+<app-header></app-header>
+
+<div class="recommended_container">
+  <div class="spinner-position faq_spinner">
+  </div>
+  <section class="hotels on-main">
+    <div class="wrapper">
+      <h2  class="hotels_title section-title hotels_title-mob">
+        {{"Home.recommendedHotelsIntro" | translate }}</h2>
+      <div class="hotels__main">
+
+        <div class="hotels__content">
+          <div class="hotels__row">
+            <div class="hotels__cards">
+              <div class="hotels__card xs-card card_height" 
+                *ngFor="let product of products;">
+                <div class="xs-card__img">
+                  <a (click)="navigateToItem(product.id)">
+                    <img src={{product.product_image}} alt="" width="340" height="428">
+                    <p style="text-align: center;" class="main_color">{{product.product_name | nameTranslator |async}} -
+                      {{product.countryName | nameTranslator |async}}</p>
+                    <div class="xs-card__main">
+                      <p class="xs-card__name card_text_name" style="height: 50px;">{{product.product_name }}</p>
+                      <p *ngIf="!showConvertedPrice" class="xs-card__cost loader">
+                      </p>
+                      <p *ngIf="showConvertedPrice" class="xs-card__cost" >
+                        <span class="rounded-purple">{{product.product_price * conversion_rate | roundUp}} {{default_curr}}</span>
+                      </p>
+                      <span>
+                        <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+                          <mat-icon *ngIf="star <= product.stars">stars</mat-icon>
+                        </ng-container>
+                      </span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<app-bottom  style="position: relative;bottom: -190px;"
+  class="mobile_bottom"></app-bottom>

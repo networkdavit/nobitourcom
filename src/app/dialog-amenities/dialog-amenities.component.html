@@ -1,0 +1,164 @@
+<h2 mat-dialog-title>{{'Damenities.amenities' | translate }}</h2>
+<span>
+    <mat-divider style="width: 80%;margin-top: -18px;"></mat-divider>
+</span>
+
+<mat-dialog-content>
+
+    <div fxLayout="column">
+        <div fxLayout="row" fxLayoutAlign="space-between start" style="margin: 10px;width: 669px;">
+            <div style="width: 203px;">
+                <h6>{{'Damenities.general' | translate }}</h6>
+                <span fxLayout="row" *ngIf="amenities.airConditioning">
+                    <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">ac_unit</mat-icon>
+                    <p style="font-size: 14px;">{{'Damenities.airconditioning' | translate }}</p>
+                </span>
+                <span fxLayout="row" *ngIf="amenities.heating">
+                    <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">wb_sunny</mat-icon>
+                    <p style="font-size: 14px;">{{'Damenities.heating' | translate }}</p>
+                </span>
+                <span fxLayout="row" *ngIf="amenities.freeWifi">
+                    <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">wifi</mat-icon>
+                    <p style="font-size: 14px;">{{'Damenities.wifi' | translate }}</p>
+                </span>
+                <span fxLayout="row" *ngIf="amenities.freeParking">
+                    <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">local_parking
+                    </mat-icon>
+                    <p style="font-size: 14px;">{{'Damenities.parking' | translate }}</p>
+                </span>
+                <span fxLayout="row" *ngIf="amenities.carChargingStation">
+                    <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">ev_station</mat-icon>
+                    <p style="font-size: 14px;">{{'Damenities.electcar' | translate }}</p>
+                </span>
+            </div>
+            <div style="width: 203px;">
+                <h6>{{'Damenities.cooking' | translate }}</h6>
+                <span fxLayout="row" *ngIf="amenities.kitchen">
+                    <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">kitchen</mat-icon>
+                    <p style="font-size: 14px;">{{'Damenities.kitchen' | translate }}</p>
+                </span>
+                <span fxLayout="row" *ngIf="amenities.kitchenette">
+                    <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">kitchen</mat-icon>
+                    <p style="font-size: 14px;">{{'Damenities.kitchenette' | translate }}</p>
+                </span>
+                <span fxLayout="row" *ngIf="amenities.laundry">
+                    <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">local_laundry_service
+                    </mat-icon>
+                    <p style="font-size: 14px;">{{'Damenities.laundry' | translate }}</p>
+                </span>
+                <span fxLayout="row" *ngIf="amenities.dryer">
+                    <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">local_laundry_service
+                    </mat-icon>
+                    <p style="font-size: 14px;">{{'Damenities.dryer' | translate }}</p>
+                </span>
+            </div>
+
+            <div style="width: 203px;">
+                <h6>{{'Damenities.entertainment' | translate }}</h6>
+                <span fxLayout="row" *ngIf="amenities.tv">
+                    <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">tv</mat-icon>
+                    <p style="font-size: 14px;">{{'Damenities.tv' | translate }}</p>
+                </span>
+                <span fxLayout="row" *ngIf="amenities.pool">
+                    <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">pool</mat-icon>
+                    <p style="font-size: 14px;">{{'Damenities.swimmingpool' | translate }}</p>
+                </span>
+                <span fxLayout="row" *ngIf="amenities.hotTub">
+                    <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">hot_tub</mat-icon>
+                    <p style="font-size: 14px;">{{'Damenities.hottub' | translate }}</p>
+                </span>
+                <span fxLayout="row" *ngIf="amenities.miniBar">
+                    <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">local_bar</mat-icon>
+                    <p style="font-size: 14px;">{{'Damenities.minibar' | translate }}</p>
+                </span>
+                <span fxLayout="row" *ngIf="amenities.sauna">
+                    <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">spa</mat-icon>
+                    <p style="font-size: 14px;">{{'Damenities.sauna' | translate }}</p>
+                </span>
+                <span fxLayout="row" *ngIf="amenities.fitness">
+                    <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">fitness_center
+                    </mat-icon>
+                    <p style="font-size: 14px;">{{'Damenities.fitness' | translate }}</p>
+                </span>
+            </div>
+
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="space-between start" style="margin: 10px;width: 669px;">
+
+            <div style="width: 203px;">
+                <h6>{{'Damenities.exterior' | translate }}</h6>
+                <span fxLayout="row" *ngIf="amenities.balcony">
+                    <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">looks</mat-icon>
+                    <p style="font-size: 14px;">{{'Damenities.balcony' | translate }}</p>
+                </span>
+                <span fxLayout="row" *ngIf="amenities.gardenView">
+                    <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">nature</mat-icon>
+                    <p style="font-size: 14px;">{{'Damenities.garden' | translate }}</p>
+                </span>
+                <span fxLayout="row" *ngIf="amenities.terrace">
+                    <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">location_city
+                    </mat-icon>
+                    <p style="font-size: 14px;">{{'Damenities.terrace' | translate }}</p>
+                </span>
+                <span fxLayout="row" *ngIf="amenities.view">
+                    <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">nature_people
+                    </mat-icon>
+                    <p style="font-size: 14px;">{{'Damenities.view' | translate }}</p>
+                </span>
+            </div>
+            <div style="width: 203px;">
+                <h6>{{'Damenities.safety' | translate }}</h6>
+                <span fxLayout="row" *ngIf="amenities.smokeDetector">
+                    <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">
+                        notification_important
+                    </mat-icon>
+                    <p style="font-size: 14px;">{{'Damenities.smoke' | translate }}</p>
+                </span>
+                <span fxLayout="row" *ngIf="amenities.carbonMonoxideDetector">
+                    <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">
+                        notification_important
+                    </mat-icon>
+                    <p style="font-size: 14px;">{{'Damenities.carbon' | translate }}</p>
+                </span>
+                <span fxLayout="row" *ngIf="amenities.firstAidKit">
+                    <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">local_pharmacy
+                    </mat-icon>
+                    <p style="font-size: 14px;">{{'Damenities.aidkit' | translate }}</p>
+                </span>
+                <span fxLayout="row" *ngIf="amenities.lockBedroomDoor">
+                    <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">lock
+                    </mat-icon>
+                    <p style="font-size: 14px;">{{'Damenities.lock' | translate }}</p>
+                </span>
+                <span fxLayout="row" *ngIf="amenities.fireExtinguisher">
+                    <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">fire_extinguisher
+                    </mat-icon>
+                    <p style="font-size: 14px;">{{'Damenities.fire' | translate }}</p>
+                </span>
+
+            </div>
+            <div style="width: 203px;">
+                <h6>{{'Damenities.others' | translate }}</h6>
+                <span fxLayout="row" *ngIf="amenities.breakfast">
+                    <mat-icon style="color: rgb(156, 155, 155);margin-right: 5px;font-size: 20px;">free_breakfast
+                    </mat-icon>
+                    <p style="font-size: 14px;">{{'Damenities.breakfast' | translate }}</p>
+                </span>
+            </div>
+
+        </div>
+
+        <!-- <div fxLayout="column" style="margin: 20px;">
+
+
+        </div> -->
+
+    </div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button class="mat-raised-button" fxFlex="end" style="margin: 0px 10px;text-decoration: none;"
+        (click)="close()">{{'Damenities.close' | translate }}</button>
+</mat-dialog-actions>

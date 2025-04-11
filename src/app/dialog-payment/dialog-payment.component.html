@@ -1,0 +1,29 @@
+<div fxLayout="row" fxLayoutAlign="space-between center">
+    <h2 mat-dialog-title>Payment</h2>
+    <button mat-button (click)="close()" style="width: 0px;margin-top: -30px;margin-right: -12px;">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+<span>
+    <mat-divider style="width: 80%;margin-top: -18px;"></mat-divider>
+</span>
+
+<mat-dialog-content>
+
+    <!-- STRIPE -->
+    <form novalidate (ngSubmit)="createToken()" [formGroup]="stripeTest">
+        <mat-form-field appearance="outline" class="mat-field">
+            <mat-label>First, Last Name</mat-label>
+            <input matInput formControlName="name" placeholder="Jane Doe" type="text">
+        </mat-form-field>
+        <ngx-stripe-card [options]="cardOptions" [elementsOptions]="elementsOptions"></ngx-stripe-card>
+        <button mat-stroked-button class="pay-btn" type="submit" color="primary">Pay</button>
+    </form>
+
+    <div class="basic-container" *ngIf="showLoader">
+        <div class="spinner-position">
+            <mat-spinner [diameter]="100"></mat-spinner>
+        </div>
+    </div>
+
+</mat-dialog-content>

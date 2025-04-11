@@ -1,0 +1,9 @@
+.hide-lang {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+    height: 100px;
+    z-index: 20;
+    background-color: rgb(253, 252, 249);
+}

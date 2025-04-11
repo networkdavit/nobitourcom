@@ -1,0 +1,188 @@
+<!-- <app-header></app-header>
+
+<div style="margin-top: 80px;">
+    <div fxLayout="column">
+        <div class="div-header-img">
+            <img class="img-header" src="../../assets/profileheader.jpg" alt="" style="width: 100%;height: 180px; object-fit: cover;">
+        </div>
+        <input style="visibility: hidden;" placeholder="{{'Cprofile.uploadfile' | translate }}" name="file" type="file" id="selectedFile"
+            accept="image/gif, image/jpg, image/jpeg, image/png" (change)="onFileSelected($event)">
+        <div class="container-hover">
+            <img *ngIf="imgReadyLoader" class="img-blur" src="../../assets/defaulPic.png" width="150" height="150" alt="profile" style="object-fit: cover;">
+            <div *ngIf="imgReadyLoader" class="spinner-icon">
+                <mat-spinner [diameter]="50"></mat-spinner>
+            </div>
+            <img *ngIf="!imgReadyLoader" class="img-blur" src="{{clientLogo}}" width="150" height="150" alt="profile" style="object-fit: cover;">
+            <img *ngIf="!imgReadyLoader" class="gallery-icon" src="https://img.icons8.com/nolan/64/upload.png" height="50" width="50" style="object-fit: cover;"
+                alt="image" onclick="document.getElementById('selectedFile').click();">
+        </div>
+
+        <div fxLayout="row" style="margin-top: 20px;">
+
+            <div fxFlex="1"></div>
+
+
+
+            <mat-card class="mat-menu-profile mat-field-input" fxFlex="14" style="width: 200px;">
+                <div class="mat-menu-btn" fxLayout="column" fxLayoutAlign="start start" fxLayout.lt-md="column" fxLayoutGap.lt-md="20px">
+                    <button mat-button fxLayoutAlign="start start" class="btn-action" style="width: 100%;" (click)="clientNavTo('client-profile')"><i
+                            class="material-icons">person</i> <span class="profile-menu" style="margin-left: 10px;">{{'Cprofile.profile' | translate }}</span></button>
+                    <button mat-button fxLayoutAlign="start start" class="btn-action" style="width: 100%;" (click)="clientNavTo('client-saves')"><i
+                            class="material-icons">hotel</i> <span class="profile-menu" style="margin-left: 10px;">{{'Cprofile.saves' | translate }}</span></button>
+                    <button mat-button fxLayoutAlign="start start" class="btn-action" style="width: 100%;" (click)="clientNavTo('client-reviews')"><i
+                            class="material-icons">restaurant</i> <span class="profile-menu"
+                            style="margin-left: 10px;">{{'Cprofile.reviews' | translate }}</span></button>
+                    <button mat-button fxLayoutAlign="start start" class="btn-action" style="width: 100%;" (click)="clientNavTo('client-lifetime')"><i
+                            class="material-icons">directions_car</i> <span class="profile-menu"
+                            style="margin-left: 10px;">{{'Cprofile.lifetime' | translate }}</span></button>
+                    <button mat-button fxLayoutAlign="start start" class="btn-action" style="width: 100%;" (click)="logout()"><i
+                            class="material-icons">remove_circle_outline</i> <span class="profile-menu"
+                            style="margin-left: 10px;">{{'Cprofile.logout' | translate }}</span></button>
+                </div>
+            </mat-card>
+
+            <div fxFlex="1"></div>
+
+            <mat-card *ngIf="profile" fxFlex="83">
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                    <p>{{'Cprofile.settings' | translate }}</p>
+                    <div style="margin-top: -15px;">
+                        <button *ngIf="enableEdit" (click)="enableField(false)" mat-button style="margin: 0px 5px;">
+                            <p style="margin: 0px 20px;">{{'Cprofile.edit' | translate }}</p>
+                        </button>
+                        <button *ngIf="!enableEdit" (click)="enableField(true)" mat-button style="margin: 0px 5px;">
+                            <p style="margin: 0px 20px;">{{'Cprofile.cancel' | translate }}</p>
+                        </button>
+                    </div>
+                </div>
+
+                <hr style="margin-top: 0px;">
+
+                <div style="margin-top: 30px;">
+                    <form [formGroup]="editFormGroup" #resetEditForm="ngForm">
+                        <div fxLayout="row" fxLayoutAlign="space-around center" class="mat-field-input" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="clientFirstName" formControlName="clientFirstName" placeholder="{{'Pregistration.firstName' | translate }}"
+                                    name="clientFirstName" type="text" tabindex="1">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="clientLastName" formControlName="clientLastName" placeholder="{{'Pregistration.lastName' | translate }}"
+                                    name="clientLastName" type="text" tabindex="1">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="clientEmail" formControlName="email" placeholder="{{'Cprofile.email' | translate }}"
+                                    name="email" type="email" tabindex="2">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="clientPhone" formControlName="phone"
+                                    placeholder="{{'Cprofile.phone' | translate }}" name="officePhone" type="text" prefix="+" mask="000-000-000-0000-00"
+                                    tabindex="3">
+                            </mat-form-field>
+                        </div>
+                    </form>
+                </div>
+
+                <div style="margin: 20px;">
+                    <button mat-button *ngIf="!enableEdit" (click)="onEditProfileInfo(null);" type="submit"
+                        tabindex="4">{{'Cprofile.save' | translate }}</button>
+                </div>
+
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                    <p>{{'Cprofile.reset' | translate }}</p>
+                </div>
+
+                <hr style="margin-top: 0px;">
+
+                <div>
+                    <form [formGroup]="resetPasswordFormGroup" #resetPartnerRegFormSecond="ngForm">
+                        <div fxLayout="row" fxLayoutAlign="space-around center">
+                            <div class="mat-field-input" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+                                <mat-form-field>
+                                    <input matInput formControlName="oldPassword" placeholder="{{'Cprofile.oldpass' | translate }}" name="old"
+                                        type="text" tabindex="5">
+                                </mat-form-field>
+                                <mat-form-field>
+                                    <input matInput formControlName="newPassword" placeholder="{{'Cprofile.newpass' | translate }}" name="new"
+                                        type="text" tabindex="6">
+                                </mat-form-field>
+                                <mat-form-field style="visibility: hidden;">
+                                    <input matInput>
+                                </mat-form-field>
+                            </div>
+                    </div>
+
+                    </form>
+
+                </div>
+
+                <div style="margin: 20px;">
+                    <button mat-button *ngIf="!enableEdit" (click)="onResetPassword();" type="submit"
+                        tabindex="7">{{'Cprofile.save' | translate }}</button>
+                </div>
+            </mat-card>
+
+            <mat-card *ngIf="saves" fxFlex="83">
+                <div fxLayout="row" fxLayoutAlign="start start" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+                    <p>{{'Cprofile.saves' | translate }}</p>
+                </div>
+                <hr style="margin-top: 0px;">
+                <div style="margin-top: 30px;">
+                    <mat-card *ngFor="let favorite of favorites" style="margin: 10px 0px; padding: 10px;">
+                        <div class="div-favorite" fxLayout="row" fxLayoutAlign="space-around start">
+                            <div fxFlex="20" fxLayoutAlign="center center">
+                                <img src="{{favorite.image}}" alt="img" style="height: 80%;width: 80%; object-fit: cover;">
+                            </div>
+                            <span fxFlex="5"></span>
+                            <div fxFlex="70" fxLayout="column" fxLayoutAlign="space-around start">
+                                <div fxLayout="row">
+                                    <p>{{favorite.productName}}</p>
+                                </div>
+                                <div style="width:100%;font-size: 12px;">
+                                    <p style="text-align: justify;">
+                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                                        Ipsum has been
+                                        the industry's standard...
+                                    </p>
+                                </div>
+                                <div>
+                                    <button mat-stroked-button style="padding: 0px 10px;">{{'Cprofile.reservation' | translate }}</button>
+                                    <button mat-icon-button (click)="onDeleteFavorite(favorite.id, favorite.productId, favorite.productType);">
+                                        <mat-icon class="save">favorite</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card>
+                </div>
+            </mat-card>
+
+            <mat-card *ngIf="reviews" fxFlex="83">
+                <div fxLayout="row" fxLayoutAlign="start start" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+                    <p>{{'Cprofile.reviews' | translate }}</p>
+                </div>
+                <hr style="margin-top: 0px;">
+                <div style="margin-top: 30px;">
+                </div>
+            </mat-card>
+
+            <mat-card *ngIf="lifetime" fxFlex="83">
+                <div fxLayout="row" fxLayoutAlign="start start" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+                    <p>{{'Cprofile.lifetime' | translate }}</p>
+                </div>
+                <hr style="margin-top: 0px;">
+                <div style="margin-top: 30px;">
+                </div>
+            </mat-card>
+
+            <div fxFlex="1"></div>
+        </div>
+    </div>
+</div>
+
+<div class="basic-container" *ngIf="showLoader">
+    <div class="spinner-position">
+        <mat-spinner [diameter]="100"></mat-spinner>
+    </div>
+</div>
+
+<app-bottom></app-bottom> -->

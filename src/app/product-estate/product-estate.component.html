@@ -1,0 +1,681 @@
+<app-header
+  (showLoader)="onShowLoader($event)"
+
+></app-header>
+<app-carousel></app-carousel>
+<section class="path" *ngIf="!showLoader">
+  <div class="wrapper">
+    <div class="path__row">
+      <a routerLink="/" class="path__link">{{ "Home.home" | translate }}</a>
+      <span class="path__sep">/</span>
+      <a
+        routerLink="/{{ filtered_website_language }}/home/{{ productType }}/{{
+          cityName
+        }}/{{ countryISO }}/1"
+        class="path__link"
+        >{{ "Home.hotel" | translate }}: {{ cityNameTranslated }},
+        {{ countryName }}</a
+      >
+      <span class="path__sep">/</span>
+      <p class="path__crnt">{{ nameForTour }}</p>
+    </div>
+  </div>
+</section>
+
+<section class="ex" *ngIf="!showLoader">
+  <div class="wrapper">
+    <div class="ex__head">
+      <h2 class="ex__title section-title">{{ estate.name }}</h2>
+      <p class="ex__subtitle">{{ estate.address }}</p>
+      <a href="#" class="ex__widget ex__widget-mob">
+        <img
+          src="../../assets/img/icons/widget.png"
+          alt=""
+          width="58"
+          height="58"
+        />
+        <span>{{ "Home.iframeRussia5.2" | translate }}</span>
+      </a>
+      <a (click)="backToSearchResults()" class="ex__back">
+        <img
+          src="../../assets/img/icons/back-arrow.png"
+          alt=""
+          width="16"
+          height="16"
+        />
+        {{ "Product.backToSearchResults" | translate }}
+      </a>
+    </div>
+    <div class="ex__content">
+      <div class="ex__right">
+        <div class="main-image">
+          <img
+            src="{{ currentImage }}"
+            (click)="selectHotelImage(0)"
+            alt="hotel"
+          />
+        </div>
+      </div>
+
+      <div class="carousel-container ex__images">
+        <div class="thumbnail-images-container">
+          <div class="thumbnail-images">
+            <div
+              *ngFor="let image of imageURLs; index as i"
+              (click)="selectHotelImage(i)"
+            >
+              <div class="image-container">
+                <img *ngIf="i < 6" src="{{ image }}" alt="hotel" />
+                <div class="overlay">
+                  <a class="icon">
+                    <i class="fa fa-search-plus"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p *ngIf="!showConvertedPrice" class="xs-card__cost loader"></p>
+
+    <p *ngIf="showConvertedPrice" class="ex__cost">
+      <a
+        *ngIf="isAgoda"
+        style="margin-top: 70px !important"
+        (click)="redirectTo()"
+        class="ex__btn"
+        >{{ "Product.booking" | translate }}</a
+      >
+
+      {{ "Home.price" | translate }}:
+      <span
+        >{{ estate.price * conversion_rate | roundUp }} {{ default_curr }}</span
+      >
+    </p>
+
+    <div *ngIf="!showMTData && !isAgoda" class="ex__row">
+      <h2 class="ex-title">{{ "Product.rooms" | translate }}</h2>
+      <ul class="row">
+        <li class="col-md-4 mb-5" *ngFor="let room of rooms_HL">
+          <h2>{{ room.agencyName }}</h2>
+          <p>{{ room.desc }}</p>
+          <p>{{ room.price }} {{ default_curr }}</p>
+          <a
+            target="_blank"
+            class="ex__btn_v2"
+            href="{{ room.fullBookingURL }}"
+            >{{ "Product.booking" | translate }}</a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <div *ngIf="showMTData" class="ex__row">
+      <h2 class="ex-title">{{ "Product.description" | translate }}</h2>
+      <div class="desc_content">{{ description }}</div>
+    </div>
+
+    <div *ngIf="!showMTData && description != '0'" class="ex__row">
+      <h2 class="ex-title">{{ "Product.description" | translate }}</h2>
+      <div class="desc_content">{{ description }}</div>
+    </div>
+
+    <div *ngIf="showMTData" class="ex__row">
+      <h2 class="ex-title">{{ "Product.selectRoom" | translate }}</h2>
+
+      <form [formGroup]="availabilityForm" (ngSubmit)="onCheckAvailability()" class="form-wrap">
+        <div class="availability">
+          <mat-form-field>
+            <input matInput [matDatepicker]="fromDate" [min]="minDateFrom" [placeholder]="'Home.datefrom' | translate"
+              formControlName="fromDate" (click)="fromDate.open()" />
+            <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+            <mat-datepicker #fromDate (closed)="changeCheckOutMin()"></mat-datepicker>
+          </mat-form-field>
+      
+          <mat-form-field>
+            <input matInput [matDatepicker]="toDate" [min]="minDate" [placeholder]="'Home.dateto' | translate"
+              formControlName="toDate" (click)="toDate.open()" />
+            <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+            <mat-datepicker #toDate (closed)="changeCheckOutMin()"></mat-datepicker>
+          </mat-form-field>
+      
+          <mat-form-field>
+            <mat-label>{{ "Product.adults" | translate }}</mat-label>
+            <mat-select formControlName="adults">
+              <mat-option (click)="changeChildrenAdult()" *ngFor="let num of adultsRange" [value]="num">
+                {{ num }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+      
+          <mat-form-field>
+            <mat-label>{{ "Product.children" | translate }}</mat-label>
+            <mat-select formControlName="children">
+              <mat-option (click)="changeChildrenAdult()" *ngFor="let num of childrenRange" [value]="num">
+                {{ num }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      
+        <div class="aval-btn-wrap">
+          <button *ngIf="!isLoading" mat-raised-button class="check_ava_btn" type="submit">
+            {{ "Product.checkAvailability" | translate }}
+          </button>
+          <div *ngIf="isLoading" class="loader">
+            <div class="loader-spinner"></div>
+          </div>
+        </div>
+      </form>
+      <!-- <div class="room-grid-container">
+                <div class="room-container" *ngFor="let room of data_for_rooms.rooms; index as i">
+                    <img [src]="room.image" style="width:100%; height: 200px; object-fit: fill;" [alt]="room.title" (click)="openGalleryDialog(room, room.title)">
+
+                  <p>{{ room.title }}</p>
+                  <h5>{{"Home.price" | translate}}: {{ room.price * conversion_rate |roundUp }} {{default_curr}}</h5>
+                  <div class="terms-container">
+                    <div class="term" *ngFor="let term of room.terms[33].child">
+                      <mat-icon class="check-icon">check_circle</mat-icon>
+                      <p>{{ term.title  | nameTranslator |async}}</p>
+                    </div>
+                  </div>
+                  
+                  <form *ngIf="!isLoading">
+                    <span class="material-icons">bed</span><span><p>{{room.beds_html.slice(1) }} {{"Paddhotel.beds" | translate}}</p></span>
+                    
+                    <label for="guests">{{"Paddhotel.rooms" |translate}}:</label>
+                    <select name="guests" id="guests" [(ngModel)]="room.number_selected"
+                            (ngModelChange)="updateTotalPrice(room)">
+                      <option *ngFor="let i of range(room.number)" [value]="i">{{ i }}</option>
+                    </select>
+                  </form>
+              
+                  <p>{{"Product.totalPrice" | translate}}:
+                    <ng-container *ngIf="room.roomTotalPrice * conversion_rate | roundUp as totalPrice; else zeroPrice">
+                      {{ totalPrice }} {{default_curr}}
+                    </ng-container>
+                    <ng-template #zeroPrice>
+                      0 {{default_curr}}
+                    </ng-template>
+                  </p>
+                </div>
+              </div>
+              
+
+            <p>{{"Product.serviceFee" | translate}} {{service_fee * conversion_rate |roundUp}} {{default_curr}}</p>
+
+            <h3 class="total-price">{{"Product.totalPriceForAllRooms" | translate}}: {{totalPrice * conversion_rate | roundUp}} {{default_curr}}</h3>
+            -->
+      <form
+        id="book-button"
+        action="{{ action }}"
+        method="POST"
+        style="display: none"
+        target="_blank"
+      >
+        <input type="hidden" name="service_id" value="{{ hotel_id }}" />
+        <input type="hidden" name="service_type" value="hotel" />
+        <input type="hidden" name="start_date" value="{{ from_add_to_cart }}" />
+        <input type="hidden" name="end_date" value="{{ to_add_to_cart }}" />
+        <ng-container *ngFor="let extra of extra_price; let i = index">
+          <input
+            type="hidden"
+            name="extra_price[{{ i }}][name]"
+            value="{{ extra.name }}"
+          />
+          <input type="hidden" name="extra_price[{{ i }}][name_bg]" value="" />
+          <input type="hidden" name="extra_price[{{ i }}][name_ru]" value="" />
+          <input type="hidden" name="extra_price[{{ i }}][name_el]" value="" />
+          <input type="hidden" name="extra_price[{{ i }}][name_hy]" value="" />
+          <input
+            *ngIf="extra.selected"
+            type="hidden"
+            name="extra_price[{{ i }}][price]"
+            value="{{ extra.price * conversion_rate | roundUp }}"
+          />
+          <input
+            type="hidden"
+            name="extra_price[{{ i }}][type]"
+            value="one_time"
+          />
+          <input type="hidden" name="extra_price[{{ i }}][number]" value="0" />
+          <input type="hidden" name="extra_price[{{ i }}][enable]" value="0" />
+          <input
+            type="hidden"
+            name="extra_price[{{ i }}][price_html]"
+            value="{{ default_curr }}{{
+              extra.price * conversion_rate | roundUp
+            }}"
+          />
+          <input
+            type="hidden"
+            name="extra_price[{{ i }}][price_type]"
+            value=""
+          />
+        </ng-container>
+
+        <input type="hidden" name="adults" value="{{ adults_add_to_cart }}" />
+        <input
+          type="hidden"
+          name="children"
+          value="{{ children_add_to_cart }}"
+        />
+
+        <ng-container *ngFor="let room of data_for_rooms.rooms; let i = index">
+          <input
+            type="hidden"
+            name="rooms[{{ i }}][id]"
+            value="{{ room.id }}"
+          />
+          <input
+            type="hidden"
+            name="rooms[{{ i }}][number_selected]"
+            value="{{ room.number_selected }}"
+          />
+        </ng-container>
+        <input type="hidden" name="_token" value="{{ token }}" />
+      </form>
+      <!-- <p>{{"Product.serviceFee" | translate}} {{service_fee * conversion_rate |roundUp}} {{default_curr}}</p> -->
+
+      <!-- <h3 class="total-price">{{"Product.totalPriceForAllRooms" | translate}}: {{totalPrice * conversion_rate | roundUp}} {{default_curr}}</h3> -->
+      <!-- <a *ngIf="is_verified && isRoomSelected" class="ex__btn" onclick="event.preventDefault(); document.getElementById('book-button').submit();">
+                {{'Product.booking' | translate }}
+            </a>
+            <a *ngIf="!is_verified && isRoomSelected" class="ex__btn" (click)="saveCurrentUrl()" href="https://admin.nobitour.com/{{filtered_website_language}}/login">
+            {{'Product.booking' | translate }}
+            </a>
+            <a *ngIf="is_verified && !isRoomSelected" class="ex__btn disabled">
+            {{'Product.booking' | translate }}
+            </a>
+            <a *ngIf="!is_verified && !isRoomSelected" class="ex__btn disabled">
+            {{'Product.booking' | translate }}
+            </a> -->
+      <div class="sticky-button" >
+        <h3 class="total-price ex__btn disabled" style="height: 50px; font-size: 15px; ">
+          <p>{{ "Home.price" | translate }}:
+        {{ totalPrice * conversion_rate | roundUp }} {{ default_curr }}</p>
+        </h3>
+
+        <a
+          *ngIf="is_verified && isRoomSelected"
+          class="ex__btn"
+          onclick="event.preventDefault(); document.getElementById('book-button').submit();"
+        >
+          <p>{{ "Product.booking" | translate }}</p>
+        </a>
+        <a
+          *ngIf="!is_verified && isRoomSelected"
+          class="ex__btn"
+          (click)="saveCurrentUrl()"
+          href="https://admin.nobitour.com/{{
+            filtered_website_language
+          }}/login"
+        >
+          <p>{{ "Product.booking" | translate }}</p>
+        </a>
+        <a *ngIf="is_verified && !isRoomSelected" class="ex__btn disabled">
+          <p>{{ "Product.booking" | translate }}</p>
+        </a>
+        <a *ngIf="!is_verified && !isRoomSelected" class="ex__btn disabled">
+          <p>{{ "Product.booking" | translate }}</p>
+        </a>
+      </div>
+      <br />
+      <div class="table-wrap">
+      <table class="room-table">
+        <tr style="background-color: rgba(111, 29, 128, 0.92); color: white">
+          <th>{{ "Cprofile.name" | translate }}</th>
+          <th>{{ "Paddhotel.terms" | translate }}</th>
+          <th>{{'Paddhotel.beds' | translate }}</th>
+          <th>{{ "Home.price" | translate }}</th>
+          <th>{{ "Paddhotel.options" | translate }}</th>
+        </tr>
+        <tr *ngFor="let room of data_for_rooms.rooms; index as i">
+          <td style="width: 300px">
+            <img
+              [src]="room.image"
+              style="width: 320px; height: 300px; object-fit: scale-down;"
+              [alt]="room.title"
+              (click)="openGalleryDialog(room, room.title)"
+            />
+            <p
+              class=""
+              style="max-width: 300px; color: rgba(111, 29, 128, 0.92)"
+            >
+              {{ room.title }}
+            </p>
+          </td>
+
+          <td>
+
+          </td>
+          <td class="bed-info">
+            <div class="bed-item">
+              <span class="material-icons">bed</span>
+              <p>{{ room.beds_html.slice(1) }} {{"Paddhotel.beds" | translate}}</p>
+            </div>
+            <div class="bed-item">
+              <span class="material-icons">person</span>
+              <p>
+                {{ room.adults_html.slice(1) }}
+                {{ "Product.adult" | translate }}
+              </p>
+            </div>
+            <div class="bed-item">
+              <span class="material-icons">child_care</span>
+              <p>
+                {{ room.children_html.slice(1) }}
+                {{ "Product.children" | translate }}
+              </p>
+            </div>
+          </td>
+          <td class="price-info">
+            <h5>
+              {{ "Home.price" | translate }}:
+              {{ room.price * conversion_rate | roundUp }} {{ default_curr }}
+            </h5>
+          </td>
+          <td class="dropdown-info">
+            <form *ngIf="!isLoading">
+              <label for="guests">{{ "Paddhotel.rooms" | translate }}:</label>
+              <select
+                name="guests"
+                id="guests"
+                [(ngModel)]="room.number_selected"
+                (ngModelChange)="updateTotalPrice(room)"
+              >
+                <option *ngFor="let i of range(room.number)" [value]="i">
+                  {{ i }}
+                </option>
+              </select>
+            </form>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="room-list-wrap">
+        <div class="room-list-container" *ngFor="let room of data_for_rooms.rooms; index as i">
+          <div class="room-list-item" style="background-color: rgba(111, 29, 128, 0.92); color: white">
+
+          </div>
+          <div class="room-list-item">
+            <div class="room-details">
+              <img [src]="room.image" alt="{{ room.title }}" (click)="openGalleryDialog(room, room.title)" />
+              <p class="room-title">{{ room.title }}</p>
+            </div>
+            <div class="bed-info">
+              <div class="bed-item">
+               
+                <p>{{ room.beds_html.slice(1) }} {{"Paddhotel.beds" | translate}}</p>
+              </div>
+              <div class="bed-item">
+                
+                <p>{{ room.adults_html.slice(1) }} {{ "Product.adult" | translate }}</p>
+              </div>
+              <div class="bed-item">
+                
+                <p>{{ room.children_html.slice(1) }} {{ "Product.children" | translate }}</p>
+              </div>
+            </div>
+            <div class="price-info">
+              <h5>{{ "Home.price" | translate }}: {{ room.price * conversion_rate | roundUp }} {{ default_curr }}</h5>
+            </div>
+            <div class="dropdown-info">
+              <form *ngIf="!isLoading">
+                <label for="guests">{{ "Paddhotel.rooms" | translate }}:</label>
+                <select name="guests" id="guests" [(ngModel)]="room.number_selected" (ngModelChange)="updateTotalPrice(room)">
+                  <option *ngFor="let i of range(room.number)" [value]="i">{{ i }}</option>
+                </select>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- <div class="book-button-container">
+                <form id="book-button" action={{action}} method="POST"
+                style="display: none;" target="_blank">
+                <input type="hidden" name="service_id" value={{hotel_id}}>
+                <input type="hidden" name="service_type" value="hotel">
+                <input type="hidden" name="start_date" value={{from_add_to_cart}}>
+                <input type="hidden" name="end_date" value={{to_add_to_cart}}>
+                <ng-container *ngFor="let extra of extra_price; let i = index">
+                    <input type="hidden" name="extra_price[{{i}}][name]" value={{extra.name}}>
+                    <input type="hidden" name="extra_price[{{i}}][name_bg]" value="">
+                    <input type="hidden" name="extra_price[{{i}}][name_ru]" value="">
+                    <input type="hidden" name="extra_price[{{i}}][name_el]" value="">
+                    <input type="hidden" name="extra_price[{{i}}][name_hy]" value="">
+                    <input *ngIf="extra.selected" type="hidden" name="extra_price[{{i}}][price]" value="{{extra.price * conversion_rate | roundUp}}">
+                    <input type="hidden" name="extra_price[{{i}}][type]" value="one_time">
+                    <input type="hidden" name="extra_price[{{i}}][number]" value="0">
+                    <input type="hidden" name="extra_price[{{i}}][enable]" value="0">
+                    <input type="hidden" name="extra_price[{{i}}][price_html]" value="{{default_curr}}{{extra.price * conversion_rate | roundUp}}">
+                    <input type="hidden" name="extra_price[{{i}}][price_type]" value="">
+                </ng-container>
+               
+                <input type="hidden" name="adults" value={{adults_add_to_cart}}>
+                <input type="hidden" name="children" value={{children_add_to_cart}}>
+               
+                <ng-container *ngFor="let room of data_for_rooms.rooms; let i = index">
+                    <input type="hidden" name="rooms[{{i}}][id]" value={{room.id}}>
+                    <input type="hidden" name="rooms[{{i}}][number_selected]" value="{{room.number_selected}}">
+                </ng-container>
+                <input type="hidden" name="_token" value={{token}}>
+                </form>
+                
+                </div>
+                
+                <p>{{"Product.serviceFee" | translate}} {{service_fee * conversion_rate |roundUp}} {{default_curr}}</p>
+                
+                <h3 class="total-price">{{"Product.totalPriceForAllRooms" | translate}}: {{totalPrice * conversion_rate | roundUp}} {{default_curr}}</h3>
+                <a *ngIf="is_verified && isRoomSelected" class="ex__btn" onclick="event.preventDefault(); document.getElementById('book-button').submit();">
+                    {{'Product.booking' | translate }}
+                </a>
+                <a *ngIf="!is_verified && isRoomSelected" class="ex__btn" (click)="saveCurrentUrl()" href="https://admin.nobitour.com/{{filtered_website_language}}/login">
+                {{'Product.booking' | translate }}
+                </a>
+                <a *ngIf="is_verified && !isRoomSelected" class="ex__btn disabled">
+                {{'Product.booking' | translate }}
+                </a>
+                <a *ngIf="!is_verified && !isRoomSelected" class="ex__btn disabled">
+                {{'Product.booking' | translate }}
+                </a> -->
+      <!-- <form id="book-button" action={{action}} method="POST"
+                style="display: none;" target="_blank">
+                <input type="hidden" name="service_id" value={{hotel_id}}>
+                <input type="hidden" name="service_type" value="hotel">
+                <input type="hidden" name="start_date" value={{from_add_to_cart}}>
+                <input type="hidden" name="end_date" value={{to_add_to_cart}}>
+                <ng-container *ngFor="let extra of extra_price; let i = index">
+                    <input type="hidden" name="extra_price[{{i}}][name]" value={{extra.name}}>
+                    <input type="hidden" name="extra_price[{{i}}][name_bg]" value="">
+                    <input type="hidden" name="extra_price[{{i}}][name_ru]" value="">
+                    <input type="hidden" name="extra_price[{{i}}][name_el]" value="">
+                    <input type="hidden" name="extra_price[{{i}}][name_hy]" value="">
+                    <input *ngIf="extra.selected" type="hidden" name="extra_price[{{i}}][price]" value="{{extra.price * conversion_rate | roundUp}}">
+                    <input type="hidden" name="extra_price[{{i}}][type]" value="one_time">
+                    <input type="hidden" name="extra_price[{{i}}][number]" value="0">
+                    <input type="hidden" name="extra_price[{{i}}][enable]" value="0">
+                    <input type="hidden" name="extra_price[{{i}}][price_html]" value="{{default_curr}}{{extra.price * conversion_rate | roundUp}}">
+                    <input type="hidden" name="extra_price[{{i}}][price_type]" value="">
+                </ng-container>
+               
+                <input type="hidden" name="adults" value={{adults_add_to_cart}}>
+                <input type="hidden" name="children" value={{children_add_to_cart}}>
+               
+                <ng-container *ngFor="let room of data_for_rooms.rooms; let i = index">
+                    <input type="hidden" name="rooms[{{i}}][id]" value={{room.id}}>
+                    <input type="hidden" name="rooms[{{i}}][number_selected]" value="{{room.number_selected}}">
+                </ng-container>
+                <input type="hidden" name="_token" value={{token}}>
+            </form> -->
+
+      <!-- <a *ngIf="is_verified && isRoomSelected" class="ex__btn"
+                onclick="event.preventDefault(); document.getElementById('book-button').submit();">
+                {{'Product.booking' | translate }}</a>
+            <a *ngIf="!is_verified && isRoomSelected" class="ex__btn" (click)="saveCurrentUrl()"
+                href="https://admin.nobitour.com/{{filtered_website_language}}/login"> {{'Product.booking' | translate
+                }}</a> -->
+    </div>
+
+    <div *ngIf="!isHotelLook && !isAgoda && showPropertyTypes" class="ex__row">
+      <h2 class="ex-title">{{ "Product.propertyType" | translate }}</h2>
+      <ul class="row">
+        <li class="col-md-4 mb-5" *ngFor="let property_type of property_types">
+          <mat-icon class="check_icon">check_circle</mat-icon
+          >{{ property_type.translation.name }}
+        </li>
+      </ul>
+    </div>
+
+    <div *ngIf="!isAgoda && showAmenities" class="ex__row">
+      <h2 class="ex-title">{{ "Product.ammenities" | translate }}</h2>
+      <ul class="row">
+        <li class="col-md-4 mb-5" *ngFor="let amenity of amenities">
+          <mat-icon class="check_icon">check_circle</mat-icon
+          >{{ amenity.translation.name }}
+        </li>
+      </ul>
+    </div>
+
+    <div *ngIf="!isAgoda && showAmenities" class="ex__row">
+      <h2 class="ex-title">{{ "Product.hotel_service" | translate }}</h2>
+      <ul class="row">
+        <li class="col-md-4 mb-5" *ngFor="let hotel_service of services">
+          <mat-icon class="check_icon">check_circle</mat-icon
+          >{{ hotel_service.translation.name }}
+        </li>
+      </ul>
+    </div>
+
+    <div *ngIf="policies_available_MT" class="ex__row">
+      <h2 class="ex-title">{{ "Product.hotel_rules" | translate }}</h2>
+      <div class="key">{{ "Product.checkin" | translate }}</div>
+      <div class="value">
+        <strong>{{ checkInTimePolicy }}</strong>
+      </div>
+      <div class="key">{{ "Product.checkout" | translate }}</div>
+      <div class="value">
+        <strong>{{ checkOutTimePolicy }}</strong>
+      </div>
+      <div class="description" *ngFor="let policy of policies">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="key">{{ policy.title }}</div>
+          </div>
+          <div class="col-lg-8">
+            <div class="value">
+              <strong>{{ policy.content }}</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="policies_available_HL" class="ex__row">
+      <h2 class="ex-title">{{ "Product.hotel_rules" | translate }}</h2>
+      <div class="key">{{ "Product.checkin" | translate }}</div>
+      <div class="value">
+        <strong>{{ estate.arrival }}</strong>
+      </div>
+      <div class="key">{{ "Product.checkout" | translate }}</div>
+      <div class="value">
+        <strong>{{ estate.leaving }}</strong>
+      </div>
+    </div>
+
+    <div *ngIf="videoAvailable" class="ex__row">
+      <iframe
+        width="100%"
+        height="500px"
+        [src]="videoEmbedUrl"
+        frameborder="0"
+        allow="autoplay; encrypted-media"
+        allowfullscreen
+      ></iframe>
+    </div>
+    <div class="ex__row">
+      <h2 class="ex-title">{{ "Product.location" | translate }}</h2>
+      <span>
+        <p>
+          <mat-divider style="width: 80%"></mat-divider>
+        </p>
+        <div fxLayoutAlign="center center" style="width: 100%">
+          <iframe
+            width="100%"
+            height="450"
+            frameborder="0"
+            style="border: 0"
+            loading="lazy"
+            allowfullscreen
+            aria-hidden="false"
+            [src]="
+              'https://maps.google.com/maps?q=' +
+                googleCoordinates +
+                '&hl=es;z=14&amp;output=embed' | safe
+            "
+          ></iframe>
+        </div>
+      </span>
+    </div>
+  </div>
+</section>
+
+<section class="descr" *ngIf="!showLoader">
+  <div class="wrapper">
+    <h2 class="ex-title"></h2>
+  </div>
+</section>
+
+<section class="city" *ngIf="!showLoader">
+  <h2 class="city__title section-title">
+    {{ "Home.recommendedHotelsIntro" | translate }}
+  </h2>
+  <div class="wrapper">
+    <div class="city__row">
+      <div class="city__items">
+        <div
+          class="city__item sm-card recommend"
+          *ngFor="let city of recommended_cities_mt_hl"
+        >
+          <a style="display: none" routerLink="{{ city.url }}"></a>
+          <a
+            class="recommend"
+            (click)="
+              navigateToRecommendedCity(
+                city.city.toLowerCase(),
+                city.country_iso.toLowerCase()
+              )
+            "
+            class="sm-card__name"
+          >
+            <div class="sm-card__img">
+              <img src="{{ city.photo1 }}" alt="" width="549" height="366" />
+            </div>
+            <div class="sm-card__row">
+              {{ city.city }}
+              <img
+                src="{{
+                  '../../assets/img/countries/48/' +
+                    city.country_iso.toUpperCase() +
+                    '.png'
+                }}"
+                alt=""
+                width="60"
+                height="33"
+              />
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="basic-container" *ngIf="showLoader">
+  <div class="spinner-position">
+    <mat-spinner [diameter]="100"></mat-spinner>
+  </div>
+</div>
+
+<app-bottom *ngIf="!showLoader"></app-bottom>

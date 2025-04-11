@@ -1,0 +1,23 @@
+<div class="popup-container">
+  <h2  class="center-text mat-dialog-title">
+    {{ 'Home.noData' | translate }} 
+  </h2>
+
+  <div style="text-align: center;">
+    <img src="../../assets/notfound.png" width="50" height="20">
+  </div>
+
+  <a *ngIf="product_type === 'adventure'" (click)="openWhitelabel('adventureRu')" class="ex__widget" style="cursor: pointer;">
+    <img src="../../assets/img/h-slider/icon-1.png" alt="" width="58" height="58">
+    <span>{{ 'Home.checkMore' | translate }} </span>
+  </a>
+  
+  <a *ngIf="product_type === 'estate'" (click)="openWhitelabel('estateRu')" class="ex__widget" style="cursor: pointer;">
+    <img src="../../assets/img/h-slider/icon-2.png" alt="" width="58" height="58">
+    <span>{{ 'Home.checkMore' | translate }} </span>
+  </a>
+
+  <button class="button-citynotfound mat-stroked-button" color="warn" type="submit" (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>

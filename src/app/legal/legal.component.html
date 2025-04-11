@@ -1,0 +1,25 @@
+<app-header></app-header>
+<app-carousel></app-carousel>
+<div>
+  <div *ngIf="showLoader" class="spinner-position faq_spinner">
+    <mat-spinner [diameter]="100"></mat-spinner>
+  </div>
+  <div *ngIf="reveal">
+    <div class="text_style">
+      <h2 class="text__title section-title">{{"Policy.h1" | translate}}</h2>
+      <p class="text__txt">{{"Policy.p1" | translate}}</p>
+      <p class="text__txt">{{"Policy.p2" | translate}}</p>
+      <h2 class="text__title section-title">{{"Policy.h3one" | translate}}</h2>
+      <p class="text__txt">{{"Policy.p3" | translate}}</p>
+      <h2 class="text__title section-title">{{"Policy.h3two" | translate}}</h2>
+      <p class="text__txt">{{"Policy.p4" | translate}}</p>
+      <h2 class="text__title section-title">{{"Policy.h3three" | translate}}</h2>
+      <p class="text__txt">{{"Policy.p5" | translate}}</p>
+      <h2 class="text__title section-title">{{"Policy.h3four" | translate}}</h2>
+      <p class="text__txt">{{"Policy.p6" | translate}}</p>
+      <h2 class="text__title section-title">{{"Policy.h3five" | translate}}</h2>
+      <p class="text__txt">{{"Policy.p7" | translate}}</p>
+    </div>
+  </div>
+</div>
+<app-bottom *ngIf="!showLoader" style="position: relative;bottom: -190px;"></app-bottom>
