@@ -45,9 +45,9 @@ export class AppComponent implements OnInit {
     translate.addLangs(['en', 'bg', 'el', 'hy', 'ru']);
     translate.setDefaultLang('en');
     this.full_url_for_filtering = this.location.path();
-    this.website_language = 'ru'
-    localStorage.setItem('currency', 'rub');
-    localStorage.setItem('lang', 'ru')
+    // this.website_language = 'ru'
+    // localStorage.setItem('currency', 'rub');
+    // localStorage.setItem('lang', 'ru')
     let langLocal = localStorage.getItem('lang');
     if (this.location.path() == '' && langLocal == null) {
 
@@ -369,7 +369,7 @@ export class AppComponent implements OnInit {
     localStorage.setItem('domain', currentDomain);
   
     if (currentDomain === 'nobitour.ru') {
-      localStorage.setItem('lang', 'ru');
+      // localStorage.setItem('lang', 'ru');
       localStorage.setItem('currency', 'rub');
 
       const currentPath = window.location.pathname;

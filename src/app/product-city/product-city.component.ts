@@ -56,11 +56,11 @@ export class ProductCityComponent implements OnInit {
     const currentDomain = window.location.hostname;
   
   
-    if (currentDomain === 'nobitour.ru') {
-      this.default_curr = '₽';
-      localStorage.setItem('lang', 'ru');
-      localStorage.setItem('currency', 'rub');
-    }
+    // if (currentDomain === 'nobitour.ru') {
+    //   this.default_curr = '₽';
+    //   localStorage.setItem('lang', 'ru');
+    //   localStorage.setItem('currency', 'rub');
+    // }
   }
 
   stripDecimals(price: number): string {
@@ -137,18 +137,29 @@ export class ProductCityComponent implements OnInit {
   get_currency_logic(conn, data) {
     console.log(1234567)
     if (localStorage.getItem('currency')) {
-      const country = localStorage.getItem('ipUserCountry');
-      if (country == "Armenia") {
-        localStorage.setItem('currency', "amd")
+      // const country = localStorage.getItem('ipUserCountry');
+      // if (country == "Armenia") {
+      //   localStorage.setItem('currency', "amd")
+      //   this.default_curr = '֏';
+      // }
+      // else if (country == "Russia") {
+      //   localStorage.setItem('currency', "rub")
+
+      //   this.default_curr = '₽';
+      // }
+      // else if (country == "Bulgaria") {
+      //   localStorage.setItem('currency', "bgn")
+      //   this.default_curr = 'лв';
+      // }
+      const currency_current = localStorage.getItem('currency');
+      if (currency_current == "amd") {
         this.default_curr = '֏';
       }
-      else if (country == "Russia") {
-        localStorage.setItem('currency', "rub")
+      else if (currency_current == "rub") {
 
         this.default_curr = '₽';
       }
-      else if (country == "Bulgaria") {
-        localStorage.setItem('currency', "bgn")
+      else if (currency_current == "bgn") {
         this.default_curr = 'лв';
       }
       const curr = localStorage.getItem('currency');

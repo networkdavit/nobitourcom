@@ -576,6 +576,64 @@ export class CarouselComponent implements OnInit {
     }
   }
 
+  // searchForCityFull() {
+  //   if (!this.searchCityValue) {
+  //     this.searchCityValue = localStorage.getItem('city') || '';
+  //     this.newFilterIso = localStorage.getItem('iso') || '';
+  //   }
+
+  //   const today = new Date();
+  //   const defaultFrom = new Date(today);
+  //   const defaultTo = new Date(defaultFrom);
+  //   defaultFrom.setDate(defaultFrom.getDate() + 14);
+  //   defaultTo.setDate(defaultTo.getDate() + 15);
+
+  
+  //   const translateIfNeeded = (translatedSearchValue: string) => {
+  //     if (this.countryNames.includes(translatedSearchValue)) {
+  //       this.router.navigate([this.website_language + '/home/country/' + translatedSearchValue.toLowerCase()]);
+  //     } else {
+  //       // if (this.newFilterIso === 'RU' && productTypeForNav !== 'adventure') {
+  //       //   this.router.navigate([this.website_language + '/home/estateRu/']);
+  //       // } else {
+  //       //   this.router.navigate([this.website_language + '/home/' + productTypeForNav + '/' + translatedSearchValue.toLowerCase() + '/' + this.newFilterIso.toLowerCase() + "/1"]);
+  //       // }
+  //       this.router.navigate([this.website_language + '/destination/' + this.searchCityValue.toLowerCase() + '/' +  this.newFilterIso.toLowerCase()]);
+  //       localStorage.setItem('city', this.searchCityValue.toLowerCase())
+  //       localStorage.setItem('iso', this.newFilterIso.toLowerCase())
+
+  //     }
+  //     if (this.location.path().length > 16 && this.location.path().length < 52) {
+  //       setTimeout(() => {
+  //         location.reload();
+  //       }, 200);
+  //     }
+  //   };
+  
+  //   const isRussianOrArmenianOrGreekOrBulgarian = (str: string) => {
+  //     return /[а-яА-ЯЁёա-ֆԱ-Ֆά-ωϊϋό-ώА-ЯЁёΑ-Ωά-ώ]/.test(str);
+  //   };
+  
+  //   if (isRussianOrArmenianOrGreekOrBulgarian(this.searchValue)) {
+  //     const apiKey = 'AIzaSyB-k4ohUZYjnHODXOZ3k6h1WMkv46eiX3Q';
+  //     const apiUrl = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`;
+  
+  //     this.http.post(apiUrl, {
+  //       q: this.searchValue,
+  //       target: 'en'
+  //     })
+  //     .subscribe(response => {
+  //       const translatedSearchValue = response['data']['translations'][0]['translatedText'];
+  //       translateIfNeeded(translatedSearchValue);
+  //     }, err => {
+  //       console.error('Error while translating:', err);
+  //       translateIfNeeded(this.searchValue);
+  //     });
+  //   } else {
+  //     translateIfNeeded(this.searchValue);
+  //   }
+  // }
+
   searchForCityFull() {
     if (!this.searchCityValue) {
       this.searchCityValue = localStorage.getItem('city') || '';
@@ -587,6 +645,7 @@ export class CarouselComponent implements OnInit {
     const defaultTo = new Date(defaultFrom);
     defaultFrom.setDate(defaultFrom.getDate() + 14);
     defaultTo.setDate(defaultTo.getDate() + 15);
+    this.website_language = localStorage.getItem('lang');
 
   
     const translateIfNeeded = (translatedSearchValue: string) => {
@@ -633,7 +692,7 @@ export class CarouselComponent implements OnInit {
       translateIfNeeded(this.searchValue);
     }
   }
-
+  
   validateAdultCount() {
     if (this.adultCount < 1) {
       this.adultCount = 1;

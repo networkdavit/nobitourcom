@@ -442,11 +442,12 @@
                     <p class="mt_card_text_name">{{adventure.kind}}</p>
                     <p class="mt_xs-card__cost ">
                       <img loading="lazy" src="../../assets/img/icons/marked.webp" alt="" width="32" height="32">
-                      <span class="rounded-purple">{{stripDecimals(adventure.originalPrice) * conversion_rate | roundUp  }} {{default_curr}}</span>
+                      <span class="rounded-purple">{{adventure.originalPrice * conversion_rate | roundUp  }} {{default_curr}}</span>
 
                     <div>
                       <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
-                        <mat-icon *ngIf="star <= adventure.starRating">stars</mat-icon>
+                        <span *ngIf="star <= adventure.starRating" style="color: gold; font-size: 20px;">★</span>
+
                       </ng-container>
                     </div>
 
@@ -491,7 +492,8 @@
                         <br>
                       <div>
                         <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
-                          <mat-icon *ngIf="star <= estate.star_rating">stars</mat-icon>
+                          <span *ngIf="star <= estate.star_rating" style="color: gold; font-size: 20px;">★</span>
+
                         </ng-container>
                       </div>
 

@@ -1,4 +1,4 @@
-.fit_carousel_image {
+/* .fit_carousel_image {
   object-fit: cover !important;
   height: 300px;
   width: auto;
@@ -222,7 +222,6 @@ input {
 
 .rounded-input {
   position: relative;
-  /* border-radius: 94px; */
   background-color: #ffffff;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -264,7 +263,6 @@ input {
   color: rgba(111, 29, 128, 0.92);
 }
 
-/* styles.css */
 .container {
   display: flex;
   justify-content: center;
@@ -414,4 +412,86 @@ input {
   }
   
   
+} */
+
+.carousel-search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;  /* Make the container full width */
+  padding-top: 30%; /* 16:9 aspect ratio, adjust based on your image's aspect ratio */
+  position: relative;
+  background-image: url('/assets/img/12-09.png'); /* Full image */
+  background-size: cover;
+  background-position: center;
+  transition: background-image 1s ease; /* Smooth transition */
+}
+
+
+.carousel-search-bar {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.9); /* Slightly transparent white background */
+  padding: 10px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: absolute; /* Positioned over the background */
+  top: 83%; /* Vertically center */
+  transform: translateY(-50%);
+  width: 90%; /* Adjust width as needed */
+  max-width: 800px; /* Optional: Limit maximum width */
+}
+
+.carousel-search-input {
+  flex: 1;
+  padding: 10px 14px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  outline: none;
+  border-color: #872a99; /* Green accent color */
+}
+
+.carousel-search-button {
+  margin-left: 10px;
+  background-color: #872a99; /* Green accent color */
+  color: white;
+  font-size: 16px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.carousel-search-button:hover {
+  background-color: #451050; 
+}
+
+.mat-autocomplete-panel {
+  max-width: 100%; /* Matches container width */
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.city-name {
+  font-weight: bold;
+  color: #333;
+}
+
+.country-name {
+  color: #666;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .carousel-search-bar {
+    width: 95%; /* Adjust width for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-search-bar {
+    width: 98%; /* Further adjust for very small screens */
+  }
 }

@@ -83,7 +83,10 @@ export class HeaderComponent implements OnInit {
     this.website_language = this.splitUrl[1];
     this.homeUrl = this.splitUrl[2];
     this.currentLang.lang = this.website_language;
-    this.setInitialCurrency()
+    if(localStorage.getItem('currency') == null){
+          this.setInitialCurrency()
+
+    }
   }
 
   @HostListener('window:popstate', ['$event'])
@@ -189,6 +192,7 @@ export class HeaderComponent implements OnInit {
     else{
       this.isNotRussia = true;
     }
+    // console.log(this.curren)
   }
 
   setInitialCurrency(): void {

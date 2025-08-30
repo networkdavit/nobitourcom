@@ -237,7 +237,7 @@ export class HomeComponent implements OnInit {
   rateHawkEstates: any;
   originalEstateData: any[] = [];
   allAdventures: any[] = [];
-
+  autofilled_city: any;
   pageSize = 24;
   startIndex = 0;
   endIndex = this.pageSize;
@@ -352,8 +352,11 @@ export class HomeComponent implements OnInit {
     let cityLocal = localStorage.getItem('city');
     let fromDateSession = localStorage.getItem('fromDate');
     let toDateSession = localStorage.getItem('toDate');
+    this.autofilled_city = localStorage.getItem('city');
 
-    const today = new Date();
+    if (this.autofilled_city && this.autofilled_city.trim() !== '') {
+      this.citySearch = this.autofilled_city;
+    }    const today = new Date();
     const defaultFrom = new Date(today);
     const defaultTo = new Date(defaultFrom);
     defaultFrom.setDate(defaultFrom.getDate() + 14);
@@ -1355,6 +1358,9 @@ async getRateHawkHotels(fromDate, toDate, lang, city, iso, numOfAdult, numOfChil
 
         data.data.sort((a, b) => b.star_rating - a.star_rating);
       this.rateHawkEstates = data.data;
+      this.countryName = this.rateHawkEstates[0].country
+      this.cityName = this.rateHawkEstates[0].city;
+
 
       // console.log(data.data, 'rate hawk');
       // Sort the data by star_rating in descending order
@@ -1961,57 +1967,193 @@ redirect_to_zenhotels(id, mid, city, country, region_id){
   }
 
   
+  // searchForCity() {
+  //   // console.log('1231232')
+    
+  //   // console.log("City: ", this.citySearch);
+  //   // console.log("From Date: ", this.fromDateSearch);
+  //   // console.log("To Date: ", this.toDateSearch);
+  //   // console.log("Adult Count: ", this.adultCount);
+  //   // console.log("Children Count: ", this.childrenCount);
+  //   // console.log("iso", this.isoSearch)
+    
+  //   localStorage.setItem("fromDate", this.datePipe.transform(this.fromDateSearch, 'yyyy-MM-dd'));
+  //   localStorage.setItem("toDate", this.datePipe.transform(this.toDateSearch, 'yyyy-MM-dd'));
+  //   localStorage.setItem("numberOfChildren", this.childrenCount.toString());
+  //   localStorage.setItem("numberOfAdult", this.adultCount.toString());
+    
+  //   this.adultCountForInput = localStorage.getItem('numberOfAdult')
+  //   this.childreCountForInput = localStorage.getItem('numberOfChildren')
+
+  //   if (this.isEstate) {
+  //     this.getMyTravelEstates(this.fromDateSearch, this.toDateSearch, this.filtered_website_language, this.citySearch.toLowerCase(), this.isoSearch.toLowerCase(), this.adultCountForInput, this.childreCountForInput);
+  //     this.router.navigate([this.filtered_website_language + '/home/estate/' + this.citySearch.toLowerCase() + '/' + this.isoSearch.toLowerCase() + "/1"])
+  //     this.showLoader = true;
+  //   }
+  //   else if (this.isAdventure) {
+  //     // console.log(this.isAdventure)
+  //     this.isAdventureTranslated = true;
+  //     this.isEstateTranslated = false;
+  //     this.isMtEstate = false;
+  //     this.isMyAdventure = true;
+  //     this.getMyTravelAdventures(this.filtered_website_language, this.citySearch.toLowerCase(), this.isoSearch.toLowerCase(), this.adultCountSearch, this.childrenCountSearch)
+  //     this.getTripsterAdventures(this.tripster_city_id, this.fromDate, this.toDate, 3);
+  //     // if (this.allAdventures.length < 1) {
+  //     //   this.getTripsterCityId(localStorage.getItem('city'));
+  //     //   setTimeout(() => {
+  //     //     this.getMyTravelAdventures(this.filtered_website_language, this.citySearch.toLowerCase(), this.isoSearch.toLowerCase(), this.adultCountSearch, this.childrenCountSearch)
+  //     //     this.getTripsterAdventures(this.tripster_city_id, this.fromDate, this.toDate, 3);
+  //     //   }, 2000);
+  //     // }
+  //     this.router.navigate([this.filtered_website_language + '/home/adventure/' + this.citySearch.toLowerCase() + '/' + this.isoSearch.toLowerCase() + "/1"])
+  //     this.showLoader = true;
+  //   }
+  //   setTimeout(() => {
+  //     this.showLoader = false;
+  //   }, 5000);
+
+  //   // this.clearCityField();
+  //   // setTimeout(() => {
+  //   //   this.showLoader = false;
+  //   // }, 2000);
+  // }
+
+  // searchForCity() {
+
+    
+  //   localStorage.setItem("fromDate", this.datePipe.transform(this.fromDateSearch, 'yyyy-MM-dd'));
+  //   localStorage.setItem("toDate", this.datePipe.transform(this.toDateSearch, 'yyyy-MM-dd'));
+  //   localStorage.setItem("numberOfChildren", this.childrenCount.toString());
+  //   localStorage.setItem("numberOfAdult", this.adultCount.toString());
+    
+  //   this.adultCountForInput = localStorage.getItem('numberOfAdult')
+  //   this.childreCountForInput = localStorage.getItem('numberOfChildren')
+  //   console.log(this.isoSearch,' test')
+  //   console.log( localStorage.getItem('iso'))
+  //   console.log(this.citySearch)
+  //   if(this.isoSearch == undefined || this.isoSearch == null){
+  //     this.isoSearch = localStorage.getItem('iso')
+  //   }
+  //   localStorage.setItem('city', this.citySearch)
+
+  //   if (this.isEstate) {
+  //     this.getMyTravelEstates(this.fromDateSearch, this.toDateSearch, this.filtered_website_language, this.citySearch.toLowerCase(), this.isoSearch.toLowerCase(), this.adultCountForInput, this.childreCountForInput);
+  //     this.router.navigate([this.filtered_website_language + '/home/estate/' + this.citySearch.toLowerCase() + '/' + this.isoSearch.toLowerCase() + "/1"])
+  //     this.showLoader = true;
+  //   }
+  //   else if (this.isAdventure) {
+  //     // console.log(this.isAdventure)
+  //     this.isAdventureTranslated = true;
+  //     this.isEstateTranslated = false;
+  //     this.isMtEstate = false;
+  //     this.isMyAdventure = true;
+  //     this.getMyTravelAdventures(this.filtered_website_language, this.citySearch.toLowerCase(), this.isoSearch.toLowerCase(), this.adultCountSearch, this.childrenCountSearch)
+  //     this.getTripsterAdventures(this.tripster_city_id, this.fromDate, this.toDate, 3);
+  //     // if (this.allAdventures.length < 1) {
+  //     //   this.getTripsterCityId(localStorage.getItem('city'));
+  //     //   setTimeout(() => {
+  //     //     this.getMyTravelAdventures(this.filtered_website_language, this.citySearch.toLowerCase(), this.isoSearch.toLowerCase(), this.adultCountSearch, this.childrenCountSearch)
+  //     //     this.getTripsterAdventures(this.tripster_city_id, this.fromDate, this.toDate, 3);
+  //     //   }, 2000);
+  //     // }
+  //     this.router.navigate([this.filtered_website_language + '/home/adventure/' + this.citySearch.toLowerCase() + '/' + this.isoSearch.toLowerCase() + "/1"])
+  //     this.showLoader = true;
+  //   }
+  //   setTimeout(() => {
+  //     this.showLoader = false;
+  //   }, 5000);
+
+  //   // this.clearCityField();
+  //   // setTimeout(() => {
+  //   //   this.showLoader = false;
+  //   // }, 2000);
+  // }
+
   searchForCity() {
-    // console.log('1231232')
-    
-    // console.log("City: ", this.citySearch);
-    // console.log("From Date: ", this.fromDateSearch);
-    // console.log("To Date: ", this.toDateSearch);
-    // console.log("Adult Count: ", this.adultCount);
-    // console.log("Children Count: ", this.childrenCount);
-    // console.log("iso", this.isoSearch)
-    
     localStorage.setItem("fromDate", this.datePipe.transform(this.fromDateSearch, 'yyyy-MM-dd'));
     localStorage.setItem("toDate", this.datePipe.transform(this.toDateSearch, 'yyyy-MM-dd'));
     localStorage.setItem("numberOfChildren", this.childrenCount.toString());
     localStorage.setItem("numberOfAdult", this.adultCount.toString());
-    
-    this.adultCountForInput = localStorage.getItem('numberOfAdult')
-    this.childreCountForInput = localStorage.getItem('numberOfChildren')
-
-    if (this.isEstate) {
-      this.getMyTravelEstates(this.fromDateSearch, this.toDateSearch, this.filtered_website_language, this.citySearch.toLowerCase(), this.isoSearch.toLowerCase(), this.adultCountForInput, this.childreCountForInput);
-      this.router.navigate([this.filtered_website_language + '/home/estate/' + this.citySearch.toLowerCase() + '/' + this.isoSearch.toLowerCase() + "/1"])
-      this.showLoader = true;
+  
+    this.adultCountForInput = localStorage.getItem('numberOfAdult');
+    this.childreCountForInput = localStorage.getItem('numberOfChildren');
+  
+    if (this.isoSearch == undefined || this.isoSearch == null) {
+      this.isoSearch = localStorage.getItem('iso');
     }
-    else if (this.isAdventure) {
-      // console.log(this.isAdventure)
+  
+    localStorage.setItem('city', this.citySearch);
+  
+    if (this.isEstate) {
+      // 🌍 Call RateHawk API here
+      this.getRateHawkHotels(
+        this.fromDateSearch,
+        this.toDateSearch,
+        this.filtered_website_language,
+        this.citySearch.toLowerCase(),
+        this.isoSearch.toLowerCase(),
+        this.adultCountForInput,
+        this.childreCountForInput
+      );
+  
+      // this.getMyTravelEstates(
+      //   this.fromDateSearch,
+      //   this.toDateSearch,
+      //   this.filtered_website_language,
+      //   this.citySearch.toLowerCase(),
+      //   this.isoSearch.toLowerCase(),
+      //   this.adultCountForInput,
+      //   this.childreCountForInput
+      // );
+      this.cityName = this.citySearch;
+      console.log(this.adultCountForInput)
+      this.router.navigate([
+        this.filtered_website_language +
+          '/home/estate/' +
+          this.citySearch.toLowerCase() +
+          '/' +
+          this.isoSearch.toLowerCase() +
+          '/1',
+      ]);
+      this.showLoader = true;
+    } else if (this.isAdventure) {
       this.isAdventureTranslated = true;
       this.isEstateTranslated = false;
       this.isMtEstate = false;
       this.isMyAdventure = true;
-      this.getMyTravelAdventures(this.filtered_website_language, this.citySearch.toLowerCase(), this.isoSearch.toLowerCase(), this.adultCountSearch, this.childrenCountSearch)
-      this.getTripsterAdventures(this.tripster_city_id, this.fromDate, this.toDate, 3);
-      // if (this.allAdventures.length < 1) {
-      //   this.getTripsterCityId(localStorage.getItem('city'));
-      //   setTimeout(() => {
-      //     this.getMyTravelAdventures(this.filtered_website_language, this.citySearch.toLowerCase(), this.isoSearch.toLowerCase(), this.adultCountSearch, this.childrenCountSearch)
-      //     this.getTripsterAdventures(this.tripster_city_id, this.fromDate, this.toDate, 3);
-      //   }, 2000);
-      // }
-      this.router.navigate([this.filtered_website_language + '/home/adventure/' + this.citySearch.toLowerCase() + '/' + this.isoSearch.toLowerCase() + "/1"])
+  
+      this.getMyTravelAdventures(
+        this.filtered_website_language,
+        this.citySearch.toLowerCase(),
+        this.isoSearch.toLowerCase(),
+        this.adultCountSearch,
+        this.childrenCountSearch
+      );
+  
+      this.getTripsterAdventures(
+        this.tripster_city_id,
+        this.fromDate,
+        this.toDate,
+        3
+      );
+  
+      this.router.navigate([
+        this.filtered_website_language +
+          '/home/adventure/' +
+          this.citySearch.toLowerCase() +
+          '/' +
+          this.isoSearch.toLowerCase() +
+          '/1',
+      ]);
       this.showLoader = true;
     }
+  
     setTimeout(() => {
       this.showLoader = false;
-    }, 5000);
-
-    // this.clearCityField();
-    // setTimeout(() => {
-    //   this.showLoader = false;
-    // }, 2000);
+    }, 7000);
   }
 
+  
   clearCityField() {
     this.citySearch = '';
 

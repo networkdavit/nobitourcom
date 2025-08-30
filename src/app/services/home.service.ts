@@ -105,8 +105,11 @@ export class HomeService {
   getAllRateHawkEstates(fromDate, toDate,lang, city, iso, numOfAdult, numOfChildren){
     // return this.http.get<any>(`https://admin.nobitour.ru/api/ostrovok/hotels_from_db?checkin=${fromDate}&checkout=${toDate}&guests=4&country_code=${iso}&name=${city}&currency=EUR&language=en`)
     // return this.http.get<any>(`https://admin.nobitour.ru/api/ostrovok/search_hotels_by_region_id?checkin=${fromDate}&checkout=${toDate}&guests=${numOfAdult + numOfChildren}&country_code=${iso}&name=${city}&currency=EUR#context`)
-    return this.http.get<any>(`https://admin.nobitour.ru/api/ostrovok/search_hotels_by_region_id?checkin=${fromDate}&checkout=${toDate}&guests=${numOfAdult + numOfChildren}&country_code=${iso}&name=${city}&currency=USD#context`) //FOR RU
-
+    // return this.http.get<any>(`https://admin.nobitour.ru/api/ostrovok/search_hotels_by_region_id?checkin=${fromDate}&checkout=${toDate}&guests=${numOfAdult + numOfChildren}&country_code=${iso}&name=${city}&currency=USD#context`) //FOR RU
+    return this.http.get<any>(
+      `https://admin.nobitour.ru/api/ostrovok/search_hotels_by_region_id?checkin=${fromDate}&checkout=${toDate}&guests=${parseInt(numOfAdult) + parseInt(numOfChildren)}&country_code=${iso}&name=${city}&currency=USD#context`
+    );
+    
   }
 
 

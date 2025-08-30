@@ -2,7 +2,8 @@
 <app-carousel></app-carousel>
 
 <br>
-<div class="recommended_container">
+<!-- <div class="recommended_container"> -->
+  <div>
   <div *ngIf="showRecommendedLoader" class="spinner-position faq_spinner">
   </div>
   <section class="hotels on-main">
@@ -47,7 +48,7 @@
   </section>
 </div>
 <!-- <section *ngIf="showBanners" class="market pc_banners"> -->
-<section class="market pc_banners">
+<!-- <section class="market pc_banners">
 
   <div class="wrapper">
     <div class="market__items">
@@ -77,9 +78,9 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 <!-- for ru version -->
-<section  class="market mobile_banners">
+<!-- <section  class="market mobile_banners">
   <div class="wrapper">
     <div class="market__items">
       <div class="market__item">
@@ -108,9 +109,9 @@
       </div>
     </div>
   </div>
-</section>
-<div class="recommended_container">
-  
+</section> -->
+<!-- <div class="recommended_container"> -->
+  <div>
   <div *ngIf="showRecommendedLoader" class="spinner-position faq_spinner">
     <!-- <mat-spinner [diameter]="100"></mat-spinner>
     <p class="loading_text">{{"Home.loading_adv" | translate}}</p> -->
@@ -136,8 +137,8 @@
                       <p *ngIf="!showConvertedPrice" class="xs-card__cost loader">
                       </p>
                       <p *ngIf="showConvertedPrice" class="xs-card__cost"  >
-                        <!-- <span class="rounded-purple">{{randomAdvByIp.price * conversion_rate | roundUp}} {{default_curr}}</span> -->
-                        <span class="rounded-purple">{{randomAdvByIp.price }} ₽</span>
+                        <span class="rounded-purple">{{randomAdvByIp.price * conversion_rate | roundUp}} {{default_curr}}</span>
+                        <!-- <span class="rounded-purple">{{randomAdvByIp.price }} ₽</span> -->
 
                       </p>
                       

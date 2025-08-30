@@ -19,7 +19,7 @@
   </mat-autocomplete>
 </div> -->
 
-<section class="hero fix_gap">
+<!-- <section class="hero fix_gap">
   <div class="hero__top ">
     <div height="300px" width="100%" id="carouselExampleControls" class="carousel slide" data-ride="carousel"
       data-interval="6000">
@@ -29,7 +29,7 @@
           <div class="carousel-item active" style="height:520px">
             <a style="cursor: pointer;" (click)="navigateToRecommendedCity('yerevan', 'am', 'estate')">
               <img 
-               class="d-block w-100 carousel-image" src="../../assets/img/carousel/yereavan_carousel.jpg"
+               class="d-block w-100 carousel-image" src="../../assets/img/carousel/yereavan_carousel.webp"
                 alt="Yerevan">
               <div class="slogan mobile-slogan">{{'Slideshow.yerevanSlideshow' | translate }}</div>
             </a>
@@ -37,7 +37,7 @@
           <div class="carousel-item" style="height:520px">
             <a style="cursor: pointer;" (click)="navigateToRecommendedCity('moscow', 'ru', 'estate')">
               <img 
-               class="d-block w-100 carousel-image" src="../../assets/img/carousel/moscow_carousel.jpg"
+               class="d-block w-100 carousel-image" src="../../assets/img/carousel/moscow_carousel.webp"
                 alt="Tbilisi">
               <div class="slogan mobile-slogan">{{'Slideshow.moscowSlideshow' | translate }}</div>
             </a>
@@ -45,7 +45,7 @@
           <div class="carousel-item" style="height:520px">
             <a style="cursor: pointer;" (click)="navigateToRecommendedCity('tbilisi', 'ge', 'estate')">
               <img 
-               class="d-block w-100 carousel-image" src="../../assets/img/carousel/tbilisi_carousel.jpeg"
+               class="d-block w-100 carousel-image" src="../../assets/img/carousel/tbilisi_carousel.webp"
                 alt="Tbilisi">
               <div class="slogan mobile-slogan">{{'Slideshow.tbilisiSlideshow' | translate }}</div>
             </a>
@@ -53,7 +53,7 @@
           <div class="carousel-item" style="height:520px">
             <a style="cursor: pointer;" (click)="navigateToRecommendedCity('sofia', 'bg', 'estate')">
               <img 
-               class="d-block w-100 carousel-image" src="../../assets/img/carousel/sofia_carousel.jpg"
+               class="d-block w-100 carousel-image" src="../../assets/img/carousel/sofia_carousel.webp"
                 alt="Sofia">
               <div class="slogan mobile-slogan">{{'Slideshow.sofiaSlideshow' | translate }}</div>
             </a>
@@ -61,7 +61,7 @@
           <div class="carousel-item" style="height:520px">
             <a style="cursor: pointer;" (click)="navigateToRecommendedCity('athens', 'gr', 'estate')">
               <img 
-               class="d-block w-100 carousel-image" src="../../assets/img/carousel/athens_carousel.jpeg"
+               class="d-block w-100 carousel-image" src="../../assets/img/carousel/athens_carousel.webp"
                 alt="Athens">
               <div class="slogan mobile-slogan">{{'Slideshow.athensSlideshow' | translate }}</div>
             </a>
@@ -84,7 +84,6 @@
 
     <div class="search-bar">
       <div class="input-wrapper city-search-input">
-        <!-- <label for="search-input">{{'Paddhotel.city' | translate }}</label> -->
         <input class="search-input" style="width:32vh;" matInput type="text" [(ngModel)]="searchCityValue"  (input)="search(searchCityValue)"
         placeholder="{{'Home.letsGoTravel' | translate }}" [matAutocomplete]="auto"
         (keydown.enter)="handleEnterClickCity()" [value]="searchCityValue">
@@ -93,9 +92,7 @@
     <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
       <mat-option class="options-container" *ngFor="let nobiCity of nobiCities" [value]="nobiCity.city"
         (click)="selectResult(nobiCity.city, nobiCity.countryIso, nobiCity.cityId)">
-        <!-- Show loader if nobiCity is undefined -->
         <div *ngIf="showLoader" class="loader"></div>
-        <!-- Show city and country if nobiCity is defined -->
         <div *ngIf="nobiCity && !showLoader">
           <span class="main_color">
             {{nobiCity.city | nameTranslator | async}}
@@ -118,8 +115,8 @@
   
 
 
-</section>
-<section class="main_menu" style="margin-top:-100px;">
+</section> -->
+<!-- <section class="main_menu" style="margin-top:-100px;">
 <div class="hero__bottom">
   <div class="hero__slider">
     <span class="hero__clip hero__clip-left"></span>
@@ -129,45 +126,36 @@
         <div class="swiper-wrapper">
           <a routerLink="/{{website_language}}/home/estate" (click)="goToHome('estate')"
             class="hero__slide swiper-slide">
-            <img src="../../assets/img/h-slider/icon-1.png" alt="" width="50" height="50">
+            <img src="../../assets/img/h-slider/icon-1.webp" alt="" width="50" height="50">
             {{'Home.hotel' | translate }}
           </a>
           <a routerLink="/{{website_language}}/home/adventure" (click)="goToHome('adventure')"
             class="hero__slide swiper-slide">
-            <img src="../../assets/img/h-slider/icon-2.png" alt="" width="50" height="50">
+            <img src="../../assets/img/h-slider/icon-2.webp" alt="" width="50" height="50">
             {{'Home.adventure' | translate }}
           </a>
           <a (click)="goToHome('flight')" class="hero__slide swiper-slide">
-            <img src="../../assets/img/h-slider/icon-3.png" alt="" width="50" height="50">
+            <img src="../../assets/img/h-slider/icon-3.webp" alt="" width="50" height="50">
             {{'Home.flights' | translate }}
             <a routerLink="/{{website_language}}/home/flight" style="display:none"></a>
           </a>
           <a routerLink="/{{website_language}}/home/rent-a-car" (click)="goToHome('rent-a-car')"
             class="hero__slide swiper-slide">
-            <img src="../../assets/img/h-slider/icon-7.png" alt="" width="50" height="50">
+            <img src="../../assets/img/h-slider/icon-7.webp" alt="" width="50" height="50">
             {{'Home.rentcar' | translate }}
           </a>
 
           <a *ngIf="showGLobalTransfer" routerLink="/{{website_language}}/home/personal-transfer" (click)="goToHome('personal-transfer')"
             class="hero__slide swiper-slide">
-            <img src="../../assets/img/h-slider/icon-6.png" alt="" width="50" height="50">
+            <img src="../../assets/img/h-slider/icon-6.webp" alt="" width="50" height="50">
             {{'Home.personalTransfer' | translate }}
           </a>
           <a *ngIf="showLocalTransfer" routerLink="/{{website_language}}/transfer" 
             class="hero__slide swiper-slide">
-            <img src="../../assets/img/h-slider/icon-6.png" alt="" width="50" height="50">
+            <img src="../../assets/img/h-slider/icon-6.webp" alt="" width="50" height="50">
             {{'Home.personalTransfer' | translate }}
           </a>
-          <!-- <a routerLink="/{{website_language}}/home/insurance" (click)="goToHome('insurance')"
-            class="hero__slide swiper-slide">
-            <img src="../../assets/img/h-slider/icon-4.png" alt="" width="50" height="50">
-            {{'Home.insurance' | translate }}
-          </a> -->
-          <!-- <a routerLink="/{{website_language}}/shop" 
-            class="hero__slide swiper-slide">
-            <img src="../../assets/img/h-slider/icon-4.png" alt="" width="50" height="50">
-            Marketplace
-          </a> -->
+
         </div>
       </swiper>
     </div>
@@ -176,8 +164,39 @@
     <div class="hero-pagination"></div>
   </div>
 </div>
-</section>
+</section> -->
 
 <!-- app.component.html -->
+<div class="carousel-search-container">
+  <div class="carousel-search-bar">
+    <input
+      class="carousel-search-input"
+      matInput
+      type="text"
+      [(ngModel)]="searchCityValue"
+      (input)="search(searchCityValue)"
+      placeholder="{{ 'Home.letsGoTravel' | translate }}"
+      [matAutocomplete]="auto"
+      (keydown.enter)="handleEnterClickCity()"
+    />
+    <button class="carousel-search-button" (click)="searchForCityFull()">
+      {{ 'Home.search' | translate }}
+    </button>
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+      <mat-option
+        *ngFor="let nobiCity of nobiCities"
+        [value]="nobiCity.city"
+        (click)="selectResult(nobiCity.city, nobiCity.countryIso, nobiCity.cityId)"
+      >
+        <span class="city-name">
+          {{ nobiCity.city | nameTranslator | async }}
+        </span>
+        <span class="country-name">
+          {{ nobiCity.country | nameTranslator | async }}
+        </span>
+      </mat-option>
+    </mat-autocomplete>
+  </div>
+</div>
 
 <div style="margin-top: 2%;"></div>
